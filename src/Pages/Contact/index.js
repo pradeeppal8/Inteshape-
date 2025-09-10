@@ -1,8 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
 import user_img from "../../ulits/assets/user_img.png";
 import { useNavigate } from "react-router-dom";
+import config from "../../config.js";
 
 
+const handleLogin = async (form) => {
+    try {
+        const response = await fetch(`${config.apiUrl}/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Login failed");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Login error:", error);
+        throw error;
+    }
+};
 
 function Toast({ show, type = "success", message, onClose, duration = 5000 }) {
     const [timeLeft, setTimeLeft] = useState(duration);
@@ -65,7 +85,7 @@ function Contact() {
             passwordRef.current.focus(); // move to password field
         }
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = {};
         if (!form.username.trim()) newErrors.username = "Username is required";
@@ -78,6 +98,15 @@ function Contact() {
         }
 
         // pretend API
+        handleLogin(form)
+            .then(data => {
+                console.log("Login success:", data);
+                showToast("success", "Login successful!");
+                navigate("/home");
+            })
+            .catch(error => {
+                showToast("error", error.message || "Login failed");
+            });
         if (form.username === "pradeep@123" && form.password === "123456") {
             setTimeout(() => {
                 setForm({ username: "", password: "" });
