@@ -48,6 +48,7 @@ function Header() {
   const [showHeader, setShowHeader] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [lightMode, setLightMode] = useState(true);
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
   // const { theme } = useTheme();
@@ -210,7 +211,7 @@ function Header() {
       </header>
       <Modal show={show} onHide={handleClose} className="dark-modal">
         <Modal.Body>
-          <button
+          {/* <button
             className={`toggle ${isDark ? "dark" : "light"}`}
             onClick={() => setMode(isDark ? "light" : "dark")}
             role="switch"
@@ -221,18 +222,30 @@ function Header() {
             <span className="thumb" aria-hidden="true">
               <span className="thumb-inner">{isDark ? <Moon /> : <Sun />}</span>
             </span>
-          </button>
-          <hr className="lm-sep" />
-
-          <button className="lm-row lm-item" type="button">
-            {/* <GlobeIcon /> */}
-            <span className="lm-title">United States - English</span>
-          </button>
-
-          <button className="lm-row lm-item" type="button">
-            {/* <UserIcon /> */}
-            <span className="lm-title">Sign in</span>
-          </button>
+          </button> */}
+          <div className="dark-mode">
+            <div className={`switch ${isDark ? "dark" : "light"}`}>
+              <span className="title">Light Mode</span>
+              <div
+               className={`switch-toggle ${isDark ? "dark" : "light"}`}
+                onClick={() => setMode(isDark ? "light" : "dark")}
+              >
+                <span className="thumb" aria-hidden="true">
+                  <span className="thumb-inner">{isDark ? <Moon /> : <Sun />}</span>
+                </span>
+                <div
+                  className={`switch-toggle-slider ${lightMode ? "translate-x-6" : "translate-x-0"
+                    }`}
+                ></div>
+              </div>
+            </div>  
+            <div className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              <span className="text-gray-700">United States - English</span>
+            </div>
+            <div className="px-4 py-2 hover:bg-gray-100 rounded-b-xl cursor-pointer">
+              <span className="text-gray-700">Sign In</span>
+            </div>
+          </div>
         </Modal.Body>
       </Modal>
     </>
