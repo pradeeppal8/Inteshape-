@@ -1,0 +1,393 @@
+.main-wrapper {
+    .homepage {
+        .page-content {
+            .sx-bnr-inr {
+                height: 500px;
+                width: 100%;
+                position: relative;
+
+                .overlay-main {
+                    img {
+                        height: 500px;
+                        display: table;
+                        width: 100%;
+                        background-size: cover;
+                        background-attachment: fixed;
+                    }
+                }
+
+                .sx-bnr-inr-entry {
+                    position: relative;
+
+                    .banner-title-outer {
+                        position: absolute;
+                        top: 0;
+                        left: 0%;
+                        transform: translate(0%, -127%);
+                        width: 100%;
+                        padding: 0 30px;
+
+                        .banner-title-name {
+                            h2 {
+                                margin-top: 0px;
+                                margin-bottom: 20px;
+                                color: #fff;
+                                font-size: 50px;
+                                font-weight: 800;
+                                letter-spacing: 0px;
+                                font-family: 'Poppins', sans-serif;
+                            }
+
+                            p {
+                                color: #fff;
+                                max-width: 555px;
+                                width: 100%;
+                            }
+                        }
+
+                        .sx-breadcrumb {
+                            margin: 0;
+                            list-style: none;
+                            padding: 0;
+
+                            li {
+                                padding: 0;
+                                margin-right: 3px;
+                                color: #fff;
+                                position: relative;
+                                display: inline-block;
+                                font-size: 12px;
+
+                                a {
+                                    color: #d7b39a;
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.7);
+                }
+            }
+
+            .section-full {
+                background-color: #eef1f2;
+                position: relative;
+                padding: 80px 30px;
+
+                .section-content {
+                    .home-2-about {
+                        min-height: 300px;
+
+                        img {
+                            height: 384px;
+                                width: 100%;
+                        }
+                    }
+
+                    .about-home-2 {
+                        position: relative;
+                        z-index: 1;
+                        padding: 80px 40px 80px 40px;
+
+                        h3 {
+                            font-family: 'Poppins', sans-serif;
+                            font-weight: 600;
+                            font-size: 38px;
+                            color: #000;
+                            margin-bottom: 20px
+                        }
+
+                        p {
+                            line-height: 24px;
+                            margin-bottom: 20px;
+                            font-family: "Poppins", sans-serif;
+                            font-size: 14px;
+                            font-weight: 500;
+                            width: 80%;
+                        }
+
+                        .text-left {
+                            .site-button-link {
+                                display: inline-block;
+                                font-weight: 500;
+                                position: relative;
+                                padding-left: 0;
+                                font-size: 14px;
+                                z-index: 1;
+                                text-transform: uppercase;
+                                color: #23252d;
+                                outline: 0 none;
+                                text-decoration: none;
+
+                                &:hover {
+                                    color: #d7b39a;
+                                    -webkit-animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                                    animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+                                    &::before {
+                                        background: none;
+                                    }
+                                }
+
+                                @keyframes focus-in-contract {
+                                    0% {
+                                        letter-spacing: 1em;
+                                        -webkit-filter: blur(12px);
+                                        filter: blur(12px);
+                                        opacity: 0;
+                                    }
+
+                                    100% {
+                                        -webkit-filter: blur(0px);
+                                        filter: blur(0px);
+                                        opacity: 1;
+                                    }
+                                }
+
+                                &::before {
+                                    content: '';
+                                    left: 0px;
+                                    bottom: 0px;
+                                    height: 5px;
+                                    background-color: #d7b39a;
+                                    width: 80%;
+                                    position: absolute;
+                                    z-index: -1;
+                                    -webkit-border-radius: 0px 50% 15px 0px;
+                                    border-radius: 0px 50% 15px 0px;
+                                    -webkit-transition: all 0.5s linear;
+                                    -moz-transition: all 0.5s linear;
+                                    -ms-transition: all 0.5s linear;
+                                    -o-transition: all 0.5s linear;
+                                    transition: all 0.5s linear;
+                                }
+                            }
+                        }
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            width: 45%;
+                            height: 100%;
+                            background-color: transparent;
+                            border: 20px solid #dfdfdf;
+                            z-index: -1;
+                        }
+                    }
+                }
+            }
+
+            .section-full-what {
+                background-image: url(../ulits/assets/bg-5.png);
+                width: 100%;
+                height: 100%;
+                padding: 80px 30px;
+                .section-content {
+                    .number-block-one {
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+
+                .section-head {
+                    margin-bottom: 40px;
+
+                    .sx-separator-outer.separator-left {
+                        text-align: left;
+                        overflow: hidden;
+
+                        .sx-separator {
+                            width: 350px;
+
+                            h3 {
+                                padding: 20px 20px 20px 20px;
+                                font-size: 42px;
+                                font-weight: 800;
+                                text-align: center;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.light {
+    .main-wrapper {
+        .homepage {
+            .page-content {
+                .sx-bnr-inr {
+                    .sx-bnr-inr-entry {
+                        .banner-title-outer {
+                            .banner-title-name {
+                                h2 {
+                                    color: #000;
+                                }
+
+                                p {
+                                    color: #000;
+                                }
+                            }
+
+                            .sx-breadcrumb {
+                                li {
+                                    color: #000;
+
+                                    a {
+                                        color: #c78c65;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    &::before {
+                        background-color: rgb(243 243 243 / 62%);
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+// .dark {
+//     .main-wrapper {
+//         .homepage {
+//             .page-content {
+//                 .section-full {
+//                     background-color: #2a2b2d;
+//                     .section-content {
+//                         .about-home-2 {
+//                             h3 {
+//                                 color: #fff;
+//                             }
+//                             p {
+//                                 color: #fff;
+//                             }
+//                             .text-left {
+//                                 .site-button-link {
+//                                     color: #fff;
+//                                     &:hover {
+//                                         color: #c78c65;
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+@media (max-width: 991px) {
+    .main-wrapper {
+        .homepage {
+            .page-content {
+                .sx-bnr-inr {
+
+                    .sx-bnr-inr-entry {
+
+
+                        .banner-title-outer {
+                            transform: translate(0%, -230%);
+
+                            .banner-title-name {
+                                h2 {
+                                    font-size: 30px;
+                                    // font-weight: 800;
+                                    margin-bottom: 10px;
+
+                                }
+
+                                p {
+                                    color: #fff;
+                                    max-width: 555px;
+                                    width: 100%;
+                                }
+                            }
+
+                            .sx-breadcrumb {
+                                margin: 0;
+                                list-style: none;
+                                padding: 0;
+
+                                li {
+                                    padding: 0;
+                                    margin-right: 3px;
+                                    color: #fff;
+                                    position: relative;
+                                    display: inline-block;
+                                    font-size: 12px;
+
+                                    a {
+                                        color: #d7b39a;
+                                        text-decoration: none;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.7);
+                    }
+                }
+
+                .section-full {
+                    padding: 12px 12px 20px;
+
+                    .section-content {
+                        .home-2-about {
+                            padding-bottom: 20px;
+                        }
+
+                        .about-home-2 {
+                            padding: 36px 12px 36px 12px;
+
+                            h3 {
+                                font-size: 24px;
+                                margin-bottom: 14px
+                            }
+
+                            p {
+                                width: 100%;
+                            }
+
+                            &::after {
+                                width: 63%;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}

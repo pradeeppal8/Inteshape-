@@ -1,0 +1,495 @@
+.main-wrapper {
+    /* ========= Variables ========= */
+    $container: 80rem; // ~max-w-7xl
+    $px: 1rem; // base horizontal padding
+    $sm: 640px;
+    $lg: 1024px;
+
+    $slate-900: #0f172a;
+    $slate-800: #1f2937;
+    $slate-700: #374151;
+    $slate-600: #475569;
+    $slate-500: #64748b;
+    $slate-50: #f8fafc;
+
+    $indigo-600: #4f46e5;
+    $indigo-500: #6366f1;
+
+    $white: #fff;
+    $black: #000;
+
+    /* ========= Base ========= */
+    .about_page {
+        color: $slate-800;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+            Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+            "Segoe UI Emoji", "Segoe UI Symbol";
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff73;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    }
+
+    /* ========= Container helper ========= */
+    .about_page .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: $container;
+    }
+
+    .about_page .px-4 {
+        padding-left: $px;
+        padding-right: $px;
+    }
+
+    @media (min-width: $sm) {
+        .about_page .sm\:px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
+    @media (min-width: $lg) {
+        .about_page .lg\:px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+
+    /* ========= Spacing helpers used in markup ========= */
+    .about_page .py-8 {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .about_page .py-10 {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .about_page .py-12 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .about_page .py-16 {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .about_page .py-20 {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    .about_page .mt-1 {
+        margin-top: 0.25rem;
+    }
+
+    .about_page .mt-2 {
+        margin-top: 0.5rem;
+    }
+
+    .about_page .mt-3 {
+        margin-top: 0.75rem;
+    }
+
+    .about_page .mt-5 {
+        margin-top: 1.25rem;
+    }
+
+    .about_page .mt-6 {
+        margin-top: 1.5rem;
+        display: flex;
+        // align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        .group {
+            margin-bottom: 15px;
+        }
+    }
+
+    .about_page .p-4 {
+        padding: 1rem;
+    }
+
+    /* ========= Hero ========= */
+    .about_page #home {
+        .rounded-2xl {
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .bg-cover {
+            background-size: cover;
+        }
+
+        .bg-center {
+            background-position: center;
+        }
+
+        .bg-black\/60 {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .text-white {
+            color: $white;
+        }
+
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .py-20 {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        @media (min-width: $sm) {
+            .sm\:py-28 {
+                padding-top: 7rem;
+                padding-bottom: 7rem;
+            }
+        }
+
+        @media (min-width: $lg) {
+            .lg\:py-36 {
+                padding-top: 9rem;
+                padding-bottom: 9rem;
+            }
+        }
+
+        .text-white\/70 {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .tracking-widest {
+            letter-spacing: 0.2em;
+        }
+
+        h1 {
+            font-weight: 600;
+            line-height: 1.25;
+            font-size: 1.875rem;
+            max-width: 48rem;
+            /* ~max-w-3xl */
+            margin: 0.5rem auto 0;
+
+            @media (min-width: $sm) {
+                font-size: 2.25rem;
+            }
+
+            @media (min-width: $lg) {
+                font-size: 3rem;
+            }
+        }
+
+        /* CTA button */
+        .btn-hero,
+        a.inline-flex {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: $white;
+            color: $slate-900;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            transition: background 0.2s ease;
+
+            &:hover {
+                background: #f3f4f6;
+            }
+        }
+    }
+
+    /* ========= Logo strip ========= */
+    .about_page .place-items-center {
+        place-items: center;
+    }
+
+    .about_page .opacity-70 {
+        opacity: 0.7;
+    }
+
+    .about_page .grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: $sm) {
+        .about_page .sm\:grid-cols-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    .about_page .h-6 {
+        height: 1.5rem;
+    }
+
+    /* ========= Feature sections ========= */
+    .about_page .feature-grid {
+        display: grid;
+        gap: 2.5rem;
+
+        @media (min-width: $lg) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    .about_page section .shadow-md {
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .about_page section .rounded-xl {
+        border-radius: 0.75rem;
+    }
+
+    .about_page section .object-cover {
+        object-fit: cover;
+    }
+
+    .about_page section .aspect-\[4\/3\] {
+        aspect-ratio: 4 / 3;
+    }
+
+    .about_page .text-indigo-600 {
+        color: $indigo-600;
+    }
+
+    .about_page .leading-relaxed {
+        line-height: 1.7;
+    }
+
+    .about_page .text-slate-700 {
+        color: $slate-700;
+    }
+
+    .about_page .text-slate-600 {
+        color: $slate-600;
+    }
+
+    .about_page .dot {
+        margin-top: 0.5rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 9999px;
+        background: $indigo-600;
+        flex: 0 0 auto;
+    }
+
+    .about_page .btn-primary,
+    .about_page a.inline-flex.bg-indigo-600 {
+        display: inline-flex;
+        align-items: center;
+        background: $indigo-600;
+        color: $white;
+        padding: 0.65rem 1rem;
+        border-radius: 0.6rem;
+        box-shadow: 0 6px 16px rgba(79, 70, 229, 0.2);
+        transition: background 0.2s ease, transform 0.1s ease;
+
+        &:hover {
+            background: $indigo-500;
+        }
+
+        &:active {
+            transform: translateY(1px);
+        }
+    }
+
+    /* ========= Blog cards ========= */
+    .about_page #blog .grid {
+        display: grid;
+        gap: 1.5rem;
+
+        @media (min-width: $sm) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @media (min-width: $lg) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    .about_page #blog article {
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 0.75rem;
+        background: $white;
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+        transition: box-shadow 0.2s ease, transform 0.1s ease;
+
+        &:hover {
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+        }
+
+        img {
+            height: 12rem;
+            width: 100%;
+            object-fit: cover;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+        }
+    }
+
+    /* “View Posts” outline button */
+    .about_page .border {
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 0.6rem;
+        padding: 0rem 0rem;
+        display: inline-flex;
+        transition: background 0.2s ease;
+        flex-direction: column;
+
+
+        &:hover {
+            background: #f8fafc;
+        }
+    }
+
+    /* ========= FAQ ========= */
+    .about_page .bg-slate-50 {
+        background: $slate-50;
+    }
+
+    .about_page details.group {
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 0.75rem;
+        background: $white;
+        padding: 1rem;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+
+        &[open] {
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+            border-color: rgba(15, 23, 42, 0.18);
+        }
+    }
+
+    .about_page details summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    /* ========= Statement/Quote ========= */
+    .about_page blockquote {
+        font-weight: 500;
+        line-height: 1.4;
+        font-size: 1.5rem;
+
+        @media (min-width: $sm) {
+            font-size: 1.875rem;
+        }
+    }
+
+    /* ========= CTA ========= */
+    .about_page .cta {
+        background: $indigo-600;
+        color: $white;
+        text-align: center;
+        padding: 4rem 1rem;
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: $white;
+            color: $slate-900;
+            border-radius: 0.6rem;
+            padding: 0.9rem 1.25rem;
+            font-weight: 600;
+            transition: background 0.2s ease;
+
+            &:hover {
+                background: #f3f4f6;
+            }
+        }
+    }
+
+    /* ========= Utilities used in markup (headings etc.) ========= */
+    .about_page h2 {
+        font-weight: 600;
+        font-size: 1.5rem;
+
+        @media (min-width: $sm) {
+            font-size: 1.875rem;
+        }
+    }
+
+    .about_page h3 {
+        font-weight: 600;
+        font-size: 2.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .about_page .text-xs {
+        font-size: 0.75rem;
+    }
+
+    .about_page .font-medium {
+        font-weight: 500;
+    }
+
+    .about_page .font-semibold {
+        font-weight: 600;
+    }
+
+    /* ========= Layout helpers required by markup ========= */
+    .about_page .grid.items-center {
+        align-items: center;
+    }
+
+    .about_page .gap-10 {
+        gap: 2.5rem;
+    }
+
+    /* Handle the “swap order on lg when align right” wrapper class from JSX */
+    @media (min-width: $lg) {
+        .about_page .lg\:\[\>\*\:first-child\]\:order-2>*:first-child {
+            order: 2;
+        }
+    }
+
+    /* ========= Optional: map a few classnames used directly ========= */
+    .about_page .text-slate-600 {
+        color: $slate-600;
+    }
+
+    .about_page .text-slate-500 {
+        color: $slate-500;
+    }
+
+    .about_page .text-slate-900 {
+        color: $slate-900;
+    }
+}
