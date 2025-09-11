@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import headerLogo from "../../ulits/assets/header-logo.png";
+import { FaTelegramPlane } from "react-icons/fa";
 
 function Footer() {
+  const [email, setEmail] = useState("");
+
+  const handleSend = () => {
+    if (!email.trim()) {
+      alert("Please enter your email first!");
+      return;
+    }
+
+    const telegramUsername = "yourusername"; 
+    const message = encodeURIComponent(`My email is: ${email}`);
+    const telegramUrl = `https://t.me/${telegramUsername}?text=${message}`;
+
+    window.open(telegramUrl, "_blank");
+  };
+
   return (
     <footer className="footer">
       <div className="footer__container">
@@ -17,7 +33,7 @@ function Footer() {
             Today we can tell you, thanks to your passion.
           </p>
           <div className="brand__social">
-            <Link to="https://www.facebook.com" target="_blank">
+            <Link to="https://www.facebook.com/pradeep.baghel" target="_blank">
               <div className="fab_facebook"></div>
             </Link>
             <Link to="https://www.twitter.com" target="_blank">
@@ -79,15 +95,24 @@ function Footer() {
             Never Miss Anything From 7xtheme By Signing Up To Our Newsletter.
           </p>
           <div className="subscribe__form">
-            <input type="email" placeholder="ENTER YOUR EMAIL" />
-            <button>
-              <div className="fas_telegram"></div>
-            </button>
+            <div style={{display: "flex"}}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="ENTER YOUR EMAIL"
+              />
+              <button
+                onClick={handleSend}
+              >
+                <FaTelegramPlane className="text-white text-xl" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <div className="footer__bottom">
-        <p>© 2019 Your Company. Designed By 7xtheme.</p>
+        <p>© {new Date().getFullYear()} Your Company. Designed By 7xtheme.</p>
       </div>
     </footer>
   );

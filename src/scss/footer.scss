@@ -443,20 +443,6 @@
     .footer__container {
       grid-template-columns: 1fr 1fr;
     }
-
-    // .footer .footer__subscribe {
-    //   text-align: center;
-    // }
-
-    .footer {
-      // .footer__col.posts {
-      //   ul {
-      //     li {
-      //       justify-content: center !important;
-      //     }
-      //   }
-      // }
-    }
   }
 
   @media (max-width: 480px) {
@@ -474,7 +460,7 @@
 
       input,
       button {
-        width: 100%;
+        width: 13%;
       }
 
       button {

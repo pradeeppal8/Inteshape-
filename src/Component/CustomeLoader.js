@@ -1,36 +1,13 @@
 import React from "react";
 
-const CustomLoader = ({ loading }) => {
-
+const CustomLoader = () => {
   return (
-    <div className={`loader-container ${loading ? "show" : "hide"}`}>
-      <div className="boxes">
-        <div className="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div className="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div className="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div className="box">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+    <div className="loader-overlay">
+      <div className="loader">
+        {Array.from({ length: 16 }).map((_, i) => (
+          <div key={i}></div>
+        ))}
       </div>
-
     </div>
   );
 };
