@@ -313,6 +313,7 @@ function Header() {
             <img src={user_icon} alt="" />
           </div>
         </div>
+        {/* {isOpen && <div className="overlay" onClick={ToggleSidebar}></div>} */}
         <div className="sidebars">
           <button
             className={`menu-button ${isOpen == true ? "open" : ""}`}
