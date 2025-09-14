@@ -86,6 +86,11 @@
 .dark .footer .footer__container .footer__col .brand__logo a img {
   filter: brightness(0) invert(1);
 }
+.dark {
+  .footer .footer__subscribe .subscribe__form button svg{
+    color: #111 !important;
+  }
+}
 
 .footer {
   background: #111 !important;
