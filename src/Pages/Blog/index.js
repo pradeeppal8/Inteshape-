@@ -288,7 +288,7 @@ function Blog({ post }) {
                 <div id="blog_page">
                     <div className="relative w-full">
                         <Swiper
-                            modules={[Navigation, Pagination, EffectFade]}
+                            modules={[Navigation, Pagination, Autoplay, EffectFade]}
                             effect="fade"
                             speed={800}
                             autoplay={{ delay: 5000, disableOnInteraction: false }}
