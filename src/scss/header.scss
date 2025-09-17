@@ -1681,6 +1681,17 @@ $font-family_1: "Arial", sans-serif;
         }
       }
     }
+    .sidebars {
+      .menu {
+        .hide-desk {
+          .dark-mode {
+            .switch {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
   }
 
 }
