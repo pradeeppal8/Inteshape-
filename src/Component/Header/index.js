@@ -152,23 +152,7 @@ function Header() {
   const menuItems = [
     { path: "/home", label: "Home" },
     { path: "/about", label: "About" },
-    {
-      path: "/portfolio",
-      label: "Portfolio",
-      children: [
-        {
-          path: "/portfolio/design",
-          label: "Design",
-          children: [
-            { path: "/portfolio/design/ui", label: "UI Design" },
-            { path: "/portfolio/design/ux", label: "UX Design" },
-            { path: "/portfolio/design/web", label: "Web Design" },
-          ],
-        },
-        { path: "/portfolio/development", label: "Development" },
-        { path: "/portfolio/photography", label: "Photography" },
-      ],
-    },
+    { path: "/portfolio", label: "Portfolio" },
     { path: "/blog", label: "Blog" },
     { path: "/shop", label: "Shop" },
     { path: "/buy", label: "Buy Theme!" },
@@ -195,63 +179,16 @@ function Header() {
 
         <nav className="nav-links">
           {menuItems.map((item, index) => (
-            <li
+            <Link
               key={index}
-              className="relative group"
-              onMouseEnter={() => setHoveredMenu(index)}
-              onMouseLeave={() => setHoveredMenu(null)}
+              to={item.path}
+              onClick={ToggleSidebar}
+              className={
+                location.pathname === item.path ? "active" : ""
+              }
             >
-              <Link
-                to={item.path}
-                className={location.pathname === item.path ? "active" : ""}
-              >
-                {item.label}
-                {item.children && <span className="ml-2">▸</span>}
-              </Link>
-
-              {/* Dropdown menu */}
-              {(hoveredMenu === index ||
-                (item.children &&
-                  item.children.some((child) =>
-                    location.pathname.startsWith(child.path)
-                  ))) && (
-                  <ul className="sub-menu">
-                    {item.children.map((child, cIndex) => (
-                      <li key={cIndex} className="relative group">
-                        <Link
-                          to={child.path}
-                          className={`block px-4 py-2 hover:bg-gray-200 ${location.pathname === child.path
-                              ? "bg-gray-300 text-gray-900"
-                              : "text-gray-800"
-                            }`}
-                        >
-                          {child.label}
-                          {child.children && <span className="ml-2">▸</span>}
-                        </Link>
-
-                        {/* Recursive sub-sub-menu */}
-                        {child.children && (
-                          <ul className="sub-menu nested">
-                            {child.children.map((subChild, subIndex) => (
-                              <li key={subIndex}>
-                                <Link
-                                  to={subChild.path}
-                                  className={`block px-4 py-2 hover:bg-gray-200 ${location.pathname === subChild.path
-                                      ? "bg-gray-300 text-gray-900"
-                                      : "text-gray-800"
-                                    }`}
-                                >
-                                  {subChild.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-            </li>
+              {item.label}
+            </Link>
           ))}
         </nav>
         <div className="dark-mode">
@@ -313,7 +250,7 @@ function Header() {
             <img src={user_icon} alt="" />
           </div>
         </div>
-        {/* {isOpen && <div className="overlay" onClick={ToggleSidebar}></div>} */}
+        {isOpen && <div className="overlays" onClick={ToggleSidebar}></div>}
         <div className="sidebars">
           <button
             className={`menu-button ${isOpen == true ? "open" : ""}`}

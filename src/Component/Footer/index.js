@@ -35,15 +35,19 @@ function Footer() {
           <div className="brand__social">
             <Link to="https://www.facebook.com/pradeep.baghel" target="_blank">
               <div className="fab_facebook"></div>
+              <span class="title">Facebook</span>
             </Link>
             <Link to="https://www.twitter.com" target="_blank">
               <div className="fab_twitter"></div>
+              <span class="title">Twitter</span>
             </Link>
             <Link to="https://www.instagram.com/rockey_star_615" target="_blank">
               <div className="fab_instagram"></div>
+              <span class="title">Instagram</span>
             </Link>
             <Link to="https://www.linkedin.com/in/pradeep-baghel-569083244" target="_blank">
               <div className="fab_linkedin"></div>
+              <span class="title">Linkedin</span>
             </Link>
           </div>
         </div>

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Roboto Condensed", sans-serif;
+  src: url("../../public/RobotoCondensed-Regular.ttf") format("truetype");
+}
+
+
+
+
 @import "header.scss";
 @import "footer.scss";
 @import "home.scss";
@@ -9,6 +17,9 @@
 @import "contact.scss";
 @import "profile.scss";
 @import "portfolio.scss";
+
+
+
 
 
 :root {

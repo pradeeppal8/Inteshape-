@@ -391,7 +391,7 @@ $font-family_1: "Arial", sans-serif;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0px 30px;
+  padding: 10px 30px;
   border-bottom: 0px solid #eee;
   font-family: $font-family_1;
   display: flex;
@@ -537,6 +537,20 @@ $font-family_1: "Arial", sans-serif;
         filter: brightness(0.6);
       }
     }
+  }
+
+  .overlays {
+    position: fixed;
+    top: 77px;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: #1e1f253d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    flex-direction: column;
   }
 
   .sidebars {
@@ -751,7 +765,7 @@ $font-family_1: "Arial", sans-serif;
 
 .dark-modal {
   .modal-dialog {
-    transform: translate(0, 83px) !important;
+    transform: translate(0, 78px) !important;
     width: 300px;
     margin: 0 30px 0 auto;
 
@@ -1337,7 +1351,7 @@ $font-family_1: "Arial", sans-serif;
               display: flex;
               justify-content: space-between;
               padding: 5px;
-              width: 100%;
+              width: 221px;
 
               &.dark {
                 border: 2px solid #e2e2e2;
