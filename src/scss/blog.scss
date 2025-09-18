@@ -581,6 +581,8 @@
                         margin-bottom: 15px;
                         position: relative;
                         overflow: hidden;
+                        width: 100%;
+                        height: auto;
 
                         &::after {
                             content: "";
@@ -799,7 +801,7 @@
                     .swiper-slide {
                         .full_slider_img {
                             .slider_content {
-                                left: 11%;
+                                // left: 11%;
                                 width: 100%;
                                 right: 0px;
                             }
@@ -831,7 +833,7 @@
                     .swiper-slide {
                         .full_slider_img {
                             .slider_content {
-                                left: 3%;
+                                // left: 3%;
                                 width: 100%;
                                 right: 0px;
                             }

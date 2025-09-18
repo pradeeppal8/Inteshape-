@@ -250,7 +250,7 @@ function Header() {
             <img src={user_icon} alt="" />
           </div>
         </div>
-        {isOpen && <div className="overlays" onClick={ToggleSidebar}></div>}
+        {/* {isOpen && <div className="overlays" onClick={ToggleSidebar}></div>} */}
         <div className="sidebars">
           <button
             className={`menu-button ${isOpen == true ? "open" : ""}`}
@@ -259,6 +259,7 @@ function Header() {
             <span></span>
             <span></span>
             <span></span>
+            {isOpen && <div className="overlays" onClick={ToggleSidebar}></div>}
           </button>
           <nav className={`menu ${isOpen == true ? "open" : ""}`}>
             <div className="sd-header">

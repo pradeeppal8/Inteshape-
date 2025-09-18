@@ -11,10 +11,10 @@ $font-family_1: "Arial", sans-serif;
         color: $color_1;
 
         &:hover {
-          color: #d7b39a;
+          color: #c78c65;
 
           &::after {
-            background-color: #d7b39a;
+            background-color: #c78c65 !important;
             content: "";
             position: absolute;
             bottom: -4px;
@@ -25,8 +25,9 @@ $font-family_1: "Arial", sans-serif;
         }
 
         &.active {
+          color: #c78c65;
           &::after {
-            background-color: $color_1;
+            background-color: #c78c65 !important;
           }
         }
       }
@@ -1218,6 +1219,7 @@ $font-family_1: "Arial", sans-serif;
         width: 30px;
         position: absolute;
         top: -10px;
+        height: 23px;
 
         span {
           position: absolute;
