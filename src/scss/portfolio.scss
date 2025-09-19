@@ -263,27 +263,44 @@
             max-width: 80%;
             max-height: 80%;
 
-            .counter {
-              position: absolute;
-              bottom: -23px;
-              right: 186px;
-              color: #fff;
-              padding: 4px 10px;
-              border-radius: 0px;
-              font-size: 10px;
+            .modal-imgs {
+              position: relative;
+              text-align: end;
+              width: 440px;
+              height: 440px;
+              margin: 0 auto;
 
+              .modal-img {
+                width: 440px;
+                height: 440px;
+                border-radius: 0px;
+                object-fit: cover;
+                margin: 0 auto;
+              }
+
+              .counter {
+                color: #fff;
+                padding: 4px 0px 4px 10px;
+                border-radius: 0px;
+                font-size: 10px;
+                text-align: end;
+              }
+
+              .close-btn {
+                padding: 8px 0px 8px 12px;
+                background: transparent;
+                color: #fff;
+                border: none;
+                filter: brightness(0) invert(1);
+                font-size: 12px;
+                text-align: end;
+              }
             }
+
           }
 
-          .modal-img {
-            width: 440px;
-            height: 440px;
-            border-radius: 0px;
-            object-fit: cover;
-            margin: 0 auto;
-          }
 
-          .close-btn,
+
           .prev-btn,
           .next-btn {
             position: absolute;
@@ -296,14 +313,7 @@
             border-radius: 4px;
           }
 
-          .close-btn {
-            top: -30px;
-            right: 184px;
-            background: transparent;
-            color: #fff;
-            filter: brightness(0) invert(1);
-            font-size: 12px;
-          }
+
 
           .prev-btn {
             top: 50%;
@@ -381,16 +391,12 @@
           }
         }
 
-
-
-
-
-
-
         .load-more-btn-outer {
           background-image: url(../ulits/assets/cross-line.png);
           padding: 20px;
-          margin: 30px 0 0;
+          // margin: 30px 0 0;
+          max-width: 1014px;
+          margin: 30px auto 0;
 
           .site-button {
             position: relative;
@@ -413,6 +419,7 @@
             color: #fff;
             text-transform: uppercase;
             font-family: "Roboto Condensed", sans-serif;
+
             &.loading-btn {
               letter-spacing: 3px;
             }
@@ -519,21 +526,25 @@
           }
 
           .modal-overlay {
-            .modal-img {
-              width: 100%;
-            }
-
-            .close-btn {
-              right: 0;
-              padding: 8px 0px 10px 12px;
-              border-radius: 0;
-            }
-
             .modal-content {
-              .counter {
-                right: 0;
-                font-size: 12px;
-                padding: 4px 0px;
+              .modal-imgs {
+                width: 100%;
+
+                .modal-img {
+                  width: 100%;
+                }
+
+                .close-btn {
+                  right: 0;
+                  padding: 8px 0px 10px 12px;
+                  border-radius: 0;
+                }
+
+                .counter {
+                  right: 0;
+                  font-size: 12px;
+                  padding: 4px 0px;
+                }
               }
             }
           }

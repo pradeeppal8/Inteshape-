@@ -16,6 +16,12 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import pic_img1 from "../../ulits/assets/pic_img1.jpg";
 import pic_img2 from "../../ulits/assets/pic_img2.jpg";
 import pic_img3 from "../../ulits/assets/pic_img3.jpg";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 const slides = [
     {
@@ -233,14 +239,39 @@ const blogPosts = [
     },
 ];
 
-function Blog({ post }) {
+function Blog() {
     const [loading, setLoading] = useState(true);
+    const contentRef = useRef("");
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const [loaded, setLoaded] = useState(false);
     const [visibleCount, setVisibleCount] = useState(3);
     const [isLoading, setIsLoading] = useState(false);
     const [tagsBoxCount, setTagsBoxCount] = useState(1);
+
+
+    useEffect(() => {
+        const el = contentRef.current;
+
+        if (el) {
+            gsap.fromTo(
+                el.children, 
+                { y: 80, opacity: 0 }, 
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.2, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%", 
+                        toggleActions: "play none none reverse",
+                    },
+                }
+            );
+        }
+    }, []);
 
     const handleLoadMore = () => {
         setIsLoading(true);
@@ -274,6 +305,9 @@ function Blog({ post }) {
         "Room",
         "Landscape",
     ];
+
+
+
 
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 1500);
@@ -316,17 +350,17 @@ function Blog({ post }) {
 
                                         <div className="slider_content">
                                             <div className="mx-auto flex h-full max-w-7xl items-center px-6">
-                                                <div className="max-w-2xl text-white drop-shadow-[0_4px_16px_rgba(0,0,0,.35)]">
-                                                    <p className="mb-2 text-xs tracking-[0.28em] font-semibold opacity-90 md:text-sm letter-spacing">
+                                                <div ref={contentRef} className="slide-content text-white">
+                                                    <p className="eyebrow mb-2 text-xs tracking-[0.28em] font-semibold opacity-90 md:text-sm letter-spacing">
                                                         {s.eyebrow}
                                                     </p>
 
-                                                    <h2 className="text-4xl leading-[1.05] font-extrabold md:text-6xl">
+                                                    <h2 className="title text-4xl leading-[1.05] font-extrabold md:text-6xl">
                                                         {s.title[0]} <br className="hidden md:block" />
                                                         {s.title[1]}
                                                     </h2>
 
-                                                    <p className="mt-4 max-w-xl text-sm md:text-base opacity-90">
+                                                    <p className="desc mt-4 max-w-xl text-sm md:text-base opacity-90">
                                                         {s.desc}
                                                     </p>
 

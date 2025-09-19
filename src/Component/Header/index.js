@@ -357,7 +357,7 @@ function Header() {
               />
             </div>
             <div className="px-3 py-2 hover:bg-gray-100 rounded-b-xl cursor-pointer">
-              <span className="text-gray-700">Sign In</span>
+              <span className="text-gray-700 cursor-pointer">Sign Out</span>
             </div>
           </div>
         </Modal.Body>

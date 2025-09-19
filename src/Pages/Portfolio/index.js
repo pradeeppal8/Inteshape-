@@ -225,17 +225,18 @@ function Portfolio() {
                                         onClick={(e) => e.stopPropagation()}
                                     >
                                         <button className="prev-btn" onClick={handlePrev}></button>
-                                        <button className="close-btn" onClick={handleClose}>
-                                            ✖
-                                        </button>
-
-                                        <img
-                                            src={filteredItems[currentIndex].src}
-                                            alt={filteredItems[currentIndex].title}
-                                            className="modal-img"
-                                        />
-                                        <div className="counter">
-                                            {currentIndex + 1} of {filteredItems.length}
+                                        <div className="modal-imgs">
+                                            <button className="close-btn" onClick={handleClose}>
+                                                ✖
+                                            </button>
+                                            <img
+                                                src={filteredItems[currentIndex].src}
+                                                alt={filteredItems[currentIndex].title}
+                                                className="modal-img"
+                                            />
+                                            <div className="counter">
+                                                {currentIndex + 1} of {filteredItems.length}
+                                            </div>
                                         </div>
 
                                         <button className="next-btn" onClick={handleNext}></button>
@@ -262,7 +263,7 @@ function Portfolio() {
                     </div>
                 </div>
             </div>
-             <ScrollButtons />
+            <ScrollButtons />
         </>
     );
 }
