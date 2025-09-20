@@ -154,7 +154,7 @@ function Header() {
     { path: "/about", label: "About" },
     { path: "/portfolio", label: "Portfolio" },
     { path: "/blog", label: "Blog" },
-    { path: "/shop", label: "Shop" },
+    { path: "/projects", label: "Projects" },
     { path: "/buy", label: "Buy Theme!" },
   ];
   const [mode, setMode] = useState(getInitial);

@@ -217,7 +217,7 @@ function Home() {
                         <p>Since 1999, we have been providing great flooring solutions and customer service for homeowners and commercial clients.
                           among flooring materials, none is more elegant and luxurious than natural stone.</p>
                         <div className="text-left">
-                          <a href="javascript:;" className="site-button-link">Read More</a>
+                          <a href="#." className="site-button-link">Read More</a>
                         </div>
                       </div>
                     </div>

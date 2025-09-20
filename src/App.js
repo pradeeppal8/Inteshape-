@@ -8,7 +8,7 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Contact from "./Pages/Contact";
 import Blog from "./Pages/Blog";
-import Shop from "./Pages/Shop";
+import Projects from "./Pages/Projects";
 import MyProfile from "./Pages/MyProfile";
 import Portfolio from "./Pages/Portfolio";
 // import ProtectedRoute from "./ProtectedRoute";
@@ -36,7 +36,7 @@ function App() {
         <Route path="/" element={<Contact />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/portfolio" element={<Portfolio />} />
-         <Route path="/shop" element={<Shop />} />
+         <Route path="/projects" element={<Projects />} />
         {/* <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}/> */}
       </Routes>
      {!hide && <Footer />}
