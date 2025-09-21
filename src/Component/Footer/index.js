@@ -33,7 +33,7 @@ function Footer() {
             Today we can tell you, thanks to your passion.
           </p>
           <div className="brand__social">
-            <Link to="https://www.facebook.com/pradeep.baghel" target="_blank">
+            <Link to="https://www.facebook.com/rockey.bhai.909800" target="_blank">
               <div className="fab_facebook"></div>
               <span class="title">Facebook</span>
             </Link>
@@ -75,8 +75,11 @@ function Footer() {
             <li>
               <Link to="/about">About</Link>
             </li>
-            <li>Services</li>
-            <li>Projects</li>
+            <li>
+              <Link to="/portfolio">Portfolio</Link>
+            </li>
+            <li>
+              <Link to="/projects">Projects</Link></li>
             <li>
               <Link to="/blog">Blog</Link>
             </li>
@@ -88,15 +91,15 @@ function Footer() {
 
         <div className="footer__col contact">
           <h4>Contact Us</h4>
-          <p>756 Livingston Street, Brooklyn, NY 11201, United State</p>
-          <p>7xthemedemo@gmail.com</p>
-          <p>(+298) 012–3456–789</p>
-          <p>(+298) 146–6543–480</p>
+          <p>756 Livingston Street, Brooklyn, Ahmedabad 380001, United State</p>
+          <p>demo@gmail.com</p>
+          <p>(+91) 9522900862</p>
+          <p>(+91) 9098670251</p>
         </div>
         <div className="footer__subscribe">
           <h4>Subscribe</h4>
           <p>
-            Never Miss Anything From 7xtheme By Signing Up To Our Newsletter.
+            Never Miss Anything From Ahmedabad By Signing Up To Our Newsletter.
           </p>
           <div className="subscribe__form">
             <div style={{display: "flex"}}>
@@ -116,7 +119,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer__bottom">
-        <p>© {new Date().getFullYear()} Your Company. Designed By 7xtheme.</p>
+        <p>© {new Date().getFullYear()} Your Company. Designed By Pradeep.</p>
       </div>
     </footer>
   );

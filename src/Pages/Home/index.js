@@ -13,7 +13,11 @@ import slide1 from "../../ulits/assets/slide1.jpg";
 import slide2 from "../../ulits/assets/slide2.jpg";
 import slide3 from "../../ulits/assets/slide3.jpg";
 import pic_img12 from "../../ulits/assets/pic_img12.jpg";
+// import abi from "../../ulits/assets/abi.jpg";
+// import pradeep from "../../ulits/assets/pradeep.jpg";
+// import rocky_bhai from "../../ulits/assets/rocky_bhai.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -75,6 +79,8 @@ function Home() {
   const [loaded, setLoaded] = useState(false);
   const contentRef = useRef(null);
   const [loading, setLoading] = useState(true);
+  const [visible, setVisible] = useState(6);
+  const [loadings, setLoadings] = useState(false);
   // const [value, setValue] = useState(null);
   // const [hoverDate, setHoverDate] = useState(null);
   // const [isHovering, setIsHovering] = useState(false);
@@ -87,6 +93,38 @@ function Home() {
   // const handleMouseLeave = () => {
   //   setIsHovering(false);
   // };
+
+  const blocks = [
+    { id: 1, title: "Architecture", text: "We combine Interior and Exterior Design services and often provide them as a single solution." },
+    { id: 2, title: "Planning", text: "Landscape plans for drainage problems may also entail planting beds away from the home’s foundation." },
+    { id: 3, title: "Exterior", text: "We offer comprehensive Architectural Engineering Services including Interior design, Master planning." },
+    { id: 4, title: "Decoration", text: "We provide a range of architectural 3D modeling services to aid the design, planning." },
+    { id: 5, title: "Interior Planning", text: "Project management is the process by which our team plans and executes your project." },
+    { id: 6, title: "Style Selection", text: "Our team also provides consultations on all architectural issues." },
+    { id: 7, title: "Landscape Design", text: "Creating functional and aesthetic landscapes with sustainability in mind." },
+    { id: 8, title: "Renovation", text: "Transforming old structures into modern, efficient, and beautiful spaces." },
+    { id: 9, title: "3D Visualization", text: "Bringing your designs to life with high-quality 3D rendering and modeling." },
+    { id: 10, title: "Smart Homes", text: "Integrating modern technology with design for convenience and efficiency." },
+    { id: 11, title: "Sustainable Design", text: "Eco-friendly solutions that minimize environmental impact and maximize efficiency." },
+    { id: 12, title: "Furniture Design", text: "Custom-made furniture solutions tailored to your space and style." },
+    { id: 13, title: "Lighting Design", text: "Perfect lighting solutions to highlight spaces and create atmosphere." },
+    { id: 14, title: "Urban Planning", text: "Designing organized and functional layouts for city development." },
+    { id: 15, title: "Commercial Spaces", text: "Creative solutions for offices, retail, and hospitality environments." },
+    { id: 16, title: "Residential Spaces", text: "Personalized home designs that reflect your lifestyle and needs." },
+    { id: 17, title: "Cultural Projects", text: "Architectural services for museums, art galleries, and cultural spaces." },
+    { id: 18, title: "Healthcare Design", text: "Designing hospitals and clinics with comfort, safety, and efficiency." },
+    { id: 19, title: "Educational Spaces", text: "Schools, colleges, and institutions designed for better learning environments." },
+    { id: 20, title: "Sports Facilities", text: "Functional and innovative designs for stadiums and recreational areas." },
+  ];
+
+
+  const handleLoadMore = () => {
+    setLoadings(true);
+    setTimeout(() => {
+      setVisible((prev) => prev + 3);
+      setLoadings(false);
+    }, 800);
+  };
 
   useEffect(() => {
     if (loaded && contentRef.current) {
@@ -238,51 +276,142 @@ function Home() {
               <div class="section-full-what">
                 <div class="section-head">
                   <div class="sx-separator-outer separator-left">
-                    <div class="sx-separator">
-                      <h3 class="sep-line-one">What We do</h3>
+                    <div class="sx-separator bg-white bg-moving bg-repeat-x">
+                      <h3 class="sep-line-one">What We Do</h3>
                     </div>
                   </div>
                 </div>
                 <div class="section-content">
-                  <div class="row number-block-one-outer justify-content-center">
-                    <div class="col-lg-4 col-md-6 col-sm-6 m-b30">
-
-                      <div class="number-block-one animate-in-to-top">
-                        <img src={pic1} alt="" />
-                        <div class="figcaption text-center p-a20">
-                          <h4 class="m-a0">Interior Design</h4>
-                        </div>
-                        <div class="figcaption-number text-center sx-text-primary animate-in-to-top-content">
-                          <span>01</span>
+                  <div className="row number-block-two-outer">
+                    {blocks.slice(0, visible).map((block) => (
+                      <div key={block.id} className="col-lg-4 col-md-6 col-sm-12 m-b30">
+                        <div className="number-block-two animate-in-to-top bdr-gray-light bdr-solid bdr-1">
+                          <div className="figcaption bg-white p-a30">
+                            <h4 className="m-t0">{block.title}</h4>
+                            <p>{block.text}</p>
+                            <a href="#." className="site-button-link">Read More</a>
+                            <div className="figcaption-number text-black animate-in-to-top-content">
+                              <span>
+                                {String(block.id).padStart(2, "0")}
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
+                    ))}
+                    {visible < blocks.length && (
+                      <div className="text-center load-more-btn-outer">
+                        <button
+                          className="site-button"
+                          onClick={handleLoadMore}
+                          disabled={loadings}
+                        >
+                          {loadings ? "Loading..." : "Load More"}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
 
+              <div className="section-full-about mobile-page-padding our-experts">
+                <div className="section-content">
+                  <div class="section-head">
+                    <div class="sx-separator-outer separator-left">
+                      <div class="sx-separator bg-white bg-moving bg-repeat-x">
+                        <h3 class="sep-line-one">Our Experts</h3>
+                      </div>
                     </div>
-
-                    <div class="col-lg-4 col-md-6 col-sm-6 m-b30">
-
-                      <div class="number-block-one animate-in-to-top">
-                        <img src={pic2} alt="" />
-                        <div class="figcaption text-center p-a20">
-                          <h4 class="m-a0">Architectur</h4>
-                        </div>
-                        <div class="figcaption-number text-center sx-text-primary animate-in-to-top-content">
-                          <span>02</span>
+                  </div>
+                  <div class="section-contents">
+                    <div class="row justify-content-center">
+                      <div class="col-lg-4 col-md-6 col-sm-12 m-b30">
+                        <div class="our-team-3">
+                          <div class="our-team-info ">
+                            <img src={pic1} alt="" />
+                            <div class="our-team-content">
+                              <h4 class="sx-team-name"><a href="#.">Interior Work Avroko</a></h4>
+                              <span class="sx-team-position text-white">Muscat, Sultanate of Oman</span>
+                              <div className="social-icon">
+                                <a href="https://www.facebook.com/pradeep.baghel" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.instagram.com/rockey_star_615" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.pinterest.com/pradeepbaghel" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-pinterest"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/pradeep-baghel-569083244" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-linkedin"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-sm-6 m-b30">
-                      <div class="number-block-one animate-in-to-top">
-                        <img src={pic3} alt="" />
-                        <div class="figcaption text-center p-a20">
-                          <h4 class="m-a0">Floor Plan</h4>
-                        </div>
-                        <div class="figcaption-number text-center sx-text-primary animate-in-to-top-content">
-                          <span>03</span>
+                      <div class="col-lg-4 col-md-6 col-sm-12 m-b30">
+                        <div class="our-team-3">
+                          <div class="our-team-info ">
+                            <img src={pic2} alt="" />
+                            <div class="our-team-content">
+                              <h4 class="sx-team-name"><a href="#.">Qatar Pavilion</a></h4>
+                              <span class="sx-team-position text-white">Muscat, Sultanate of Oman</span>
+                              <div className="social-icon">
+                                <a href="https://www.facebook.com/pradeep.baghel" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.instagram.com/rockey_star_615" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.pinterest.com/pradeepbaghel" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-pinterest"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/pradeep-baghel-569083244" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-linkedin"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
+
+                      <div class="col-lg-4 col-md-6 col-sm-12 m-b30">
+                        <div class="our-team-3">
+                          <div class="our-team-info ">
+                            <img src={pic3} alt="" />
+                            <div class="our-team-content">
+                              <h4 class="sx-team-name"><a href="#.">House Bluprint</a></h4>
+                              <span class="sx-team-position text-white">Muscat, Sultanate of Oman</span>
+                              <div className="social-icon">
+                                <a href="https://www.facebook.com/pradeep.baghel" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.instagram.com/rockey_star_615" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.pinterest.com/pradeepbaghel" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-pinterest"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/pradeep-baghel-569083244" target="_blank" rel="noreferrer">
+                                  <i className="fab fa-linkedin"></i>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
