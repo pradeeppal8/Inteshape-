@@ -1515,7 +1515,6 @@
     }
 }
 
-
 @media (max-width: 1199px) {
     .main-wrapper {
         .homepage {
@@ -1645,7 +1644,6 @@
         }
     }
 }
-
 
 @media (max-width: 991px) {
     .main-wrapper {
@@ -1957,6 +1955,15 @@
 
                     &.our-experts {
                         padding: 30px 15px 37px;
+                    }
+                }
+                .section-full {
+                    .section-content {
+                        .about-home-2 {
+                            p {
+                                width: 100%;
+                            }
+                        }
                     }
                 }
 
