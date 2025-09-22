@@ -107,7 +107,7 @@ function Contact() {
             .catch(error => {
                 showToast("error", error.message || "Login failed");
             });
-        if (form.username === "pradeep@123" && form.password === "123456") {
+        if (form.username === "demo@123" && form.password === "123456") {
             setTimeout(() => {
                 setForm({ username: "", password: "" });
                 setErrors({});

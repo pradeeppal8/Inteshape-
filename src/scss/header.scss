@@ -10,26 +10,30 @@ $font-family_1: "Arial", sans-serif;
       a {
         color: $color_1;
 
-        &:hover {
-          color: #c78c65;
+        // &:hover {
+        //   color: #c78c65;
 
-          &::after {
-            background-color: #c78c65 !important;
-            content: "";
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            height: 2px;
-            width: 100%;
-          }
-        }
+        //   &::after {
+        //     background-color: #c78c65 !important;
+        //     content: "";
+        //     position: absolute;
+        //     bottom: 0px;
+        //     left: 0;
+        //     height: 2px;
+        //     width: 100%;
+        //   }
+        // }
 
-        &.active {
-          color: #c78c65;
-          &::after {
-            background-color: #c78c65 !important;
-          }
-        }
+        // &.active {
+        //   color: #c78c65;
+
+        //   &::after {
+        //     background-color: #c78c65 !important;
+        //     width: 100%;
+        //     left: 0;
+        //     top: 27px;
+        //   }
+        // }
       }
     }
 
@@ -582,12 +586,11 @@ $font-family_1: "Arial", sans-serif;
         top: 100%;
         // left: 0;
         min-width: 200px;
-        background: #1d1d1f; // dark background like your screenshot
+        background: #1d1d1f;
         border: none;
         padding: 0;
-        // margin: 0;
         list-style: none;
-        display: none; // hidden by default
+        display: none;
         z-index: 1000;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         margin: 0 auto;
@@ -596,7 +599,7 @@ $font-family_1: "Arial", sans-serif;
           position: relative;
 
           a {
-            color: #d5b9a2; // beige color like your screenshot
+            color: #d5b9a2;
             text-decoration: none;
             display: block;
             padding: 0.5rem 1rem;
@@ -612,11 +615,9 @@ $font-family_1: "Arial", sans-serif;
             }
           }
 
-          /* Nested submenu (Design → UI/UX/Web) */
           &.nested {
             position: absolute;
             top: 0;
-            // left: 100%;
             min-width: 200px;
             background: #1d1d1f;
             display: none;
@@ -688,19 +689,58 @@ $font-family_1: "Arial", sans-serif;
       color: #fff;
       font-weight: 500;
       position: relative;
-    }
 
-    a.active {
       &::after {
-        content: "";
+        content: '';
         position: absolute;
-        bottom: -4px;
-        left: 0;
+        left: 100%;
+        bottom: -8px;
         height: 2px;
-        width: 100%;
-        background: #ffff;
+        width: 0px;
+        z-index: -1;
+        background-color: #c78c65;
+        transition: width 0.35s ease;
+        -moz-transition: all 0.35s ease;
+        -webkit-transition: all 0.35s ease;
+        -o-transition: all 0.35s ease;
+      }
+      
+
+      &.active {
+        color: #c78c65;
+
+        &::after {
+          width: 100%;
+          left: 0;
+        }
+      }
+
+      &:hover {
+        color: #c78c65;
+
+        &::after {
+          width: 100%;
+          left: 0;
+        }
       }
     }
+
+    // a.active {
+    //   &::after {
+    //     content: '';
+    //     position: absolute;
+    //     left: 100%;
+    //     bottom: 0px;
+    //     height: 2px;
+    //     width: 0px;
+    //     z-index: -1;
+    //     background-color: #c78c65;
+    //     transition: width 0.35s ease;
+    //     -moz-transition: all 0.35s ease;
+    //     -webkit-transition: all 0.35s ease;
+    //     -o-transition: all 0.35s ease;
+    //   }
+    // }
 
     a.buy {
       font-weight: bold;
@@ -1683,6 +1723,7 @@ $font-family_1: "Arial", sans-serif;
         }
       }
     }
+
     .sidebars {
       .menu {
         .hide-desk {
