@@ -1,0 +1,12 @@
+.main-wrapper {
+    .blog-details {
+        img {
+            &.blog-image {
+                width: 100%;
+                height: 700px;
+                display: block;
+                object-fit: cover;
+            }
+        }
+    }
+}

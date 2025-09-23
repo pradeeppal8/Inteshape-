@@ -116,9 +116,11 @@
                                 padding: 30px;
 
                                 h3 {
+                                    font-family: "quincy-cf";
+
                                     &.number {
                                         font-size: 100px;
-                                        background: #e5a882;
+                                        background: #e5a88275;
                                         width: 120px;
                                         height: 120px;
                                         display: flex;
@@ -134,14 +136,17 @@
                                         letter-spacing: 9px;
                                         font-size: 40px;
                                         font-weight: 300;
+
                                     }
                                 }
 
                                 h2 {
                                     font-size: 58px;
-                                    font-weight: 600;
+                                    font-weight: 500;
                                     line-height: 1.05;
+                                    font-family: "quincy-cf";
                                     margin: 0;
+                                    letter-spacing: 1px;
 
                                 }
 
@@ -396,7 +401,7 @@
                         padding: 80px 40px 80px 40px;
 
                         h3 {
-                            font-family: 'Poppins', sans-serif;
+                            font-family: "quincy-cf";
                             font-weight: 600;
                             font-size: 38px;
                             color: #000;
@@ -548,13 +553,14 @@
 
                                 .sep-line-one {
                                     padding: 24px 0px 22px 0px;
-                                    font-size: 42px;
-                                    font-weight: 800;
+                                    font-size: 50px;
+                                    font-weight: 600;
                                     position: relative;
                                     text-align: center;
                                     display: flex;
                                     justify-content: center;
                                     margin-bottom: 0;
+                                    font-family: "quincy-cf";
 
                                     &::before {
                                         content: "";
@@ -598,7 +604,7 @@
                             h3 {
                                 font-size: 38px;
                                 font-weight: 600;
-                                font-family: 'Poppins', sans-serif;
+                               font-family: "quincy-cf";
                                 margin-bottom: 20px;
                             }
 
@@ -680,6 +686,9 @@
 
                         .about-home-right {
                             .swiper-container {
+                                .count-text {
+                                    font-weight: 700;
+                                }
                                 .swiper {
                                     width: 45%;
                                     margin: 0 auto 0 0;
@@ -888,6 +897,7 @@
                                             a {
                                                 color: #fff;
                                                 text-decoration: none;
+                                                font-family: "quincy-cf";
 
                                                 &:hover {
                                                     color: #e5a882;
@@ -1156,13 +1166,14 @@
 
                         .sep-line-one {
                             padding: 24px 0px 22px 0px;
-                            font-size: 42px;
-                            font-weight: 800;
+                            font-size: 47px;
+                            font-weight: 600;
                             position: relative;
                             text-align: center;
                             display: flex;
                             justify-content: center;
                             margin-bottom: 0;
+                            font-family: "quincy-cf";
 
                             &::before {
                                 content: "";
@@ -1265,6 +1276,7 @@
                             h4 {
                                 font-size: 24px;
                                 font-weight: 700;
+                                font-family: "quincy-cf";
                             }
 
                             .figcaption-number {
@@ -1485,6 +1497,7 @@
             .page-content {
                 .section-full-about {
                     padding: 50px 30px 50px;
+
                     .section-content {
                         .section-contents {
 
@@ -1957,6 +1970,7 @@
                         padding: 30px 15px 37px;
                     }
                 }
+
                 .section-full {
                     .section-content {
                         .about-home-2 {

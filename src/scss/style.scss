@@ -1,6 +1,17 @@
+// @import "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
+// @import "https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700;900&display=swap";
+// @import "https://fonts.googleapis.com/css2?family=Cormorant:wght@700&display=swap";
+// @import "https://unpkg.com//style/react-tabs.css";
+
+
+
 @font-face {
   font-family: "Roboto Condensed", sans-serif;
   src: url("../../public/RobotoCondensed-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "quincy-cf";
+  src: url("../../public/Fontspring-DEMO-quincycf-medium.otf") format("truetype");
 }
 
 
@@ -18,6 +29,7 @@
 @import "profile.scss";
 @import "portfolio.scss";
 @import "projects.scss";
+@import "blog-details.scss";
 
 
 

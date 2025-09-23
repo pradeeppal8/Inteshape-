@@ -14,10 +14,11 @@ import thum1 from "../../ulits/assets/thum1.jpg";
 import thum2 from "../../ulits/assets/thum2.jpg";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import pic_img1 from "../../ulits/assets/pic_img1.jpg";
-import pic_img2 from "../../ulits/assets/pic_img2.jpg";
+import pic_img2 from "../../ulits/assets/pic_img2.png";
 import pic_img3 from "../../ulits/assets/pic_img3.jpg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useNavigate } from "react-router-dom";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -158,7 +159,7 @@ const blogPosts = [
     },
     {
         id: 12,
-        date: { day: "14", month: "JUN" },
+        date: { day: "15", month: "JUN" },
         src: pic_img3,
         author: "Anna Jackson",
         comments: 6,
@@ -240,6 +241,7 @@ const blogPosts = [
 ];
 
 function Blog() {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const contentRef = useRef("");
     const prevRef = useRef(null);
@@ -255,17 +257,17 @@ function Blog() {
 
         if (el) {
             gsap.fromTo(
-                el.children, 
-                { y: 80, opacity: 0 }, 
+                el.children,
+                { y: 80, opacity: 0 },
                 {
                     y: 0,
                     opacity: 1,
                     duration: 0.8,
-                    stagger: 0.2, 
+                    stagger: 0.2,
                     ease: "power3.out",
                     scrollTrigger: {
                         trigger: el,
-                        start: "top 80%", 
+                        start: "top 80%",
                         toggleActions: "play none none reverse",
                     },
                 }
@@ -363,7 +365,7 @@ function Blog() {
                                                     <p className="desc mt-4 max-w-xl text-sm md:text-base opacity-90">
                                                         {s.desc}
                                                     </p>
-
+                                                    
                                                     <button className="read-more-btn">{s.cta}</button>
                                                 </div>
                                             </div>
@@ -467,7 +469,7 @@ function Blog() {
 
                             <div className="blog-grid">
                                 {blogPosts.slice(0, visibleCount).map((index) => (
-                                    <div key={index.id} className="blog-card">
+                                    <div key={index.id} className="blog-card" onClick={() => navigate("/blog-details", { state: { index }})}>
                                         <img
                                             src={index.src}
                                             alt={index.title}

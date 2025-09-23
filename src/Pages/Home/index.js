@@ -79,7 +79,7 @@ const slides = [
     },
   },
   {
-    number: "04",
+    number: "05",
     eyebrow: "STYLE",
     title: ["Scandi chairs and soft plants"],
     desc: "Balanced contrast for spaces that feel curated yet livable.",
@@ -109,6 +109,7 @@ function Home() {
   const [loadings, setLoadings] = useState(false);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(1);
 
   const blocks = [
     {
@@ -776,11 +777,12 @@ function Home() {
                         <div className="about-home-right">
                           <div className="swiper-container">
                             <Swiper
-                              modules={[Navigation]}
+                              modules={[Navigation, Autoplay]}
                               navigation
-                              // autoplay={{ delay: 3000 }}
+                              autoplay={{ delay: 3000 }}
                               loop={true}
                               className="mySwiper"
+                              onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex + 1)}
                             >
                               {swiperSlide.map((slide) => (
                                 <SwiperSlide key={slide.id}>
@@ -792,6 +794,9 @@ function Home() {
                                 </SwiperSlide>
                               ))}
                             </Swiper>
+                            <div className="absolute bottom-4 right-4 bg-black/60 text-black px-1 py-1 rounded count-text">
+                              {currentSlide} / {swiperSlide.length}
+                            </div>
                           </div>
                           <div className="about-home-before">
                             <img src={abc} alt="" />

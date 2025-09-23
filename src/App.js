@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation  } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import Home from "./Pages/Home";
@@ -11,11 +11,13 @@ import Blog from "./Pages/Blog";
 import Projects from "./Pages/Projects";
 import MyProfile from "./Pages/MyProfile";
 import Portfolio from "./Pages/Portfolio";
+
 // import ProtectedRoute from "./ProtectedRoute";
 import "./scss/style.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import "@coreui/coreui-pro/dist/css/coreui.min.css";
 import { useTheme } from "./Component/ThemeProvider";
+import BlogDetails from "./Pages/Blog/BlogDetails";
 // import ColorSkin from "./Component/ColorSkin";
 
 function App() {
@@ -36,10 +38,11 @@ function App() {
         <Route path="/" element={<Contact />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/portfolio" element={<Portfolio />} />
-         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/blog-details" element={<BlogDetails />} />
         {/* <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}/> */}
       </Routes>
-     {!hide && <Footer />}
+      {!hide && <Footer />}
     </div>
   );
 }
