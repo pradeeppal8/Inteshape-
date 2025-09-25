@@ -18,6 +18,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@coreui/coreui-pro/dist/css/coreui.min.css";
 import { useTheme } from "./Component/ThemeProvider";
 import BlogDetails from "./Pages/Blog/BlogDetails";
+import Theme from "./Pages/Theme";
 // import ColorSkin from "./Component/ColorSkin";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/blog-details" element={<BlogDetails />} />
+        <Route path="/buytheme" element={<Theme />} />
         {/* <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}/> */}
       </Routes>
       {!hide && <Footer />}

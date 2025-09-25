@@ -1,3 +1,13 @@
+// :root {
+//   --skeleton-base: #2a2a2a;
+//   --skeleton-highlight: #3a3a3a;
+// }
+
+// .light-theme {
+//   --skeleton-base: #2a2a2a;
+//   --skeleton-highlight: #3a3a3a;
+// }
+
 .light {
   .footer {
     background: #f7f6f6 !important;
@@ -91,6 +101,18 @@
   .footer .footer__subscribe .subscribe__form button svg {
     color: #111 !important;
   }
+
+  // .footer {
+  //   .footer__container {
+  //     .react-loading-skeleton {
+  //       background-color: var(--skeleton-base) !important;
+  //       background-image: linear-gradient(90deg,
+  //           var(--skeleton-base),
+  //           var(--skeleton-highlight),
+  //           var(--skeleton-base)) !important;
+  //     }
+  //   }
+  // }
 }
 
 .footer {
@@ -167,6 +189,10 @@
       .brand__social {
         display: flex;
         gap: 15px;
+
+        .react-loading-skeleton {
+          margin-top: 20px;
+        }
 
         a {
           background: #fff;

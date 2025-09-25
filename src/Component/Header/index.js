@@ -155,7 +155,7 @@ function Header() {
     { path: "/portfolio", label: "Portfolio" },
     { path: "/blog", label: "Blog" },
     { path: "/projects", label: "Projects" },
-    { path: "/buy", label: "Buy Theme!" },
+    { path: "/buytheme", label: "Buy Theme!" },
   ];
   const [mode, setMode] = useState(getInitial);
   useEffect(() => {
@@ -172,7 +172,7 @@ function Header() {
           }`}
       >
         <div className="logo">
-          <Link to="/">
+          <Link to="/home">
             <img src={headerLogo} alt="Logo" />
           </Link>
         </div>
