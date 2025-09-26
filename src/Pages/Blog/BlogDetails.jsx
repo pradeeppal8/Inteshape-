@@ -10,7 +10,7 @@ function BlogDetails() {
   const index = location.state?.index;
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
+    const timer = setTimeout(() => setLoading(false), 15000000);
     return () => clearTimeout(timer);
   }, []);
 

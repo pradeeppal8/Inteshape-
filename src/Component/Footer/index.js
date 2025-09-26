@@ -319,7 +319,7 @@ function Footer({ }) {
               />
             ) : (
               <li>
-                <Link to="/">Contact Us</Link>
+                <Link to="/contact">Contact Us</Link>
               </li>
             )}
           </ul>

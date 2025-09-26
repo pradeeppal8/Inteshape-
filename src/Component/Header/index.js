@@ -150,7 +150,7 @@ function Header() {
     // Add additional logic as needed
   };
   const menuItems = [
-    { path: "/home", label: "Home" },
+    { path: "/", label: "Home" },
     { path: "/about", label: "About" },
     { path: "/portfolio", label: "Portfolio" },
     { path: "/blog", label: "Blog" },

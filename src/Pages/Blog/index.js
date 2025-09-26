@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import ScrollButtons from "../../Component/ScrollButtons";
-import CustomLoader from "../../Component/CustomeLoader";
+// import CustomLoader from "../../Component/CustomeLoader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
@@ -19,10 +19,10 @@ import pic_img3 from "../../ulits/assets/pic_img3.jpg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "react-router-dom";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 gsap.registerPlugin(ScrollTrigger);
-
 
 const slides = [
     {
@@ -251,7 +251,6 @@ function Blog() {
     const [isLoading, setIsLoading] = useState(false);
     const [tagsBoxCount, setTagsBoxCount] = useState(1);
 
-
     useEffect(() => {
         const el = contentRef.current;
 
@@ -285,13 +284,13 @@ function Blog() {
     };
     const handleNextArticle = () => {
         if (tagsBoxCount < 5) {
-            setTagsBoxCount(prevCount => prevCount + 1);
+            setTagsBoxCount((prevCount) => prevCount + 1);
         }
     };
 
     const handlePrevArticle = () => {
         if (tagsBoxCount > 0) {
-            setTagsBoxCount(prevCount => prevCount - 1);
+            setTagsBoxCount((prevCount) => prevCount - 1);
         }
     };
 
@@ -308,15 +307,11 @@ function Blog() {
         "Landscape",
     ];
 
-
-
-
     useEffect(() => {
-        const timer = setTimeout(() => setLoading(false), 1500);
-        return () => clearTimeout(timer);
+        setTimeout(() => setLoading(false), 15000000);
     }, []);
 
-    if (loading) return <CustomLoader loading />;
+    // if (loading) return <CustomLoader loading />;
 
     return (
         <>
@@ -352,7 +347,10 @@ function Blog() {
 
                                         <div className="slider_content">
                                             <div className="mx-auto flex h-full max-w-7xl items-center px-6">
-                                                <div ref={contentRef} className="slide-content text-white">
+                                                <div
+                                                    ref={contentRef}
+                                                    className="slide-content text-white"
+                                                >
                                                     <p className="eyebrow mb-2 text-xs tracking-[0.28em] font-semibold opacity-90 md:text-sm letter-spacing">
                                                         {s.eyebrow}
                                                     </p>
@@ -365,7 +363,7 @@ function Blog() {
                                                     <p className="desc mt-4 max-w-xl text-sm md:text-base opacity-90">
                                                         {s.desc}
                                                     </p>
-                                                    
+
                                                     <button className="read-more-btn">{s.cta}</button>
                                                 </div>
                                             </div>
@@ -377,28 +375,110 @@ function Blog() {
                     </div>
                     <div className="blog-container">
                         <div className="blog-hero">
-                            <img src={thum1} alt="Blog Hero" />
+                            {loading ? (
+                                <div className="skeleton-thumb">
+                                    <svg
+                                        width="100%"
+                                        height="600"
+                                        viewBox="0 0 1536 1024"
+                                        preserveAspectRatio="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        style={{
+                                            borderRadius: "0px",
+                                            backgroundColor: "#fff",
+                                            position: "relative",
+                                            zIndex: "9",
+                                            marginBottom: "20px",
+                                        }}
+                                    >
+                                        <defs>
+                                            <linearGradient id="shimmerGradient">
+                                                <stop offset="0%" stopColor="#e8ebee">
+                                                    <animate
+                                                        attributeName="offset"
+                                                        values="-2; 1"
+                                                        dur="1.5s"
+                                                        repeatCount="indefinite"
+                                                    />
+                                                </stop>
+                                                <stop offset="50%" stopColor="#dfe6ea">
+                                                    <animate
+                                                        attributeName="offset"
+                                                        values="-1.5; 1.5"
+                                                        dur="1.5s"
+                                                        repeatCount="indefinite"
+                                                    />
+                                                </stop>
+                                                <stop offset="100%" stopColor="#e8ebee">
+                                                    <animate
+                                                        attributeName="offset"
+                                                        values="0; 2"
+                                                        dur="1.5s"
+                                                        repeatCount="indefinite"
+                                                    />
+                                                </stop>
+                                            </linearGradient>
+                                        </defs>
+
+                                        <rect
+                                            width="100%"
+                                            height="100%"
+                                            fill="url(#shimmerGradient)"
+                                            rx="0"
+                                        />
+                                        <circle cx="290" cy="330" r="78" fill="#f9fafb" />
+                                        <path
+                                            d="M0 825 
+C 290 660, 507 991, 725 743 
+S 1159 743, 1536 825 
+V1024 H0 Z"
+                                            fill="#f9fafb"
+                                        />
+                                    </svg>
+                                </div>
+                            ) : (
+                                <img src={thum1} alt="Blog Hero" />
+                            )}
                         </div>
 
                         <div className="blog-content">
-                            <p className="meta">20 October 2019 • By Admin • Architecture</p>
-                            <h1 className="title">
-                                Blog post with image slider there are many variations of
-                                passages.
-                            </h1>
+                            {loading ? (
+                                <Skeleton width={180} height={15} />
+                            ) : (
+                                <p className="meta">
+                                    20 October 2019 • By Admin • Architecture
+                                </p>
+                            )}
+                            {loading ? (
+                                <Skeleton width={"80%"} height={30} style={{ marginBottom: "10px" }} />
+                            ) : (
+                                <h1 className="title">
+                                    Blog post with image slider there are many variations of
+                                    passages.
+                                </h1>
+                            )}
 
-                            <p className="paragraph">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                nisi ut aliquip ex ea commodo consequat.
-                            </p>
+                            {loading ? (
+                                <Skeleton count={1} height={15} />
+                            ) : (
+                                <p className="paragraph">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                    enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                    nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            )}
 
-                            <p className="paragraph">
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                                cupidatat non proident.
-                            </p>
+                            {loading ? (
+                                <Skeleton count={1} height={15} />
+                            ) : (
+                                <p className="paragraph">
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                    cupidatat non proident.
+                                </p>
+                            )}
+
 
                             <div className="quote-box">
                                 <blockquote>
@@ -436,19 +516,39 @@ function Blog() {
                                     <div className="share-box">
                                         <h3>Share this Post:</h3>
                                         <div className="social-icons">
-                                            <a href="https://www.facebook.com/pradeep.baghel" target="_blank" rel="noreferrer">
+                                            <a
+                                                href="https://www.facebook.com/pradeep.baghel"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
                                                 <i className="fab fa-facebook-f"></i>
                                             </a>
-                                            <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
+                                            <a
+                                                href="https://www.twitter.com"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
                                                 <i className="fab fa-twitter"></i>
                                             </a>
-                                            <a href="https://www.instagram.com/rockey_star_615" target="_blank" rel="noreferrer">
+                                            <a
+                                                href="https://www.instagram.com/rockey_star_615"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
                                                 <i className="fab fa-instagram"></i>
                                             </a>
-                                            <a href="https://www.pinterest.com/pradeepbaghel" target="_blank" rel="noreferrer">
+                                            <a
+                                                href="https://www.pinterest.com/pradeepbaghel"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
                                                 <i className="fab fa-pinterest"></i>
                                             </a>
-                                            <a href="https://www.linkedin.com/in/pradeep-baghel-569083244" target="_blank" rel="noreferrer">
+                                            <a
+                                                href="https://www.linkedin.com/in/pradeep-baghel-569083244"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
                                                 <i className="fab fa-linkedin"></i>
                                             </a>
                                         </div>
@@ -456,10 +556,18 @@ function Blog() {
                                 </div>
                             ))}
                             <div className="pagination">
-                                <button className="prev" onClick={handlePrevArticle} disabled={tagsBoxCount === 0}>
+                                <button
+                                    className="prev"
+                                    onClick={handlePrevArticle}
+                                    disabled={tagsBoxCount === 0}
+                                >
                                     Prev Article
                                 </button>
-                                <button className="next" onClick={handleNextArticle} disabled={tagsBoxCount === 5}>
+                                <button
+                                    className="next"
+                                    onClick={handleNextArticle}
+                                    disabled={tagsBoxCount === 5}
+                                >
                                     Next Article
                                 </button>
                             </div>
@@ -469,7 +577,13 @@ function Blog() {
 
                             <div className="blog-grid">
                                 {blogPosts.slice(0, visibleCount).map((index) => (
-                                    <div key={index.id} className="blog-card" onClick={() => navigate("/blog-details", { state: { index }})}>
+                                    <div
+                                        key={index.id}
+                                        className="blog-card"
+                                        onClick={() =>
+                                            navigate("/blog-details", { state: { index } })
+                                        }
+                                    >
                                         <img
                                             src={index.src}
                                             alt={index.title}
@@ -509,6 +623,113 @@ function Blog() {
                             )}
                         </div>
                     </div>
+                    {loading && (
+                        <div className="blog-container">
+                            {/* Hero Image */}
+                            <div className="blog-hero">
+                                <Skeleton height={400} />
+                            </div>
+
+                            {/* Blog Content */}
+                            <div className="blog-content">
+                                <p className="meta">
+                                    <Skeleton width={180} height={15} />
+                                </p>
+                                <h1 className="title">
+                                    <Skeleton width="80%" height={30} />
+                                </h1>
+
+                                {/* Paragraphs */}
+                                <p>
+                                    <Skeleton count={3} />
+                                </p>
+                                <p>
+                                    <Skeleton count={2} />
+                                </p>
+
+                                {/* Quote Box */}
+                                <div className="quote-box">
+                                    <Skeleton height={80} />
+                                    <p>
+                                        <Skeleton width={150} />
+                                    </p>
+                                </div>
+
+                                {/* Gallery (2 images side by side) */}
+                                <div className="gallery">
+                                    <Skeleton height={200} width="48%" />
+                                    <Skeleton height={200} width="48%" />
+                                </div>
+
+                                <p>
+                                    <Skeleton count={3} />
+                                </p>
+
+                                {/* Tags & Share */}
+                                <div className="tags-box">
+                                    <h3>
+                                        <Skeleton width={100} />
+                                    </h3>
+                                    <div className="tags">
+                                        {[...Array(6)].map((_, i) => (
+                                            <Skeleton
+                                                key={i}
+                                                width={70}
+                                                height={20}
+                                                style={{ margin: "5px" }}
+                                            />
+                                        ))}
+                                    </div>
+                                    <div className="share-box">
+                                        <h3>
+                                            <Skeleton width={120} />
+                                        </h3>
+                                        <div className="social-icons">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Skeleton
+                                                    key={i}
+                                                    circle
+                                                    width={30}
+                                                    height={30}
+                                                    style={{ margin: "5px" }}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Pagination */}
+                                <div className="pagination">
+                                    <Skeleton width={100} height={35} />
+                                    <Skeleton width={100} height={35} />
+                                </div>
+                            </div>
+
+                            {/* Blog List Section */}
+                            <div className="blog-list-container">
+                                <h2 className="section-title">
+                                    <Skeleton width={120} />
+                                </h2>
+                                <div className="blog-grid">
+                                    {[...Array(3)].map((_, i) => (
+                                        <div key={i} className="blog-card">
+                                            <Skeleton height={200} />
+                                            <Skeleton
+                                                width="60%"
+                                                height={20}
+                                                style={{ marginTop: "10px" }}
+                                            />
+                                            <Skeleton width="40%" height={15} />
+                                            <Skeleton width="80%" height={20} />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="load-more">
+                                    <Skeleton width={120} height={40} />
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
             <ScrollButtons />

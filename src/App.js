@@ -23,20 +23,21 @@ import Theme from "./Pages/Theme";
 
 function App() {
   const { theme } = useTheme();
-  const location = useLocation();
-  const HIDE_LAYOUT_ON = ["/"];
-  const hide = HIDE_LAYOUT_ON.includes(location.pathname);
+  // const location = useLocation();
+  // const HIDE_LAYOUT_ON = ["/"];
+  // const hide = HIDE_LAYOUT_ON.includes(location.pathname);
   return (
     <div className={`App ${theme}`}>
-      {!hide && <Header />}
+      {/* {!hide && <Header />} */}
+      {<Header />}
       {/* <ColorSkin /> */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/" element={<Contact />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/projects" element={<Projects />} />
@@ -44,7 +45,8 @@ function App() {
         <Route path="/buytheme" element={<Theme />} />
         {/* <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}/> */}
       </Routes>
-      {!hide && <Footer />}
+      {/* {!hide && <Footer />} */}
+      {<Footer />}
     </div>
   );
 }

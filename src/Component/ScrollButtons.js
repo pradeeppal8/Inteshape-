@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import arrowdown from "../ulits/assets/arrow-down.svg";
 
 const ScrollButtons = () => {
   const [showButtons, setShowButtons] = useState(false);
@@ -25,8 +26,10 @@ const ScrollButtons = () => {
     <>
       {showButtons && (
         <div className="scroll-buttons">
-          <button onClick={scrollToTop} className="scroll-btn top">↑</button>
-          <button onClick={scrollToBottom} className="scroll-btn bottom">↓</button>
+          <button onClick={scrollToTop} className="scroll-btn top">
+            <img src={arrowdown} alt=""/>
+          </button>
+          {/* <button onClick={scrollToBottom} className="scroll-btn bottom">↓</button> */}
         </div>
       )}
     </>

@@ -604,7 +604,7 @@
                             h3 {
                                 font-size: 38px;
                                 font-weight: 600;
-                               font-family: "quincy-cf";
+                                font-family: "quincy-cf";
                                 margin-bottom: 20px;
                             }
 
@@ -689,6 +689,7 @@
                                 .count-text {
                                     font-weight: 700;
                                 }
+
                                 .swiper {
                                     width: 45%;
                                     margin: 0 auto 0 0;
@@ -1379,7 +1380,7 @@
                                 height: 2.5px;
                                 width: 0px;
                                 z-index: -1;
-                                background-color: #d7b39a;
+                                background-color: #23252d;
                                 transition: all 0.35s ease;
                                 -moz-transition: all 0.35s ease;
                                 -webkit-transition: all 0.35s ease;
@@ -1394,7 +1395,7 @@
                                 height: 2px;
                                 width: 0px;
                                 z-index: -1;
-                                background-color: #d7b39a;
+                                background-color: #23252d;
                                 transition: width 0.35s ease;
                                 -moz-transition: all 0.35s ease;
                                 -webkit-transition: all 0.35s ease;
@@ -1450,35 +1451,55 @@
                         text-transform: uppercase;
                         font-family: "Roboto Condensed", sans-serif;
 
-                        &::before,
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            right: 100%;
+                            bottom: 0px;
+                            height: 25px;
+                            width: 0px;
+                            z-index: -1;
+                            background-color: #e5a882;
+                            transition: all 0.35s ease;
+                            -moz-transition: all 0.35s ease;
+                            -webkit-transition: all 0.35s ease;
+                            -o-transition: all 0.35s ease;
+                        }
+
                         &::after {
                             content: "";
                             position: absolute;
-                            width: 4px;
-                            height: 100%;
-                            top: 0;
-                            transition: all 0.4s ease;
-                            background-color: #e5a882;
+                            left: 100%;
+                            top: 0px;
+                            height: 25px;
+                            width: 0px;
                             z-index: -1;
-                        }
-
-                        &::before {
-                            left: 0;
-                        }
-
-                        &::after {
-                            right: 0;
+                            background-color: #e5a882;
+                            transition: width 0.35s ease;
+                            -moz-transition: all 0.35s ease;
+                            -webkit-transition: all 0.35s ease;
+                            -o-transition: all 0.35s ease;
                         }
 
                         &:hover {
-                            color: #111;
+                            color: #222;
+                            z-index: 2;
+                            position: relative;
 
                             &::before {
-                                width: 50%;
+                                width: 100%;
+                                right: 0;
+                                -webkit-transition: width 0.35s ease;
+                                transition: width 0.35s ease;
+                                z-index: -1;
                             }
 
                             &::after {
-                                width: 50%;
+                                width: 100%;
+                                left: 0;
+                                -webkit-transition: width 0.35s ease;
+                                transition: width 0.35s ease;
+                                z-index: -1;
                             }
                         }
                     }
