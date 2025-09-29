@@ -308,7 +308,7 @@ function Blog() {
     ];
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 15000000);
+        setTimeout(() => setLoading(false), 1500);
     }, []);
 
     // if (loading) return <CustomLoader loading />;
@@ -379,7 +379,7 @@ function Blog() {
                                 <div className="skeleton-thumb">
                                     <svg
                                         width="100%"
-                                        height="600"
+                                        height="100%"
                                         viewBox="0 0 1536 1024"
                                         preserveAspectRatio="none"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -481,99 +481,277 @@ V1024 H0 Z"
 
 
                             <div className="quote-box">
-                                <blockquote>
-                                    We let our quality work and commitment to customer
-                                    satisfaction be our slogan. Quality you deserve and
-                                    dependability you can count on.
-                                </blockquote>
-                                <p className="author">
-                                    Jessica Mcdade <span>Interior Designer</span>
-                                </p>
+                                {loading ? (
+                                    <Skeleton count={1} height={80} />
+                                ) : (
+                                    <blockquote>
+                                        We let our quality work and commitment to customer
+                                        satisfaction be our slogan. Quality you deserve and
+                                        dependability you can count on.
+                                    </blockquote>
+                                )}
+                                {loading ? (
+                                    <Skeleton width={"15%"} count={1} height={18} />
+                                ) : (
+                                    <p className="author">
+                                        Jessica Mcdade <span>Interior Designer</span>
+                                    </p>
+                                )}
                             </div>
 
                             <div className="gallery">
-                                <img src={thum1} alt="Blog Hero" />
-                                <img src={thum2} alt="Blog Hero" />
-                            </div>
+                                {loading ? (
+                                    <div className="skeleton-thumb">
+                                        <svg
+                                            width="100%"
+                                            height="200"
+                                            viewBox="0 0 212 124"
+                                            preserveAspectRatio="xMidYMid slice"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            style={{
+                                                border: "1px solid white",
+                                                borderRadius: "6px",
+                                            }}
+                                        >
+                                            <defs>
+                                                <linearGradient id="shimmerGradient">
+                                                    <stop offset="0%" stopColor="#e8ebee">
+                                                        <animate
+                                                            attributeName="offset"
+                                                            values="-2; 1"
+                                                            dur="1.5s"
+                                                            repeatCount="indefinite"
+                                                        />
+                                                    </stop>
+                                                    <stop offset="50%" stopColor="#dfe6ea">
+                                                        <animate
+                                                            attributeName="offset"
+                                                            values="-1.5; 1.5"
+                                                            dur="1.5s"
+                                                            repeatCount="indefinite"
+                                                        />
+                                                    </stop>
+                                                    <stop offset="100%" stopColor="#e8ebee">
+                                                        <animate
+                                                            attributeName="offset"
+                                                            values="0; 2"
+                                                            dur="1.5s"
+                                                            repeatCount="indefinite"
+                                                        />
+                                                    </stop>
+                                                </linearGradient>
+                                            </defs>
 
-                            <p className="paragraph">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry. Lorem Ipsum has been the industry’s standard dummy
-                                text ever since the 1500s, when an unknown printer took a galley
-                                of type and scrambled it to make a type specimen book.
-                            </p>
+                                            <rect
+                                                width="300"
+                                                height="200"
+                                                fill="url(#shimmerGradient)"
+                                                rx="6"
+                                            />
+                                            <circle cx="40" cy="40" r="10" fill="#f9fafb" />
+                                            <path
+                                                d="M0 100 
+      C 40 80, 70 120, 100 90 
+      S 160 90, 212 100 
+      V124 H0 Z"
+                                                fill="#f9fafb"
+                                            />
+                                        </svg>
+                                    </div>
+                                ) : (
+                                    <img src={thum1} alt="Blog Hero" />
+                                )}
+
+                                {loading ? (
+                                    <div className="skeleton-thumb">
+                                        <svg
+                                            width="100%"
+                                            height="200"
+                                            viewBox="0 0 212 124"
+                                            preserveAspectRatio="xMidYMid slice"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            style={{
+                                                border: "1px solid white",
+                                                borderRadius: "6px",
+                                            }}
+                                        >
+                                            <defs>
+                                                <linearGradient id="shimmerGradient">
+                                                    <stop offset="0%" stopColor="#e8ebee">
+                                                        <animate
+                                                            attributeName="offset"
+                                                            values="-2; 1"
+                                                            dur="1.5s"
+                                                            repeatCount="indefinite"
+                                                        />
+                                                    </stop>
+                                                    <stop offset="50%" stopColor="#dfe6ea">
+                                                        <animate
+                                                            attributeName="offset"
+                                                            values="-1.5; 1.5"
+                                                            dur="1.5s"
+                                                            repeatCount="indefinite"
+                                                        />
+                                                    </stop>
+                                                    <stop offset="100%" stopColor="#e8ebee">
+                                                        <animate
+                                                            attributeName="offset"
+                                                            values="0; 2"
+                                                            dur="1.5s"
+                                                            repeatCount="indefinite"
+                                                        />
+                                                    </stop>
+                                                </linearGradient>
+                                            </defs>
+
+                                            <rect
+                                                width="300"
+                                                height="200"
+                                                fill="url(#shimmerGradient)"
+                                                rx="6"
+                                            />
+                                            <circle cx="40" cy="40" r="10" fill="#f9fafb" />
+                                            <path
+                                                d="M0 100 
+      C 40 80, 70 120, 100 90 
+      S 160 90, 212 100 
+      V124 H0 Z"
+                                                fill="#f9fafb"
+                                            />
+                                        </svg>
+                                    </div>
+                                ) : (
+                                    <img src={thum2} alt="Blog Hero" />
+                                )}
+                            </div>
+                            {loading ? (
+                                <Skeleton count={1} height={40} />
+                            ) : (
+                                <p className="paragraph">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting
+                                    industry. Lorem Ipsum has been the industry’s standard dummy
+                                    text ever since the 1500s, when an unknown printer took a galley
+                                    of type and scrambled it to make a type specimen book.
+                                </p>
+                            )}
 
                             {[...Array(tagsBoxCount)].map((_, idx) => (
                                 <div key={idx} className="tags-box">
-                                    <h3>Tags</h3>
+                                    {loading ? (
+                                        <Skeleton width={100} count={1} height={20} style={{ marginBottom: "10px" }} />
+                                    ) : (
+                                        <h3>Tags</h3>
+                                    )}
                                     <div className="tags">
                                         {tagList.map((tag, index) => (
-                                            <span key={index} className="tag">
-                                                {tag}
-                                            </span>
+                                            <>
+                                                {loading ? (
+                                                    <Skeleton width={80} count={1} height={20} />
+                                                ) : (
+                                                    <span key={index} className="tag">
+                                                        {tag}
+                                                    </span>
+                                                )}
+                                            </>
                                         ))}
                                     </div>
                                     <div className="share-box">
-                                        <h3>Share this Post:</h3>
+                                        {loading ? (
+                                            <Skeleton width={100} count={1} height={20} style={{ marginBottom: "10px" }} />
+                                        ) : (
+                                            <h3>Share this Post:</h3>
+                                        )}
                                         <div className="social-icons">
-                                            <a
-                                                href="https://www.facebook.com/pradeep.baghel"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <i className="fab fa-facebook-f"></i>
-                                            </a>
-                                            <a
-                                                href="https://www.twitter.com"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <i className="fab fa-twitter"></i>
-                                            </a>
-                                            <a
-                                                href="https://www.instagram.com/rockey_star_615"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <i className="fab fa-instagram"></i>
-                                            </a>
-                                            <a
-                                                href="https://www.pinterest.com/pradeepbaghel"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <i className="fab fa-pinterest"></i>
-                                            </a>
-                                            <a
-                                                href="https://www.linkedin.com/in/pradeep-baghel-569083244"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <i className="fab fa-linkedin"></i>
-                                            </a>
+                                            {loading ? (
+                                                <Skeleton width={30} height={30} count={1} borderRadius={50} />
+                                            ) : (
+                                                <a
+                                                    href="https://www.facebook.com/pradeep.baghel"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <i className="fab fa-facebook-f"></i>
+                                                </a>
+                                            )}
+                                            {loading ? (
+                                                <Skeleton width={30} height={30} count={1} borderRadius={50} />
+                                            ) : (
+                                                <a
+                                                    href="https://www.twitter.com"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <i className="fab fa-twitter"></i>
+                                                </a>
+                                            )}
+                                            {loading ? (
+                                                <Skeleton width={30} height={30} count={1} borderRadius={50} />
+                                            ) : (
+                                                <a
+                                                    href="https://www.instagram.com/rockey_star_615"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <i className="fab fa-instagram"></i>
+                                                </a>
+                                            )}
+                                            {loading ? (
+                                                <Skeleton width={30} height={30} count={1} borderRadius={50} />
+                                            ) : (
+                                                <a
+                                                    href="https://www.pinterest.com/pradeepbaghel"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <i className="fab fa-pinterest"></i>
+                                                </a>
+                                            )}
+                                            {loading ? (
+                                                <Skeleton width={30} height={30} count={1} borderRadius={50} />
+                                            ) : (
+                                                <a
+                                                    href="https://www.linkedin.com/in/pradeep-baghel-569083244"
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <i className="fab fa-linkedin"></i>
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
                             ))}
                             <div className="pagination">
-                                <button
-                                    className="prev"
-                                    onClick={handlePrevArticle}
-                                    disabled={tagsBoxCount === 0}
-                                >
-                                    Prev Article
-                                </button>
-                                <button
-                                    className="next"
-                                    onClick={handleNextArticle}
-                                    disabled={tagsBoxCount === 5}
-                                >
-                                    Next Article
-                                </button>
+                                {loading ? (
+                                    <Skeleton width={100} height={35} count={1} />
+                                ) : (
+                                    <button
+                                        className="prev"
+                                        onClick={handlePrevArticle}
+                                        disabled={tagsBoxCount === 0}
+                                    >
+                                        Prev Article
+                                    </button>
+                                )}
+                                {loading ? (
+                                    <Skeleton width={100} height={35} count={1} />
+                                ) : (
+                                    <button
+                                        className="next"
+                                        onClick={handleNextArticle}
+                                        disabled={tagsBoxCount === 5}
+                                    >
+                                        Next Article
+                                    </button>
+                                )}
                             </div>
                         </div>
                         <div className="blog-list-container">
-                            <h2 className="section-title">Blog -</h2>
+                            {loading ? (
+                                <Skeleton width={120} height={35} count={1} style={{ marginBottom: "10px" }} />
+                            ) : (
+                                <h2 className="section-title">Blog -</h2>
+                            )}
 
                             <div className="blog-grid">
                                 {blogPosts.slice(0, visibleCount).map((index) => (
@@ -584,26 +762,102 @@ V1024 H0 Z"
                                             navigate("/blog-details", { state: { index } })
                                         }
                                     >
-                                        <img
-                                            src={index.src}
-                                            alt={index.title}
-                                            className="blog-image"
-                                        />
-                                        <div className="blog-date">
-                                            <span className="day">{index.date.day}</span>
-                                            <span className="month">{index.date.month}</span>
-                                        </div>
-                                        <div className="blog-meta">
-                                            <span>By {index.author}</span> |{" "}
-                                            <span>{index.comments} Comments</span>
-                                        </div>
+                                        {loading ? (
+                                            <div className="skeleton-thumb">
+                                                <svg
+                                                    width="100%"
+                                                    height="300"
+                                                    viewBox="0 0 124 124"
+                                                    preserveAspectRatio="xMidYMid slice"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    style={{
+                                                        border: "1px solid white",
+                                                        borderRadius: "6px",
+                                                    }}
+                                                >
+                                                    <defs>
+                                                        <linearGradient id="shimmerGradient">
+                                                            <stop offset="0%" stopColor="#e8ebee">
+                                                                <animate
+                                                                    attributeName="offset"
+                                                                    values="-2; 1"
+                                                                    dur="1.5s"
+                                                                    repeatCount="indefinite"
+                                                                />
+                                                            </stop>
+                                                            <stop offset="50%" stopColor="#dfe6ea">
+                                                                <animate
+                                                                    attributeName="offset"
+                                                                    values="-1.5; 1.5"
+                                                                    dur="1.5s"
+                                                                    repeatCount="indefinite"
+                                                                />
+                                                            </stop>
+                                                            <stop offset="100%" stopColor="#e8ebee">
+                                                                <animate
+                                                                    attributeName="offset"
+                                                                    values="0; 2"
+                                                                    dur="1.5s"
+                                                                    repeatCount="indefinite"
+                                                                />
+                                                            </stop>
+                                                        </linearGradient>
+                                                    </defs>
 
-                                        <h3 className="blog-title">
-                                            <a href={index.link}>{index.title}</a>
-                                        </h3>
-                                        <a href={index.link} className="site-button-link">
-                                            VIEW MORE
-                                        </a>
+                                                    <rect
+                                                        width="300"
+                                                        height="200"
+                                                        fill="url(#shimmerGradient)"
+                                                        rx="6"
+                                                    />
+                                                    <circle cx="40" cy="40" r="10" fill="#f9fafb" />
+                                                    <path
+                                                        d="M0 100 
+      C 40 80, 70 120, 100 90 
+      S 160 90, 212 100 
+      V124 H0 Z"
+                                                        fill="#f9fafb"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        ) : (
+                                            <img
+                                                src={index.src}
+                                                alt={index.title}
+                                                className="blog-image"
+                                            />
+                                        )}
+
+                                        {loading ? (
+                                            <Skeleton width={50} height={50} count={0} />
+                                        ) : (
+                                            <div className="blog-date">
+                                                <span className="day">{index.date.day}</span>
+                                                <span className="month">{index.date.month}</span>
+                                            </div>
+                                        )}
+                                        {loading ? (
+                                            <Skeleton height={20} count={1} style={{ marginBottom: "10px" }} />
+                                        ) : (
+                                            <div className="blog-meta">
+                                                <span>By {index.author}</span> |{" "}
+                                                <span>{index.comments} Comments</span>
+                                            </div>
+                                        )}
+                                        {loading ? (
+                                            <Skeleton height={20} count={1} style={{ marginBottom: "10px" }} />
+                                        ) : (
+                                            <h3 className="blog-title">
+                                                <a href={index.link}>{index.title}</a>
+                                            </h3>
+                                        )}
+                                        {loading ? (
+                                            <Skeleton width={120} height={40} count={1} style={{ marginBottom: "10px" }} />
+                                        ) : (
+                                            <a href={index.link} className="site-button-link">
+                                                VIEW MORE
+                                            </a>
+                                        )}
                                     </div>
                                 ))}
                             </div>
@@ -616,120 +870,17 @@ V1024 H0 Z"
 
                             {!isLoading && visibleCount < blogPosts.length && (
                                 <div className="text-center load-more-btn-outer">
-                                    <button className="site-button" onClick={handleLoadMore}>
-                                        Load More
-                                    </button>
+                                    {loading ? (
+                                        <Skeleton width={120} height={40} count={1} />
+                                    ) : (
+                                        <button className="site-button" onClick={handleLoadMore}>
+                                            Load More
+                                        </button>
+                                    )}
                                 </div>
                             )}
                         </div>
                     </div>
-                    {loading && (
-                        <div className="blog-container">
-                            {/* Hero Image */}
-                            <div className="blog-hero">
-                                <Skeleton height={400} />
-                            </div>
-
-                            {/* Blog Content */}
-                            <div className="blog-content">
-                                <p className="meta">
-                                    <Skeleton width={180} height={15} />
-                                </p>
-                                <h1 className="title">
-                                    <Skeleton width="80%" height={30} />
-                                </h1>
-
-                                {/* Paragraphs */}
-                                <p>
-                                    <Skeleton count={3} />
-                                </p>
-                                <p>
-                                    <Skeleton count={2} />
-                                </p>
-
-                                {/* Quote Box */}
-                                <div className="quote-box">
-                                    <Skeleton height={80} />
-                                    <p>
-                                        <Skeleton width={150} />
-                                    </p>
-                                </div>
-
-                                {/* Gallery (2 images side by side) */}
-                                <div className="gallery">
-                                    <Skeleton height={200} width="48%" />
-                                    <Skeleton height={200} width="48%" />
-                                </div>
-
-                                <p>
-                                    <Skeleton count={3} />
-                                </p>
-
-                                {/* Tags & Share */}
-                                <div className="tags-box">
-                                    <h3>
-                                        <Skeleton width={100} />
-                                    </h3>
-                                    <div className="tags">
-                                        {[...Array(6)].map((_, i) => (
-                                            <Skeleton
-                                                key={i}
-                                                width={70}
-                                                height={20}
-                                                style={{ margin: "5px" }}
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className="share-box">
-                                        <h3>
-                                            <Skeleton width={120} />
-                                        </h3>
-                                        <div className="social-icons">
-                                            {[...Array(5)].map((_, i) => (
-                                                <Skeleton
-                                                    key={i}
-                                                    circle
-                                                    width={30}
-                                                    height={30}
-                                                    style={{ margin: "5px" }}
-                                                />
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Pagination */}
-                                <div className="pagination">
-                                    <Skeleton width={100} height={35} />
-                                    <Skeleton width={100} height={35} />
-                                </div>
-                            </div>
-
-                            {/* Blog List Section */}
-                            <div className="blog-list-container">
-                                <h2 className="section-title">
-                                    <Skeleton width={120} />
-                                </h2>
-                                <div className="blog-grid">
-                                    {[...Array(3)].map((_, i) => (
-                                        <div key={i} className="blog-card">
-                                            <Skeleton height={200} />
-                                            <Skeleton
-                                                width="60%"
-                                                height={20}
-                                                style={{ marginTop: "10px" }}
-                                            />
-                                            <Skeleton width="40%" height={15} />
-                                            <Skeleton width="80%" height={20} />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="load-more">
-                                    <Skeleton width={120} height={40} />
-                                </div>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
             <ScrollButtons />
