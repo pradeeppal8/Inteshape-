@@ -1,0 +1,139 @@
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  padding: 20px;
+}
+
+.auth-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+
+.auth-logo { color: #3498db; font-size: 24px; }
+.auth-brand strong { color: #3498db; }
+
+.auth-title {
+  font-size: 22px;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.auth-sub {
+  font-size: 13px;
+  color: #7f8c8d;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-error {
+  background: #fadbd8;
+  color: #922b21;
+  border: 1px solid #f1948a;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.auth-success {
+  background: #d5f5e3;
+  color: #1e8449;
+  border: 1px solid #a9dfbf;
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.auth-group {
+  margin-bottom: 16px;
+}
+
+.auth-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.auth-group input[type="text"],
+.auth-group input[type="email"],
+.auth-group input[type="password"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.auth-group input:focus { border-color: #3498db; box-shadow: 0 0 0 3px rgba(52,152,219,0.1); }
+.auth-group input.input-err { border-color: #e74c3c; }
+.auth-field-error { font-size: 11px; color: #e74c3c; margin-top: 4px; display: block; }
+
+.auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.check-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #2c3e50;
+  cursor: pointer;
+}
+
+.auth-link {
+  font-size: 13px;
+  color: #3498db;
+  text-decoration: none;
+}
+
+.auth-link:hover { text-decoration: underline; }
+
+.auth-btn {
+  width: 100%;
+  padding: 11px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 16px;
+}
+
+.auth-btn:hover { background: #2980b9; }
+
+.auth-footer {
+  text-align: center;
+  font-size: 13px;
+  color: #7f8c8d;
+}

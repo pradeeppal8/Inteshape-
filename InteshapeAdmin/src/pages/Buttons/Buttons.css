@@ -1,0 +1,33 @@
+.buttons-page { max-width: 1400px; }
+.btn-section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.btn-card { background: #fff; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden; }
+.btn-card-header { padding: 13px 20px; font-size: 14px; font-weight: 600; color: #2c3e50; border-bottom: 1px solid #ecf0f1; background: #f8f9fa; }
+.btn-card-body { padding: 20px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; }
+.btn { padding: 8px 18px; border: none; border-radius: 4px; font-size: 13px; cursor: pointer; font-weight: 500; transition: opacity 0.2s, transform 0.1s; }
+.btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-primary { background: #3498db; color: #fff; }
+.btn-success { background: #2ecc71; color: #fff; }
+.btn-warning { background: #f39c12; color: #fff; }
+.btn-danger { background: #e74c3c; color: #fff; }
+.btn-info { background: #1abc9c; color: #fff; }
+.btn-dark { background: #2c3e50; color: #fff; }
+.btn-light { background: #ecf0f1; color: #2c3e50; border: 1px solid #ddd; }
+.btn-outline-primary { background: transparent; color: #3498db; border: 2px solid #3498db; }
+.btn-outline-success { background: transparent; color: #2ecc71; border: 2px solid #2ecc71; }
+.btn-outline-warning { background: transparent; color: #f39c12; border: 2px solid #f39c12; }
+.btn-outline-danger { background: transparent; color: #e74c3c; border: 2px solid #e74c3c; }
+.btn-outline-info { background: transparent; color: #1abc9c; border: 2px solid #1abc9c; }
+.btn-outline-dark { background: transparent; color: #2c3e50; border: 2px solid #2c3e50; }
+.btn-xs { padding: 4px 10px; font-size: 11px; }
+.btn-sm { padding: 6px 14px; font-size: 12px; }
+.btn-md { padding: 8px 18px; font-size: 13px; }
+.btn-lg { padding: 10px 24px; font-size: 15px; }
+.btn-xl { padding: 13px 30px; font-size: 17px; }
+.btn-rounded { border-radius: 50px; }
+.btn-loading { position: relative; color: transparent; }
+.btn-loading::after { content: ''; position: absolute; width: 14px; height: 14px; top: 50%; left: 50%; margin: -7px 0 0 -7px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn-block { width: 100%; }
+@media (max-width: 900px) { .btn-section-grid { grid-template-columns: 1fr; } }

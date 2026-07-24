@@ -1,0 +1,11 @@
+.addons-page { max-width: 1400px; }
+.addons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.addon-card { background: #fff; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 20px; display: flex; align-items: flex-start; gap: 16px; }
+.addon-icon { width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; color: #fff; }
+.addon-info { flex: 1; }
+.addon-name { font-size: 14px; font-weight: 600; color: #2c3e50; margin-bottom: 4px; }
+.addon-desc { font-size: 12px; color: #7f8c8d; line-height: 1.5; }
+.addon-status { align-self: flex-start; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.status-active { background: #d5f5e3; color: #1e8449; }
+.status-beta { background: #fef9e7; color: #9a7d0a; }
+.status-soon { background: #d0d3d4; color: #566573; }

@@ -1,0 +1,25 @@
+.tables-page { max-width: 1400px; }
+.table-card { background: #fff; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden; }
+.table-card-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #ecf0f1; background: #f8f9fa; font-size: 14px; font-weight: 600; color: #2c3e50; }
+.table-search { padding: 7px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; outline: none; width: 220px; }
+.table-search:focus { border-color: #3498db; }
+.table-wrapper { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { background: #f8f9fa; padding: 11px 16px; text-align: left; color: #7f8c8d; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid #ecf0f1; white-space: nowrap; }
+.data-table td { padding: 11px 16px; border-bottom: 1px solid #f0f0f0; color: #2c3e50; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: #f8f9fa; }
+.sort-icon { font-size: 10px; color: #95a5a6; }
+.role-badge { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.role-admin { background: #d6eaf8; color: #2980b9; }
+.role-editor { background: #d5f5e3; color: #27ae60; }
+.role-viewer { background: #fdebd0; color: #e67e22; }
+.status-badge { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.status-badge.active { background: #d5f5e3; color: #27ae60; }
+.status-badge.inactive { background: #fadbd8; color: #e74c3c; }
+.action-btn { padding: 4px 12px; border: none; border-radius: 3px; font-size: 12px; cursor: pointer; margin-right: 4px; }
+.action-btn.edit { background: #3498db; color: #fff; }
+.action-btn.edit:hover { background: #2980b9; }
+.action-btn.delete { background: #e74c3c; color: #fff; }
+.action-btn.delete:hover { background: #c0392b; }
+.table-footer { padding: 12px 20px; font-size: 12px; color: #7f8c8d; border-top: 1px solid #ecf0f1; }

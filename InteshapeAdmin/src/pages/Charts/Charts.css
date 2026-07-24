@@ -1,0 +1,6 @@
+.charts-page { max-width: 1400px; }
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.chart-card { background: #fff; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden; }
+.chart-card-header { padding: 14px 20px; font-size: 14px; font-weight: 600; color: #2c3e50; border-bottom: 1px solid #ecf0f1; background: #f8f9fa; }
+.recharts-wrapper { padding: 12px; }
+@media (max-width: 900px) { .charts-grid { grid-template-columns: 1fr; } }

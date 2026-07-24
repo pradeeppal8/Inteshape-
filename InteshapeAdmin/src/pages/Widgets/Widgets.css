@@ -1,0 +1,21 @@
+.widgets-page { max-width: 1400px; }
+.widget-stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 20px; }
+.widget-stat-card { background: #fff; border-radius: 4px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); display: flex; gap: 16px; align-items: flex-start; }
+.widget-stat-icon { font-size: 40px; display: flex; }
+.widget-stat-value { font-size: 24px; font-weight: 700; color: #2c3e50; }
+.widget-stat-title { font-size: 13px; color: #7f8c8d; margin: 2px 0; }
+.widget-stat-change { font-size: 12px; font-weight: 600; }
+.widgets-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.widget-card { background: #fff; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden; }
+.widget-card-header { padding: 14px 20px; font-size: 14px; font-weight: 600; color: #2c3e50; border-bottom: 1px solid #ecf0f1; background: #f8f9fa; }
+.progress-list { padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+.progress-label { display: flex; justify-content: space-between; font-size: 13px; color: #2c3e50; margin-bottom: 6px; }
+.progress-bar-bg { background: #ecf0f1; border-radius: 10px; height: 8px; }
+.progress-bar-fill { height: 8px; border-radius: 10px; transition: width 0.3s; }
+.activity-list { padding: 8px 0; }
+.activity-item { display: flex; align-items: center; gap: 14px; padding: 12px 20px; border-bottom: 1px solid #f0f0f0; }
+.activity-item:last-child { border-bottom: none; }
+.activity-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; flex-shrink: 0; }
+.activity-msg { font-size: 13px; color: #2c3e50; }
+.activity-time { font-size: 11px; color: #95a5a6; margin-top: 2px; }
+@media (max-width: 900px) { .widget-stats-grid { grid-template-columns: 1fr 1fr; } .widgets-bottom { grid-template-columns: 1fr; } }
