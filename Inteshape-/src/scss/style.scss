@@ -84,22 +84,129 @@ html,
 .loader-overlay {
     position: fixed;
     inset: 0;
-    background: #23252d;
-    /* dark overlay */
+    background: rgba(10, 10, 20, 0.92);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 9999;
+    gap: 24px;
+    backdrop-filter: blur(4px);
 }
+
+/* ── Logo Loader ── */
+.logo-loader {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__ring {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        animation: loaderSpin 1.6s linear infinite;
+
+        &--reverse {
+            animation-direction: reverse;
+            animation-duration: 2.4s;
+        }
+    }
+
+    &__arc {
+        animation: loaderArcPulse 1.6s ease-in-out infinite;
+    }
+
+    &__center {
+        position: relative;
+        z-index: 2;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: loaderPulse 1.6s ease-in-out infinite;
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary-color) 50%, transparent);
+    }
+
+    &__img {
+        width: 44px;
+        height: 44px;
+        object-fit: contain;
+    }
+
+    &__orbit {
+        position: absolute;
+        inset: 0;
+        animation: loaderSpin 1.2s linear infinite;
+    }
+
+    &__dot {
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        box-shadow: 0 0 8px 2px color-mix(in srgb, var(--primary-color) 60%, transparent);
+    }
+}
+
+.logo-loader__text {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.logo-loader__dots::after {
+    content: '';
+    animation: loaderDots 1.2s steps(4, end) infinite;
+}
+
+@keyframes loaderSpin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes loaderArcPulse {
+    0%, 100% { stroke-dasharray: 80 260; }
+    50%       { stroke-dasharray: 160 180; }
+}
+
+@keyframes loaderPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary-color) 40%, transparent);
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 0 10px color-mix(in srgb, var(--primary-color) 0%, transparent);
+    }
+}
+
+@keyframes loaderDots {
+    0%  { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+}
+
 .light {
   .loader-overlay {
-    background-color: #fff;
-    .loader {
-        >div {
-            background-color: #23252d;
-        }
-    //    background-color: #23252d;
-    }
+    background: rgba(240, 244, 255, 0.35);
+    .logo-loader__text { color: var(--primary-color); }
   }
 }
 

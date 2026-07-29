@@ -26,8 +26,10 @@ const Register = () => {
     <div className="auth-wrapper">
       <div className="auth-card">
         <div className="auth-brand">
-          <span className="auth-logo">⊞</span>
-          <span>Matrix <strong>Admin</strong></span>
+          <span className="auth-logo">
+            <img src="/header-logo.png" alt="Logo" className="brand-avatar" />
+          </span>
+          {/* <span><strong>Admin</strong></span> */}
         </div>
         <h2 className="auth-title">Create Account</h2>
         <p className="auth-sub">Fill in the details to register</p>

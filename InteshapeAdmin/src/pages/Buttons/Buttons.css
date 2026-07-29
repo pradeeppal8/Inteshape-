@@ -7,14 +7,14 @@
 .btn { padding: 8px 18px; border: none; border-radius: 4px; font-size: 13px; cursor: pointer; font-weight: 500; transition: opacity 0.2s, transform 0.1s; }
 .btn:hover { opacity: 0.88; transform: translateY(-1px); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.btn-primary { background: #3498db; color: #fff; }
+.btn-primary { background: var(--primary-color); color: #fff; }
 .btn-success { background: #2ecc71; color: #fff; }
 .btn-warning { background: #f39c12; color: #fff; }
 .btn-danger { background: #e74c3c; color: #fff; }
 .btn-info { background: #1abc9c; color: #fff; }
 .btn-dark { background: #2c3e50; color: #fff; }
 .btn-light { background: #ecf0f1; color: #2c3e50; border: 1px solid #ddd; }
-.btn-outline-primary { background: transparent; color: #3498db; border: 2px solid #3498db; }
+.btn-outline-primary { background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); }
 .btn-outline-success { background: transparent; color: #2ecc71; border: 2px solid #2ecc71; }
 .btn-outline-warning { background: transparent; color: #f39c12; border: 2px solid #f39c12; }
 .btn-outline-danger { background: transparent; color: #e74c3c; border: 2px solid #e74c3c; }

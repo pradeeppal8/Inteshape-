@@ -12,7 +12,7 @@
     width: 40px;
     height: 40px;
     font-size: 20px;
-    background-color: #333;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 0px;
@@ -44,8 +44,8 @@
     }
 
     &:hover {
-      opacity: 1;
-      background-color: black;
+      opacity: 0.8;
+      background-color: var(--primary-color);
     }
   }
 }

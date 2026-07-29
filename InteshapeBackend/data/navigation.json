@@ -1,0 +1,93 @@
+{
+  "header": [
+    {
+      "id": 1,
+      "label": "Home",
+      "path": "/",
+      "active": true
+    },
+    {
+      "id": 1785217082074,
+      "label": "About Us",
+      "path": "/about",
+      "active": true,
+      "isCustom": true
+    },
+    {
+      "id": 1785217121003,
+      "label": "Portfolio",
+      "path": "/portfolio",
+      "active": true,
+      "isCustom": true
+    },
+    {
+      "id": 1785217134979,
+      "label": "Blog",
+      "path": "/blog",
+      "active": true,
+      "isCustom": true
+    },
+    {
+      "id": 1785217154922,
+      "label": "Projects",
+      "path": "/projects",
+      "active": true,
+      "isCustom": true
+    },
+    {
+      "id": 1785217176413,
+      "label": "Contact Us",
+      "path": "/contact",
+      "active": true,
+      "isCustom": true
+    }
+  ],
+  "footer": [
+    {
+      "id": 1,
+      "label": "Home",
+      "path": "/",
+      "active": true
+    },
+    {
+      "id": 2,
+      "label": "About Us",
+      "path": "/about",
+      "active": true
+    },
+    {
+      "id": 3,
+      "label": "Portfolio",
+      "path": "/portfolio",
+      "active": true
+    },
+    {
+      "id": 4,
+      "label": "Blog",
+      "path": "/blog",
+      "active": true
+    },
+    {
+      "id": 5,
+      "label": "Contact Us",
+      "path": "/contact",
+      "active": true
+    }
+  ],
+  "mobileMenuTop": [],
+  "mobileApp": [],
+  "socialMediaLinks": {
+    "whatsappNumber": "",
+    "whatsappGroup1Text": "",
+    "whatsappGroup1Link": "",
+    "whatsappGroup2Text": "",
+    "whatsappGroup2Link": "",
+    "facebookLink": "fb.com",
+    "twitterLink": "twitter.com",
+    "instagramLink": "insta.com",
+    "linkedinLink": "linkedln.com",
+    "youtubeLink": "",
+    "snapchatLink": "",
+    "tiktokLink": ""
+  }
+}

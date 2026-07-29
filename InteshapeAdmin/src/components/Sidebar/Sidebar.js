@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   MdDashboard, MdBarChart, MdWidgets, MdTableChart, MdFullscreen,
-  MdDynamicForm, MdErrorOutline, MdPerson, MdChevronRight, MdChevronLeft
+  MdDynamicForm, MdErrorOutline, MdPerson, MdChevronRight, MdChevronLeft, MdMail, MdImage, MdMenuOpen, MdPeople, MdArticle
 } from 'react-icons/md';
 import { useAuth } from '../../context/AuthContext';
+import { useAdminSettings } from '../../context/AdminSettingsContext';
 import './Sidebar.css';
 
 const navItems = [
@@ -12,6 +13,20 @@ const navItems = [
   { label: 'Charts', icon: <MdBarChart />, path: '/charts' },
   { label: 'Widgets', icon: <MdWidgets />, path: '/widgets' },
   { label: 'Tables', icon: <MdTableChart />, path: '/tables' },
+  { label: 'Messages', icon: <MdMail />, path: '/messages' },
+  { label: 'Banners', icon: <MdImage />, path: '/banners' },
+  {
+    label: 'Pages', icon: <MdArticle />, path: '/pages',
+    children: [
+      { label: 'About Us', path: '/pages/about' },
+      { label: 'Portfolio', path: '/pages/portfolio' },
+      { label: 'Blog', path: '/pages/blog' },
+      { label: 'Projects', path: '/pages/projects' },
+      { label: 'Contact Us', path: '/pages/contact' },
+    ]
+  },
+  { label: 'Navigation', icon: <MdMenuOpen />, path: '/navigation' },
+  { label: 'Experts', icon: <MdPeople />, path: '/experts' },
   { label: 'Full Width', icon: <MdFullscreen />, path: '/full-width' },
   {
     label: 'Forms', icon: <MdDynamicForm />, path: '/forms',
@@ -21,14 +36,14 @@ const navItems = [
       { label: 'Validation', path: '/forms/validation' },
     ]
   },
-  {
-    label: 'Authentication', icon: <MdPerson />, path: '/auth',
-    children: [
-      { label: 'Login', path: '/auth/login' },
-      { label: 'Register', path: '/auth/register' },
-      { label: 'Forgot Password', path: '/auth/forgot-password' },
-    ]
-  },
+  // {
+  //   label: 'Authentication', icon: <MdPerson />, path: '/auth',
+  //   children: [
+  //     { label: 'Login', path: '/auth/login' },
+  //     { label: 'Register', path: '/auth/register' },
+  //     { label: 'Forgot Password', path: '/auth/forgot-password' },
+  //   ]
+  // },
   {
     label: 'Errors', icon: <MdErrorOutline />, path: '/errors',
     children: [
@@ -40,7 +55,41 @@ const navItems = [
 
 const Sidebar = ({ sidebarOpen }) => {
   const [openMenus, setOpenMenus] = useState({});
+  const [unreadCount, setUnreadCount] = useState(0);
   const { user } = useAuth();
+  const { headerLogo } = useAdminSettings();
+
+  useEffect(() => {
+    const fetchUnread = () =>
+      fetch('http://localhost:5000/api/messages')
+        .then(r => r.json())
+        .then(d => { if (d.success) setUnreadCount(d.data.filter(m => !m.read).length); })
+        .catch(() => { });
+
+    fetchUnread();
+
+    // Poll every 10s as reliable fallback
+    const pollInterval = setInterval(fetchUnread, 10000);
+
+    // SSE for instant badge update
+    let es;
+    try {
+      es = new EventSource('http://localhost:5000/api/settings/stream');
+      es.onmessage = (e) => {
+        try {
+          const data = JSON.parse(e.data);
+          if (data.type === 'newMessage') {
+            setUnreadCount(prev => prev + 1);
+          }
+        } catch { }
+      };
+    } catch { }
+
+    return () => {
+      clearInterval(pollInterval);
+      if (es) es.close();
+    };
+  }, []);
 
   const toggleMenu = (label) => {
     setOpenMenus(prev => ({ ...prev, [label]: !prev[label] }));
@@ -49,12 +98,8 @@ const Sidebar = ({ sidebarOpen }) => {
   return (
     <div className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-brand">
-        {/* <div className="brand-avatar">
-           <img src="/favicon-light.ico" alt="Logo" />
-        </div> */}
-        {/* <span className="brand-text">{(user?.name || 'Matrix').split(/[\s._]/)[0]}</span> */}
-        <img src="/favicon-light.ico" alt="Logo" className="brand-avatar" />
-        <img src="/header-logo.png" alt="Logo" className="brand-text" />
+        <img src='/user_img.png' alt="Logo" className="brand-avatar" />
+        <img src='/header-logo.png' alt="Logo" className="brand-text" />
       </div>
       <nav className="sidebar-nav">
         {navItems.map((item) => (
@@ -85,9 +130,13 @@ const Sidebar = ({ sidebarOpen }) => {
               <NavLink
                 to={item.path}
                 className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+                onClick={() => item.path === '/messages' && setUnreadCount(0)}
               >
                 <span className="nav-icon">{item.icon}</span>
                 <span className="nav-label">{item.label}</span>
+                {item.path === '/messages' && unreadCount > 0 && (
+                  <span className="nav-badge">{unreadCount}</span>
+                )}
               </NavLink>
             )}
           </div>

@@ -43,7 +43,7 @@ const ValidationForms = () => {
         <span className="breadcrumb">Home &rsaquo; Forms &rsaquo; Validation</span>
       </div>
       <div className="forms-grid" style={{ gridTemplateColumns: '1fr' }}>
-        <div className="form-card" style={{ maxWidth: '640px' }}>
+        <div className="form-card">
           <div className="form-card-header">Registration Form with Validation</div>
           <div className="form-body">
             {submitted && (

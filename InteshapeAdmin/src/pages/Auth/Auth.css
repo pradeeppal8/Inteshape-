@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  background: linear-gradient(135deg, #2c3e50 0%, var(--primary-color) 100%);
   padding: 20px;
 }
 
@@ -13,7 +13,7 @@
   padding: 36px 32px;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 .auth-brand {
@@ -26,8 +26,17 @@
   justify-content: center;
 }
 
-.auth-logo { color: #3498db; font-size: 24px; }
-.auth-brand strong { color: #3498db; }
+.auth-logo {
+  color: var(--primary-color);
+  font-size: 24px;
+}
+.auth-logo .brand-avatar {
+    filter: none;
+    height: 50px;
+}
+.auth-brand strong {
+  color: var(--primary-color);
+}
 
 .auth-title {
   font-size: 22px;
@@ -88,9 +97,19 @@
   transition: border-color 0.2s;
 }
 
-.auth-group input:focus { border-color: #3498db; box-shadow: 0 0 0 3px rgba(52,152,219,0.1); }
-.auth-group input.input-err { border-color: #e74c3c; }
-.auth-field-error { font-size: 11px; color: #e74c3c; margin-top: 4px; display: block; }
+.auth-group input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 15%, transparent);
+}
+.auth-group input.input-err {
+  border-color: #e74c3c;
+}
+.auth-field-error {
+  font-size: 11px;
+  color: #e74c3c;
+  margin-top: 4px;
+  display: block;
+}
 
 .auth-row {
   display: flex;
@@ -109,28 +128,36 @@
 }
 
 .auth-link {
-  font-size: 13px;
-  color: #3498db;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
   text-decoration: none;
+  font-family: Nunito, system-ui, BlinkMacSystemFont, -apple-system, sans-serif;
 }
 
-.auth-link:hover { text-decoration: underline; }
+.auth-link:hover {
+  text-decoration: underline;
+}
 
 .auth-btn {
   width: 100%;
   padding: 11px;
-  background: #3498db;
+  background: var(--primary-color);
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.5rem;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: background 0.2s;
   margin-bottom: 16px;
+  outline: none;
+  font-family: Nunito, system-ui, BlinkMacSystemFont, -apple-system, sans-serif;
 }
 
-.auth-btn:hover { background: #2980b9; }
+.auth-btn:hover {
+  background: var(--primary-color);
+}
 
 .auth-footer {
   text-align: center;

@@ -5,6 +5,7 @@ import {
   MdLogout, MdPerson, MdSettings, MdCircle, MdDoneAll, MdSend
 } from 'react-icons/md';
 import { useAuth } from '../../context/AuthContext';
+import { useUsers } from '../../context/UsersContext';
 import './Header.css';
 
 const autoReplies = {
@@ -100,6 +101,10 @@ const searchPages = [
 const Header = ({ toggleSidebar }) => {
   const [createOpen, setCreateOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
+  const [newUserModal, setNewUserModal] = useState(false);
+  const [newUserForm, setNewUserForm] = useState({ name: '', email: '', role: 'Editor', status: 'Active' });
+  const [newUserErrors, setNewUserErrors] = useState({});
+  const { addUser } = useUsers();
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [notifOpen, setNotifOpen] = useState(false);
@@ -254,7 +259,7 @@ const Header = ({ toggleSidebar }) => {
               <button onClick={(e) => { e.stopPropagation(); setCreateOpen(false); navigate('/forms/basic'); }}>
                 New Page
               </button>
-              <button onClick={(e) => { e.stopPropagation(); setCreateOpen(false); navigate('/tables'); }}>
+              <button onClick={(e) => { e.stopPropagation(); setCreateOpen(false); navigate('/tables'); setNewUserModal(true); }}>
                 New User
               </button>
             </div>
@@ -403,10 +408,9 @@ const Header = ({ toggleSidebar }) => {
         </div>
         <div className="user-menu-wrapper" ref={userRef}>
           <div className="user-avatar" onClick={() => setUserOpen(!userOpen)}>
-            <img
-              src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'Admin')}&background=e67e22&color=fff`}
-              alt="user avatar"
-            />
+            <div className="user-avatar-initials">
+              {(user?.name || 'AD').slice(0, 2).toUpperCase()}
+            </div>
           </div>
           {userOpen && (
             <div className="user-dropdown">
@@ -423,7 +427,7 @@ const Header = ({ toggleSidebar }) => {
               <button className="user-dropdown-item" onClick={() => { setUserOpen(false); navigate('/profile'); }}>
                 <MdPerson /> My Profile
               </button>
-              <button className="user-dropdown-item" onClick={() => { setUserOpen(false); navigate('/dashboard'); }}>
+              <button className="user-dropdown-item" onClick={() => { setUserOpen(false); navigate('/settings'); }}>
                 <MdSettings /> Settings
               </button>
               <div className="user-dropdown-divider" />
@@ -445,6 +449,69 @@ const Header = ({ toggleSidebar }) => {
           <div className="notif-toast-desc">{toast.desc}</div>
         </div>
         <button className="notif-toast-close" onClick={() => setToast(null)}>×</button>
+      </div>
+    )}
+
+    {/* New User Modal */}
+    {newUserModal && (
+      <div style={{ position:'fixed',inset:0,background:'rgba(0,0,0,0.45)',zIndex:9999,display:'flex',alignItems:'center',justifyContent:'center' }}
+        onClick={() => { setNewUserModal(false); setNewUserErrors({}); }}>
+        <div style={{ background:'#fff',borderRadius:'10px',padding:'32px',minWidth:'400px',boxShadow:'0 8px 32px rgba(0,0,0,0.18)' }}
+          onClick={e => e.stopPropagation()}>
+          <h3 style={{ margin:'0 0 20px',color:'#2c3e50',fontSize:'18px' }}>Create New User</h3>
+
+          {[
+            { label:'Full Name', key:'name', type:'text', placeholder:'Enter full name' },
+            { label:'Email Address', key:'email', type:'email', placeholder:'Enter email' },
+          ].map(f => (
+            <div key={f.key} style={{ marginBottom:'14px' }}>
+              <label style={{ display:'block',fontSize:'12px',fontWeight:600,color:'#7f8c8d',marginBottom:'4px',textTransform:'uppercase' }}>{f.label}</label>
+              <input type={f.type} placeholder={f.placeholder} value={newUserForm[f.key]}
+                onChange={e => { setNewUserForm(p=>({...p,[f.key]:e.target.value})); setNewUserErrors(p=>({...p,[f.key]:''})); }}
+                style={{ width:'100%',padding:'9px 12px',border:`1px solid ${newUserErrors[f.key]?'#e74c3c':'#dde1e7'}`,borderRadius:'6px',fontSize:'14px',boxSizing:'border-box' }} />
+              {newUserErrors[f.key] && <span style={{ color:'#e74c3c',fontSize:'12px' }}>{newUserErrors[f.key]}</span>}
+            </div>
+          ))}
+
+          <div style={{ display:'flex',gap:'12px',marginBottom:'14px' }}>
+            <div style={{ flex:1 }}>
+              <label style={{ display:'block',fontSize:'12px',fontWeight:600,color:'#7f8c8d',marginBottom:'4px',textTransform:'uppercase' }}>Role</label>
+              <select value={newUserForm.role} onChange={e => setNewUserForm(p=>({...p,role:e.target.value}))}
+                style={{ width:'100%',padding:'9px 12px',border:'1px solid #dde1e7',borderRadius:'6px',fontSize:'14px' }}>
+                <option>Admin</option><option>Editor</option><option>Viewer</option>
+              </select>
+            </div>
+            <div style={{ flex:1 }}>
+              <label style={{ display:'block',fontSize:'12px',fontWeight:600,color:'#7f8c8d',marginBottom:'4px',textTransform:'uppercase' }}>Status</label>
+              <select value={newUserForm.status} onChange={e => setNewUserForm(p=>({...p,status:e.target.value}))}
+                style={{ width:'100%',padding:'9px 12px',border:'1px solid #dde1e7',borderRadius:'6px',fontSize:'14px' }}>
+                <option>Active</option><option>Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <div style={{ display:'flex',gap:'10px',marginTop:'20px' }}>
+            <button onClick={() => {
+              const errs = {};
+              if (!newUserForm.name.trim()) errs.name = 'Name is required';
+              if (!newUserForm.email.trim()) errs.email = 'Email is required';
+              else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newUserForm.email)) errs.email = 'Enter a valid email';
+              setNewUserErrors(errs);
+              if (Object.keys(errs).length > 0) return;
+              addUser(newUserForm);
+              setNewUserModal(false);
+              setNewUserForm({ name:'', email:'', role:'Editor', status:'Active' });
+              setNewUserErrors({});
+              navigate('/tables');
+            }} style={{ flex:1,padding:'10px',background:'var(--primary-color)',color:'#fff',border:'none',borderRadius:'6px',fontWeight:600,cursor:'pointer',fontSize:'14px' }}>
+              Create User
+            </button>
+            <button onClick={() => { setNewUserModal(false); setNewUserErrors({}); }}
+              style={{ flex:1,padding:'10px',background:'#f0f2f5',color:'#2c3e50',border:'none',borderRadius:'6px',fontWeight:600,cursor:'pointer',fontSize:'14px' }}>
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
     )}
     </>

@@ -2,23 +2,21 @@ import { useEffect, useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import headerLogo from "../../ulits/assets/header-logo.png";
 import Modal from "react-bootstrap/Modal";
-// import { useTheme } from "../ThemeProvider";
 import user_icon from "../../ulits/assets/user_icon.png";
 import search_icon from "../../ulits/assets/search-icon.svg";
+import { ReactComponent as SearchIcon } from "../../ulits/assets/search-icon.svg";
 import LanguageModal from "../../Component/LanguageModal";
 import { gsap } from "gsap";
-// import LanguageSelect from "../../LanguageSelect";
+import { useSettings } from "../../context/SettingsContext";
 
-const sampleData = [
-  "Apple",
-  "Banana",
-  "Orange",
-  "Mango",
-  "Pineapple",
-  "Strawberry",
-  "Watermelon",
-  "Grapes",
-  "Blueberry",
+const pages = [
+  { label: "Home",       path: "/",          desc: "Welcome to Inteshape" },
+  { label: "About",      path: "/about",     desc: "About us, our team and story" },
+  { label: "Portfolio",  path: "/portfolio", desc: "Our work and projects showcase" },
+  { label: "Blog",       path: "/blog",      desc: "Latest articles and news" },
+  { label: "Projects",   path: "/projects",  desc: "Development projects" },
+  { label: "Contact",    path: "/contact",   desc: "Get in touch with us" },
+  { label: "My Profile", path: "/profile",   desc: "User profile page" },
 ];
 
 const Sun = () => (
@@ -61,6 +59,7 @@ const Moon = () => (
 );
 
 function Header() {
+  const { headerLogo: dynamicLogo } = useSettings();
   const [showHeader, setShowHeader] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -77,16 +76,42 @@ function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLang, setSelectedLang] = useState("United States - English");
   const [hoveredMenu, setHoveredMenu] = useState(null);
+  const [menuItems, setMenuItems] = useState([
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About Us" },
+    { path: "/portfolio", label: "Portfolio" },
+    { path: "/blog", label: "Blog" },
+    { path: "/projects", label: "Projects" },
+    { path: "/contact", label: "Contact Us" },
+  ]);
 
-
+  useEffect(() => {
+    fetch('http://localhost:5000/api/navigation')
+      .then(r => r.json())
+      .then(d => {
+        if (d.success && Array.isArray(d.data.header)) {
+          const active = d.data.header
+            .filter(item => item.active)
+            .map(item => ({ path: item.path, label: item.label }));
+          if (active.length > 0) setMenuItems(active);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const toggleModal = () => {
     setIsModalOpen((prev) => !prev);
     setSearchTerm("");
   };
-  const filteredResults = sampleData.filter((item) =>
-    item.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredResults = pages.filter((p) =>
+    p.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    p.desc.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  const handleSearchSelect = (path) => {
+    navigate(path);
+    setIsModalOpen(false);
+    setSearchTerm("");
+  };
 
 
 
@@ -149,14 +174,6 @@ function Header() {
     console.log('Selected language:', lang);
     // Add additional logic as needed
   };
-  const menuItems = [
-    { path: "/", label: "Home" },
-    { path: "/about", label: "About" },
-    { path: "/portfolio", label: "Portfolio" },
-    { path: "/blog", label: "Blog" },
-    { path: "/projects", label: "Projects" },
-    { path: "/buytheme", label: "Buy Theme!" },
-  ];
   const [mode, setMode] = useState(getInitial);
   useEffect(() => {
     document.body.classList.remove("light", "dark");
@@ -172,8 +189,8 @@ function Header() {
           }`}
       >
         <div className="logo">
-          <Link to="/home">
-            <img src={headerLogo} alt="Logo" />
+          <Link to="/">
+            <img src={dynamicLogo || headerLogo} alt="Logo" />
           </Link>
         </div>
 
@@ -202,7 +219,8 @@ function Header() {
           <div class="extra-nav">
             <div class="extra-cell">
               <a href="#." onClick={toggleModal}>
-                <img src={search_icon} alt="" />
+                {/* <SearchIcon /> */}
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path id="Path_27753" data-name="Path 27753" d="M24.639,22.9l-4.154-4.142a9.677,9.677,0,0,0,2.065-5.987,9.775,9.775,0,1,0-9.775,9.775,9.677,9.677,0,0,0,5.987-2.065L22.9,24.639A1.227,1.227,0,1,0,24.639,22.9ZM5.444,12.775a7.331,7.331,0,1,1,7.331,7.331,7.331,7.331,0,0,1-7.331-7.331Z" transform="translate(-3 -3)" fill="var(--primary-color)"></path></svg>
               </a>
             </div>
           </div>
@@ -229,26 +247,31 @@ function Header() {
                     gsap.to(iconRef.current, { x: -12, repeat: -1, yoyo: true, duration: 1 })
                   }
                 >
-                  <img src={search_icon} alt="Search" />
+                  {/* <SearchIcon /> */}
+                   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"><path id="Path_27753" data-name="Path 27753" d="M24.639,22.9l-4.154-4.142a9.677,9.677,0,0,0,2.065-5.987,9.775,9.775,0,1,0-9.775,9.775,9.677,9.677,0,0,0,5.987-2.065L22.9,24.639A1.227,1.227,0,1,0,24.639,22.9ZM5.444,12.775a7.331,7.331,0,1,1,7.331,7.331,7.331,7.331,0,0,1-7.331-7.331Z" transform="translate(-3 -3)" fill="var(--primary-color)"></path></svg>
                 </span>
                 {/* Display Filtered Results */}
               </div>
               {searchTerm && (
                 <ul className="search-results">
                   {filteredResults.length > 0 ? (
-                    filteredResults.map((item, index) => (
-                      <li key={index}>{item}</li>
+                    filteredResults.map((page) => (
+                      <li key={page.path} onClick={() => handleSearchSelect(page.path)}
+                        style={{ cursor: 'pointer' }}>
+                        <span className="sr-label">{page.label}</span>
+                        <span className="sr-desc">{page.desc}</span>
+                      </li>
                     ))
                   ) : (
-                    <li className="no-results">No results found</li>
+                    <li className="no-results">No pages found</li>
                   )}
                 </ul>
               )}
             </div>
           )}
-          <div className="dce-padding_small" onClick={() => setShow(true)}>
+          {/* <div className="dce-padding_small" onClick={() => setShow(true)}>
             <img src={user_icon} alt="" />
-          </div>
+          </div> */}
         </div>
         {/* {isOpen && <div className="overlays" onClick={ToggleSidebar}></div>} */}
         <div className="sidebars">
@@ -292,7 +315,7 @@ function Header() {
                   Profile
                 </button>
               </div>
-              <div className="dark-mode">
+              {/* <div className="dark-mode">
                 <div className={`switch ${isDark ? "dark" : "light"}`}>
                   <span className="title">
                     {mode === "dark" ? "Dark Mode" : "Light Mode"}
@@ -313,7 +336,7 @@ function Header() {
                   </div>
                 </div>
                 <div className="min-h-screen flex items-center justify-center bg-gray-50">
-                  {/* <span className="text-gray-700">{selectedLang}</span> */}
+                  <span className="text-gray-700">{selectedLang}</span>
                   <LanguageModal
                     selectedLang={selectedLang}
                     onSelect={(lang) => setSelectedLang(lang)}
@@ -322,7 +345,7 @@ function Header() {
                 <div className="px-3 py-2 hover:bg-gray-100 rounded-b-xl cursor-pointer">
                   <span className="text-gray-700">Sign In</span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </nav>
         </div>

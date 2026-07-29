@@ -105,11 +105,47 @@ function Home() {
   const [loaded, setLoaded] = useState(false);
   const contentRef = useRef(null);
   const [loading, setLoading] = useState(true);
+  const [dynamicSlides, setDynamicSlides] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/banners')
+      .then(r => r.json())
+      .then(d => { if (d.success) setDynamicSlides(d.data.filter(b => b.active)); })
+      .catch(() => {});
+
+    // SSE for real-time banner updates
+    const es = new EventSource('http://localhost:5000/api/settings/stream');
+    es.onmessage = (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        if (data.type === 'bannersUpdated') {
+          setDynamicSlides(data.banners.filter(b => b.active));
+        }
+      } catch {}
+    };
+    return () => es.close();
+  }, []);
   const [visible, setVisible] = useState(6);
   const [loadings, setLoadings] = useState(false);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(1);
+  const [experts, setExperts] = useState([]);
+  const [socialLinks, setSocialLinks] = useState({ facebookLink: '', twitterLink: '', instagramLink: '', linkedinLink: '' });
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/experts')
+      .then(r => r.json())
+      .then(d => { if (d.success) setExperts(d.data.filter(e => e.active)); })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/navigation')
+      .then(r => r.json())
+      .then(d => { if (d.success && d.data.socialMediaLinks) setSocialLinks(d.data.socialMediaLinks); })
+      .catch(() => {});
+  }, []);
 
   const blocks = [
     {
@@ -645,12 +681,12 @@ function Home() {
                   }}
                   className="h-screen w-full"
                 >
-                  {slides.map((s, i) => (
-                    <SwiperSlide key={i}>
+                  {(dynamicSlides.length > 0 ? dynamicSlides : slides).map((s, i) => (
+                    <SwiperSlide key={s.id || i}>
                       <div className="full_slider_img">
                         <img
-                          src={s.image.src}
-                          alt={s.image.alt}
+                          src={s.image ? (typeof s.image === 'string' ? s.image : s.image.src) : (s.image?.src || '')}
+                          alt={typeof s.image === 'string' ? s.title : (s.image?.alt || s.title)}
                           className="h-full w-full object-cover"
                           loading="lazy"
                         />
@@ -681,8 +717,7 @@ function Home() {
                                 data-aos="fade-down"
                                 data-aos-delay="400"
                               >
-                                {s.title[0]} <br className="hidden md:block" />
-                                {s.title[1]}
+                                {Array.isArray(s.title) ? s.title[0] : s.title}
                               </h2>
                               <p
                                 className="desc mt-4 max-w-xl text-sm md:text-base opacity-90"
@@ -863,14 +898,14 @@ function Home() {
                   </div>
                   <div class="section-contents">
                     <div class="row">
-                      {blogPosts.slice(0, visibleCount).map((item, index) => (
+                      {experts.slice(0, visibleCount).map((item, index) => (
                         <div
                           key={index}
                           className="col-lg-4 col-md-6 col-sm-12 m-b30"
                         >
                           <div className="our-team-3">
                             <div className="our-team-info">
-                              <img src={item.image} alt={item.title} />
+                              <img src={item.image || pic1} alt={item.title} />
                               <div className="our-team-content">
                                 <h4 className="sx-team-name">
                                   <a href="#.">{item.title}</a>
@@ -880,16 +915,18 @@ function Home() {
                                 </span>
 
                                 <div className="social-icon">
-                                  {item.socials.map((social, i) => (
-                                    <a
-                                      key={i}
-                                      href={social.link}
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      <i className={social.icon}></i>
-                                    </a>
-                                  ))}
+                                  {[
+                                    { key: 'facebookLink',  cls: 'fab_facebook',  title: 'Facebook'  },
+                                    { key: 'twitterLink',   cls: 'fab_twitter',   title: 'Twitter'   },
+                                    { key: 'instagramLink', cls: 'fab_instagram', title: 'Instagram' },
+                                    { key: 'linkedinLink',  cls: 'fab_linkedin',  title: 'Linkedin'  },
+                                  ].map(({ key, cls, title }) =>
+                                    socialLinks[key] ? (
+                                      <a key={key} href={socialLinks[key]} target="_blank" rel="noopener noreferrer">
+                                        <div className={cls}></div>
+                                      </a>
+                                    ) : null
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -905,7 +942,7 @@ function Home() {
                     )}
 
                     {/* Load More Button */}
-                    {!isLoading && visibleCount < blogPosts.length && (
+                    {!isLoading && visibleCount < experts.length && (
                       <div className="text-center load-more-btn-outer sx-separator bg-white bg-moving bg-repeat-x">
                         <button
                           className="site-button"

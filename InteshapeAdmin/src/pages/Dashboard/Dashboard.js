@@ -76,6 +76,11 @@ const Dashboard = () => {
   const chatEndRef = useRef(null);
 
   useEffect(() => {
+    const t = setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 50);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
     if (chatEndRef.current) chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
   }, [chatMessages, isTyping]);
 

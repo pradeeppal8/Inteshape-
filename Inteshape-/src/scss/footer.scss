@@ -19,7 +19,7 @@
 
         .brand__social {
           a {
-            background-color: $color_1;
+            background-color: var(--primary-color);
 
             .fab_facebook {
               background-color: $color_2;
@@ -42,7 +42,7 @@
 
       .footer__col {
         h4 {
-          color: #111 !important;
+          color: var(--primary-color) !important;
         }
 
         p {
@@ -73,12 +73,12 @@
 
     .footer__subscribe {
       h4 {
-        color: #111 !important;
+        color: var(--primary-color) !important;
       }
 
       .subscribe__form {
         button {
-          background-color: $color_1;
+          background-color: var(--primary-color);
 
           .fas_telegram {
             background-color: $color_2;
@@ -144,7 +144,7 @@
     text-decoration: none;
 
     &:hover {
-      color: #c78c65;
+      color: var(--primary-color);
     }
   }
 
@@ -171,6 +171,7 @@
         a {
           img {
             width: 150px;
+            object-fit: contain;
           }
         }
 
@@ -275,7 +276,7 @@
 
 
           &:hover {
-            background: #c78c65;
+            background: var(--primary-color);
             color: #fff;
             width: 42%;
             border-radius: 30px;
@@ -384,14 +385,14 @@
             color: #c4c4c4;
 
             &:hover {
-              color: #d7b39a;
+              color: var(--primary-color);
               -webkit-animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
               animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             }
           }
 
           &:hover {
-            color: #d7b39a;
+            color: var(--primary-color);
             -webkit-animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
             animation: focus-in-contract 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
           }
@@ -455,10 +456,15 @@
         flex: 1;
         padding: 12px 15px;
         border: none;
-        background: #2d2e30;
+        background: var(--primary-color);
         color: #fff;
         font-size: 14px;
         outline: none;
+        opacity: 0.8;
+
+        &::placeholder {
+          color: #fff;
+        }
       }
 
       button {
@@ -484,7 +490,7 @@
         }
 
         &:hover {
-          background: #c78c65;
+          background: var(--primary-color);
 
           .fas_telegram {
             background-color: #fff;

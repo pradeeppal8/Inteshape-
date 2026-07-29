@@ -15,6 +15,9 @@ const Layout = () => {
         <div className="content">
           <Outlet />
         </div>
+        <footer className="admin-footer">
+          <span>© {new Date().getFullYear()} <strong>Inteshape</strong></span>
+        </footer>
       </div>
     </div>
   );

@@ -8,32 +8,32 @@ $font-family_1: "Arial", sans-serif;
 
     .nav-links {
       a {
-        color: $color_1;
+        color: var(--primary-color);
 
-        // &:hover {
-        //   color: #c78c65;
+        &:hover {
+          color: var(--primary-color);
 
-        //   &::after {
-        //     background-color: #c78c65 !important;
-        //     content: "";
-        //     position: absolute;
-        //     bottom: 0px;
-        //     left: 0;
-        //     height: 2px;
-        //     width: 100%;
-        //   }
-        // }
+          &::after {
+            background-color: var(--primary-color) !important;
+            content: "";
+            position: absolute;
+            top: 31px;
+            left: 0;
+            height: 2px;
+            width: 100%;
+          }
+        }
 
-        // &.active {
-        //   color: #c78c65;
+        &.active {
+          color: var(--primary-color);
 
-        //   &::after {
-        //     background-color: #c78c65 !important;
-        //     width: 100%;
-        //     left: 0;
-        //     top: 27px;
-        //   }
-        // }
+          &::after {
+            background-color: var(--primary-color) !important;
+            width: 100%;
+            left: 0;
+            top: 31px;
+          }
+        }
       }
     }
 
@@ -51,7 +51,7 @@ $font-family_1: "Arial", sans-serif;
       color: $color_1;
 
       &:hover {
-        background-color: #111;
+        background-color: var(--primary-color);
         color: $color_2;
       }
     }
@@ -59,7 +59,7 @@ $font-family_1: "Arial", sans-serif;
     .sidebars {
       .menu-button {
         span {
-          background-color: $color_1;
+          background-color: var(--primary-color);
         }
       }
 
@@ -76,7 +76,7 @@ $font-family_1: "Arial", sans-serif;
           .meno-menu {
             .nav-links {
               a {
-                color: $color_1;
+                color: var(--primary-color);
 
                 &::after {
                   background-color: $color_1;
@@ -188,7 +188,7 @@ $font-family_1: "Arial", sans-serif;
 
 .dark {
   .main-header {
-    background-color: $color_1;
+    background-color: var(--primary-color);
 
     .logo {
       a {
@@ -203,10 +203,10 @@ $font-family_1: "Arial", sans-serif;
         color: $color_2;
 
         &:hover {
-          color: #d7b39a;
+          color: var(--primary-color);
 
           &::after {
-            background-color: #d7b39a;
+            background-color: var(--primary-color);
             content: "";
             position: absolute;
             bottom: -4px;
@@ -217,10 +217,10 @@ $font-family_1: "Arial", sans-serif;
         }
 
         &.active {
-          color: #d7b39a;
+          color: var(--primary-color);
 
           &::after {
-            background-color: #d7b39a;
+            background-color: var(--primary-color);
           }
         }
       }
@@ -396,7 +396,7 @@ $font-family_1: "Arial", sans-serif;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px 30px;
+  padding: 20px 30px;
   border-bottom: 0px solid #eee;
   font-family: $font-family_1;
   display: flex;
@@ -414,7 +414,18 @@ $font-family_1: "Arial", sans-serif;
       .extra-cell {
         a {
           img {
-            filter: brightness(0);
+            filter: var(--primary-color);
+            transition: filter 0.3s ease;
+          }
+          svg {
+            fill: var(--primary-color);
+            // stroke: var(--primary-color);
+            transition: fill 0.3s ease, stroke 0.3s ease;
+            color: var(--primary-color);
+            &.Path_27753 {
+              fill: var(--primary-color);
+              transition: fill 0.3s ease;
+            }
           }
         }
       }
@@ -426,12 +437,13 @@ $font-family_1: "Arial", sans-serif;
       left: 0;
       height: 100vh;
       width: 100%;
-      background-color: #1e1f25;
+      background-color: var(--primary-color);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
       flex-direction: column;
+      // opacity: 0.7;
 
       .search-results {
         display: flex;
@@ -446,10 +458,34 @@ $font-family_1: "Arial", sans-serif;
           color: #fff;
           line-height: 28px;
           font-size: 14px;
+          width: 100%;
+          padding: 10px 16px;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          transition: background 0.2s;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.15);
+          }
+
+          .sr-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            min-width: 100px;
+          }
+
+          .sr-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+          }
 
           &.no-results {
             text-align: center;
             width: 100%;
+            justify-content: center;
           }
         }
       }
@@ -458,7 +494,7 @@ $font-family_1: "Arial", sans-serif;
         position: relative;
         display: flex;
         align-items: center;
-        background-color: #2a2b31;
+        background-color: #fff;
         padding: 9px 18px;
         min-width: 660px;
       }
@@ -469,7 +505,8 @@ $font-family_1: "Arial", sans-serif;
         position: absolute;
         width: 17px;
         height: 17px;
-        border: 2px solid #fff;
+        border: 2px solid var(--primary-color);
+        opacity: 0.7;
       }
 
       .search-container::before {
@@ -490,19 +527,19 @@ $font-family_1: "Arial", sans-serif;
         flex: 1;
         background: transparent;
         border: none;
-        color: #bbb;
+        color: var(--primary-color);
         font-size: 1.5rem;
         outline: none;
       }
 
       .search-icon {
-        color: white;
+        color: var(--primary-color);
         font-size: 1.2rem;
         cursor: pointer;
         margin-left: 10px;
 
         img {
-          filter: brightness(0) invert(1);
+          filter: none;
         }
       }
 
@@ -693,12 +730,12 @@ $font-family_1: "Arial", sans-serif;
       &::after {
         content: '';
         position: absolute;
-        left: 100%;
-        bottom: -8px;
+        left: 50%;
+        top: 31px;
         height: 2px;
         width: 0px;
         z-index: -1;
-        background-color: #c78c65;
+        background-color: var(--primary-color);
         transition: width 0.35s ease;
         -moz-transition: all 0.35s ease;
         -webkit-transition: all 0.35s ease;
@@ -707,7 +744,7 @@ $font-family_1: "Arial", sans-serif;
       
 
       &.active {
-        color: #c78c65;
+        color: var(--primary-color);
 
         &::after {
           width: 100%;
@@ -716,7 +753,7 @@ $font-family_1: "Arial", sans-serif;
       }
 
       &:hover {
-        color: #c78c65;
+        color: var(--primary-color);
 
         &::after {
           width: 100%;
@@ -734,7 +771,7 @@ $font-family_1: "Arial", sans-serif;
     //     height: 2px;
     //     width: 0px;
     //     z-index: -1;
-    //     background-color: #c78c65;
+    //     background-color: var(--primary-color);
     //     transition: width 0.35s ease;
     //     -moz-transition: all 0.35s ease;
     //     -webkit-transition: all 0.35s ease;
@@ -936,7 +973,7 @@ $font-family_1: "Arial", sans-serif;
                   color: #fff;
 
                   &:hover {
-                    color: #c78c65;
+                    color: var(--primary-color);
                     background-color: #363636;
                   }
                 }
@@ -1265,9 +1302,9 @@ $font-family_1: "Arial", sans-serif;
           position: absolute;
           left: 0px;
           background: #fff;
-          border-radius: 0px;
+          border-radius: 0.5rem;
           transition: transform 0.28s ease, opacity 0.2s ease, width 0.2s ease;
-          height: 2.2px;
+          height: 2.4px;
           width: 1.8rem;
           top: 11px;
         }
@@ -1323,7 +1360,7 @@ $font-family_1: "Arial", sans-serif;
         transition: all 0.5s;
         position: fixed;
         left: -77%;
-        top: 76px;
+        top: 57px;
 
         &.open {
           // background: #0f1115;
@@ -1334,7 +1371,7 @@ $font-family_1: "Arial", sans-serif;
           transition: all 0.5s;
           position: fixed;
           left: 0;
-          top: 76px;
+          top: 57px;
         }
 
         .hide-desk {
@@ -1356,7 +1393,7 @@ $font-family_1: "Arial", sans-serif;
                 }
 
                 &:hover {
-                  color: #d7b39a;
+                  color: var(--primary-color);
                   -webkit-animation: focus-in-contract 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
                   animation: focus-in-contract 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
@@ -1512,7 +1549,7 @@ $font-family_1: "Arial", sans-serif;
                     text-align: left;
 
                     &:hover {
-                      color: #c78c65;
+                      color: var(--primary-color);
                       background-color: #363636;
                     }
                   }

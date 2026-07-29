@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Apply saved primary color on startup
+const savedColor = localStorage.getItem('admin_primary_color');
+if (savedColor) document.documentElement.style.setProperty('--primary-color', savedColor);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

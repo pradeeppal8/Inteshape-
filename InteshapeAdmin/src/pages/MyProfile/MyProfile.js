@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   MdEmail, MdPhone, MdLocationOn, MdWork, MdEdit, MdSave,
   MdClose, MdPerson, MdBarChart, MdArticle, MdStar,
   MdCalendarToday, MdLink, MdCameraAlt
 } from 'react-icons/md';
 import { FaGithub, FaTwitter, FaLinkedin, FaGlobe } from 'react-icons/fa';
+import { useAuth } from '../../context/AuthContext';
 import './MyProfile.css';
+import '../Settings/Settings.css';
 
 const skills = [
   { name: 'React.js', level: 90, color: '#3498db' },
@@ -24,24 +26,76 @@ const recentActivity = [
 ];
 
 const MyProfile = () => {
+  const { user } = useAuth();
   const [editing, setEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('about');
   const [profile, setProfile] = useState({
-    name: 'Admin User',
+    name: user?.name || 'Admin User',
     role: 'Super Administrator',
-    email: 'admin@example.com',
+    email: user?.email || 'admin@example.com',
     phone: '+91 98765 43210',
-    location: 'Mumbai, India',
-    company: 'Matrix Technologies',
-    website: 'https://matrixadmin.com',
+    location: 'Gujarat, India',
+    company: 'Inteshape Technologies',
+    website: 'https://inteshape.com',
     bio: 'Passionate full-stack developer and system administrator with 5+ years of experience building scalable web applications and managing enterprise-level admin panels.',
     joined: 'January 2022',
   });
   const [formData, setFormData] = useState({ ...profile });
+  const [toasts, setToasts] = useState([]);
+  const [avatarSrc, setAvatarSrc] = useState(localStorage.getItem('admin_profile_avatar') || null);
+  const avatarInputRef = useRef();
+
+  // Sync avatar from AdvancedForms "Save Changes"
+  useEffect(() => {
+    const handler = (e) => setAvatarSrc(e.detail);
+    window.addEventListener('profileAvatarUpdated', handler);
+    return () => window.removeEventListener('profileAvatarUpdated', handler);
+  }, []);
+  const [pwdForm, setPwdForm] = useState({ current: '', newPwd: '', confirm: '' });
+  const [pwdErrors, setPwdErrors] = useState({});
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      setAvatarSrc(ev.target.result);
+      localStorage.setItem('admin_profile_avatar', ev.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const showToasts = () => {
+    const id1 = Date.now();
+    const id2 = id1 + 1;
+    setToasts(prev => [...prev, { id: id1, msg: 'Data saved successfully!.' }]);
+    setTimeout(() => setToasts(prev => [...prev, { id: id2, msg: 'Data Loaded successfully!' }]), 400);
+    setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id1 && t.id !== id2)), 3500);
+  };
 
   const handleSave = () => {
     setProfile({ ...formData });
     setEditing(false);
+    showToasts();
+  };
+
+  const handleUpdatePassword = () => {
+    const errors = {};
+    if (!pwdForm.current.trim())          errors.current = 'Current password is required';
+    if (!pwdForm.newPwd.trim())           errors.newPwd  = 'New password is required';
+    else if (pwdForm.newPwd.length < 6)   errors.newPwd  = 'Minimum 6 characters required';
+    if (!pwdForm.confirm.trim())          errors.confirm = 'Please confirm your new password';
+    else if (pwdForm.newPwd !== pwdForm.confirm) errors.confirm = 'Passwords do not match';
+
+    setPwdErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+
+    // Success — clear fields and show toast
+    setPwdForm({ current: '', newPwd: '', confirm: '' });
+    setPwdErrors({});
+    const id1 = Date.now(), id2 = id1 + 1;
+    setToasts(prev => [...prev, { id: id1, msg: 'Password updated successfully!' }]);
+    setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id1)), 3500);
   };
 
   const handleCancel = () => {
@@ -63,10 +117,14 @@ const MyProfile = () => {
           <div className="profile-avatar-card">
             <div className="profile-cover" />
             <div className="profile-avatar-wrapper">
-              <div className="profile-avatar">AD</div>
-              <button className="avatar-edit-btn" title="Change photo">
+              {avatarSrc
+                ? <img src={avatarSrc} alt="Avatar" className="profile-avatar profile-avatar-img" />
+                : <div className="profile-avatar">{profile.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</div>
+              }
+              <button className="avatar-edit-btn" title="Change photo" onClick={() => avatarInputRef.current.click()}>
                 <MdCameraAlt />
               </button>
+              <input ref={avatarInputRef} type="file" accept="image/*" hidden onChange={handleAvatarChange} />
             </div>
             <div className="profile-identity">
               <h3>{profile.name}</h3>
@@ -269,13 +327,44 @@ const MyProfile = () => {
                 <h4 style={{ marginBottom: '20px', color: '#2c3e50' }}>Account Settings</h4>
                 <div className="settings-section">
                   <div className="settings-title">Change Password</div>
-                  {['Current Password', 'New Password', 'Confirm New Password'].map(label => (
-                    <div key={label} className="edit-form-group">
-                      <label>{label}</label>
-                      <input type="password" placeholder={`Enter ${label.toLowerCase()}`} />
-                    </div>
-                  ))}
-                  <button className="save-btn" style={{ marginTop: '8px' }}>
+
+                  <div className="edit-form-group">
+                    <label>CURRENT PASSWORD</label>
+                    <input
+                      type="password"
+                      placeholder="Enter current password"
+                      value={pwdForm.current}
+                      onChange={e => { setPwdForm(p => ({ ...p, current: e.target.value })); setPwdErrors(p => ({ ...p, current: '' })); }}
+                      style={pwdErrors.current ? { borderColor: '#e74c3c' } : {}}
+                    />
+                    {pwdErrors.current && <span style={{ color: '#e74c3c', fontSize: '12px', marginTop: '4px', display: 'block' }}>{pwdErrors.current}</span>}
+                  </div>
+
+                  <div className="edit-form-group">
+                    <label>NEW PASSWORD</label>
+                    <input
+                      type="password"
+                      placeholder="Enter new password"
+                      value={pwdForm.newPwd}
+                      onChange={e => { setPwdForm(p => ({ ...p, newPwd: e.target.value })); setPwdErrors(p => ({ ...p, newPwd: '' })); }}
+                      style={pwdErrors.newPwd ? { borderColor: '#e74c3c' } : {}}
+                    />
+                    {pwdErrors.newPwd && <span style={{ color: '#e74c3c', fontSize: '12px', marginTop: '4px', display: 'block' }}>{pwdErrors.newPwd}</span>}
+                  </div>
+
+                  <div className="edit-form-group">
+                    <label>CONFIRM NEW PASSWORD</label>
+                    <input
+                      type="password"
+                      placeholder="Enter confirm new password"
+                      value={pwdForm.confirm}
+                      onChange={e => { setPwdForm(p => ({ ...p, confirm: e.target.value })); setPwdErrors(p => ({ ...p, confirm: '' })); }}
+                      style={pwdErrors.confirm ? { borderColor: '#e74c3c' } : {}}
+                    />
+                    {pwdErrors.confirm && <span style={{ color: '#e74c3c', fontSize: '12px', marginTop: '4px', display: 'block' }}>{pwdErrors.confirm}</span>}
+                  </div>
+
+                  <button className="save-btn" style={{ marginTop: '8px' }} onClick={handleUpdatePassword}>
                     <MdSave /> Update Password
                   </button>
                 </div>
@@ -300,6 +389,13 @@ const MyProfile = () => {
             )}
           </div>
         </div>
+      </div>
+
+      {/* Toast notifications */}
+      <div className="settings-toast-container">
+        {toasts.map(t => (
+          <div key={t.id} className="settings-toast">{t.msg}</div>
+        ))}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
@@ -19,18 +19,36 @@ import "@coreui/coreui-pro/dist/css/coreui.min.css";
 import { useTheme } from "./Component/ThemeProvider";
 import BlogDetails from "./Pages/Blog/BlogDetails";
 import Theme from "./Pages/Theme";
-// import ColorSkin from "./Component/ColorSkin";
+import { useSettings } from "./context/SettingsContext";
+
+const PAGE_TITLES = {
+  "/": "Home",
+  "/about": "About",
+  "/blog": "Blog",
+  "/contact": "Contact",
+  "/portfolio": "Portfolio",
+  "/projects": "Projects",
+  "/profile": "My Profile",
+  "/blog-details": "Blog Details",
+  "/buytheme": "Buy Theme",
+  "/login": "Login",
+  "/signup": "Sign Up",
+};
 
 function App() {
   const { theme } = useTheme();
-  // const location = useLocation();
-  // const HIDE_LAYOUT_ON = ["/"];
-  // const hide = HIDE_LAYOUT_ON.includes(location.pathname);
+  const { websiteName } = useSettings();
+  const location = useLocation();
+
+  useEffect(() => {
+    const page = PAGE_TITLES[location.pathname] || "Page";
+    const site = websiteName || "Inteshape";
+    document.title = `${page} - ${site}`;
+  }, [location.pathname, websiteName]);
+
   return (
     <div className={`App ${theme}`}>
-      {/* {!hide && <Header />} */}
       {<Header />}
-      {/* <ColorSkin /> */}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -43,9 +61,7 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/blog-details" element={<BlogDetails />} />
         <Route path="/buytheme" element={<Theme />} />
-        {/* <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}/> */}
       </Routes>
-      {/* {!hide && <Footer />} */}
       {<Footer />}
     </div>
   );

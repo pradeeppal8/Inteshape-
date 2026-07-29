@@ -4,14 +4,44 @@ import headerLogo from "../../ulits/assets/header-logo.png";
 import { FaTelegramPlane } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useSettings } from "../../context/SettingsContext";
 
 function Footer({ }) {
+  const { footerLogo, headerLogo: dynHeaderLogo } = useSettings();
+  const dynamicLogo = footerLogo || dynHeaderLogo;
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(true);
-  //  const [theme, setTheme] = useState("light");
+  const [footerLinks, setFooterLinks] = useState([
+    { path: "/about", label: "About" },
+    { path: "/portfolio", label: "Portfolio" },
+    { path: "/projects", label: "Projects" },
+    { path: "/blog", label: "Blog" },
+    { path: "/contact", label: "Contact Us" },
+  ]);
+  const [socialLinks, setSocialLinks] = useState({
+    facebookLink: '', twitterLink: '', instagramLink: '', linkedinLink: ''
+  });
 
-  const theme = "light"; 
-  
+  useEffect(() => {
+    fetch('http://localhost:5000/api/navigation')
+      .then(r => r.json())
+      .then(d => {
+        if (d.success) {
+          if (Array.isArray(d.data.footer)) {
+            const active = d.data.footer
+              .filter(item => item.active)
+              .map(item => ({ path: item.path, label: item.label }));
+            if (active.length > 0) setFooterLinks(active);
+          }
+          if (d.data.socialMediaLinks) {
+            setSocialLinks(d.data.socialMediaLinks);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const theme = "light";
   const baseColor = theme === "light" ? "#e8ebee" : "#2a2a2a";
   const highlightColor = theme === "light" ? "#f1f1f1" : "#3a3a3a";
 
@@ -89,8 +119,8 @@ function Footer({ }) {
                 </svg>
               </div>
             ) : (
-              <Link to="/home">
-                <img src={headerLogo} alt="Running Shoes" width="150" height="58" />
+              <Link to="/">
+                <img src={dynamicLogo || headerLogo} alt="Running Shoes" width="150" height="58" />
               </Link>
             )}
 
@@ -111,71 +141,25 @@ function Footer({ }) {
           )}
 
           <div className="brand__social">
-            {loading ? (
-              <Skeleton
-                width={45}
-                height={45}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-              />
-            ) : (
-              <Link
-                to="https://www.facebook.com/rockey.bhai.909800"
-                target="_blank"
-              >
-                <div className="fab_facebook"></div>
-                <span class="title">Facebook</span>
-              </Link>
-            )}
-            {loading ? (
-              <Skeleton
-                width={45}
-                height={45}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-              />
-            ) : (
-              <Link to="https://www.twitter.com" target="_blank">
-                <div className="fab_twitter"></div>
-                <span class="title">Twitter</span>
-              </Link>
-            )}
-            {loading ? (
-              <Skeleton
-                width={45}
-                height={45}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-              />
-            ) : (
-              <Link
-                to="https://www.instagram.com/rockey_star_615"
-                target="_blank"
-              >
-                <div className="fab_instagram"></div>
-                <span class="title">Instagram</span>
-              </Link>
-            )}
-            {loading ? (
-              <Skeleton
-                width={45}
-                height={45}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-              />
-            ) : (
-              <Link
-                to="https://www.linkedin.com/in/pradeep-baghel-569083244"
-                target="_blank"
-              >
-                <div className="fab_linkedin"></div>
-                <span class="title">Linkedin</span>
-              </Link>
-            )}
+            {
+              // [1,2,3,4].map(i => (
+              //   <Skeleton key={i} width={45} height={45} borderRadius={30} baseColor={baseColor} highlightColor={highlightColor} />
+              // ))
+              // <></>
+              [
+                { key: 'facebookLink',  cls: 'fab_facebook',  title: 'Facebook'  },
+                { key: 'twitterLink',   cls: 'fab_twitter',   title: 'Twitter'   },
+                { key: 'instagramLink', cls: 'fab_instagram', title: 'Instagram' },
+                { key: 'linkedinLink',  cls: 'fab_linkedin',  title: 'Linkedin'  },
+              ].map(({ key, cls, title }) =>
+                socialLinks[key] ? (
+                  <Link key={key} to={socialLinks[key]} target="_blank" rel="noopener noreferrer">
+                    <div className={cls}></div>
+                    <span className="title">{title}</span>
+                  </Link>
+                ) : null
+              )
+            }
           </div>
         </div>
         <div className="footer__col posts">
@@ -254,73 +238,11 @@ function Footer({ }) {
           )}
           <ul>
             {loading ? (
-              <Skeleton
-                width={'100%'}
-                height={20}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-                style={{ marginBottom: "10px" }}
-              />
+              <Skeleton width={'100%'} height={20} borderRadius={30} baseColor={baseColor} highlightColor={highlightColor} style={{ marginBottom: "10px" }} count={5} />
             ) : (
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-            )}
-            {loading ? (
-              <Skeleton
-                width={'100%'}
-                height={20}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-                style={{ marginBottom: "10px" }}
-              />
-            ) : (
-              <li>
-                <Link to="/portfolio">Portfolio</Link>
-              </li>
-            )}
-            {loading ? (
-              <Skeleton
-                width={'100%'}
-                height={20}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-                style={{ marginBottom: "10px" }}
-              />
-            ) : (
-              <li>
-                <Link to="/projects">Projects</Link>
-              </li>)}
-            {loading ? (
-              <Skeleton
-                width={'100%'}
-                height={20}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-                style={{ marginBottom: "10px" }}
-              />
-            ) : (
-              <li>
-                <Link to="/blog">Blog</Link>
-              </li>
-            )}
-            {loading ? (
-              <Skeleton
-                width={'100%'}
-                height={20}
-                borderRadius={30}
-                baseColor={baseColor}
-                highlightColor={highlightColor}
-                style={{ marginBottom: "10px" }}
-              />
-            ) : (
-              <li>
-                <Link to="/contact">Contact Us</Link>
-              </li>
+              footerLinks.map((link, i) => (
+                <li key={i}><Link to={link.path}>{link.label}</Link></li>
+              ))
             )}
           </ul>
         </div>

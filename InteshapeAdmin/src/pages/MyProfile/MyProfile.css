@@ -7,7 +7,7 @@
   align-items: flex-start;
 }
 
-/* ── Avatar Card ── */
+/* â”€â”€ Avatar Card â”€â”€ */
 .profile-avatar-card {
   background: #fff;
   border-radius: 6px;
@@ -18,7 +18,7 @@
 
 .profile-cover {
   height: 90px;
-  background: linear-gradient(135deg, #2c3e50, #3498db);
+  background: linear-gradient(135deg, #2c3e50, var(--primary-color));
 }
 
 .profile-avatar-wrapper {
@@ -26,13 +26,15 @@
   display: inline-block;
   margin-top: -40px;
   margin-bottom: 12px;
+  /* background: #fff; */
+  /* border-radius: 50%; */
 }
 
 .profile-avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #e67e22;
+  background: #fff;
   color: #fff;
   font-size: 26px;
   font-weight: 700;
@@ -43,6 +45,11 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+.profile-avatar-img {
+  object-fit: cover;
+  background: transparent;
+}
+
 .avatar-edit-btn {
   position: absolute;
   bottom: 2px;
@@ -50,7 +57,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #3498db;
+  background: var(--primary-color);
   color: #fff;
   border: none;
   display: flex;
@@ -143,7 +150,7 @@
 .social-btn.linkedin { background: #0077b5; }
 .social-btn.web { background: #2ecc71; }
 
-/* ── Skills ── */
+/* â”€â”€ Skills â”€â”€ */
 .profile-card {
   background: #fff;
   border-radius: 6px;
@@ -168,8 +175,6 @@
   gap: 14px;
 }
 
-.skill-item {}
-
 .skill-label {
   display: flex;
   justify-content: space-between;
@@ -190,7 +195,7 @@
   border-radius: 10px;
 }
 
-/* ── Right Column ── */
+/* â”€â”€ Right Column â”€â”€ */
 .profile-tabs-card {
   margin-top: 0;
 }
@@ -216,8 +221,8 @@
 }
 
 .profile-tab-btn.active {
-  color: #3498db;
-  border-bottom-color: #3498db;
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
   font-weight: 600;
 }
 
@@ -225,7 +230,7 @@
   padding: 24px;
 }
 
-/* ── Section Header ── */
+/* â”€â”€ Section Header â”€â”€ */
 .section-header {
   display: flex;
   align-items: center;
@@ -244,14 +249,14 @@
   align-items: center;
   gap: 6px;
   padding: 7px 16px;
-  background: #3498db;
+  background: var(--primary-color);
   color: #fff;
   border: none;
   border-radius: 4px;
   font-size: 13px;
   cursor: pointer;
 }
-.edit-btn:hover { background: #2980b9; }
+.edit-btn:hover { background: var(--primary-color); }
 
 .edit-actions { display: flex; gap: 8px; }
 
@@ -282,7 +287,7 @@
   cursor: pointer;
 }
 
-/* ── Info Grid ── */
+/* â”€â”€ Info Grid â”€â”€ */
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -307,7 +312,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #3498db;
+  color: var(--primary-color);
   font-size: 18px;
   flex-shrink: 0;
 }
@@ -327,7 +332,7 @@
   line-height: 1.5;
 }
 
-/* ── Edit Form ── */
+/* â”€â”€ Edit Form â”€â”€ */
 .edit-form {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -365,11 +370,11 @@
 
 .edit-form-group input:focus,
 .edit-form-group textarea:focus {
-  border-color: #3498db;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
 }
 
-/* ── Activity Timeline ── */
+/* â”€â”€ Activity Timeline â”€â”€ */
 .activity-timeline {
   display: flex;
   flex-direction: column;
@@ -411,16 +416,16 @@
   color: #95a5a6;
 }
 
-/* ── Settings ── */
+/* â”€â”€ Settings â”€â”€ */
 .settings-section {
   margin-bottom: 8px;
 }
 
 .settings-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: #2c3e50;
-  margin-bottom: 16px;
+  margin-bottom: 0px;
 }
 
 .settings-divider {
@@ -450,7 +455,7 @@
   flex-shrink: 0;
 }
 
-.settings-toggle.on { background: #3498db; }
+.settings-toggle.on { background: var(--primary-color); }
 
 .settings-knob {
   width: 18px;

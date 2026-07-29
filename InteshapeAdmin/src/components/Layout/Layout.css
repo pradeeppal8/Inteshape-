@@ -19,5 +19,19 @@
 .content {
   flex: 1;
   padding: 20px;
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
+}
+
+.admin-footer {
+  text-align: center;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #9aa3b5;
+  /* border-top: 1px solid #e8ecf2; */
+  /* background: #fff; */
+}
+.admin-footer strong {
+  color: var(--primary-color);
+  font-weight: 600;
 }

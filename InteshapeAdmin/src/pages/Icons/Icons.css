@@ -4,5 +4,5 @@
 .icons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 4px; padding: 16px; }
 .icon-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 8px; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
 .icon-item:hover { background: #f0f8ff; }
-.icon-display { font-size: 28px; color: #3498db; display: flex; }
+.icon-display { font-size: 28px; color: var(--primary-color); display: flex; }
 .icon-name { font-size: 11px; color: #7f8c8d; text-align: center; }
