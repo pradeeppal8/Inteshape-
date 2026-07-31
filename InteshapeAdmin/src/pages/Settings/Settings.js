@@ -7,7 +7,7 @@ const PALETTE_COLORS = [
   '#29abe2','#1a7fc1','#9b59b6','#8e44ad',
   '#34495e','#0085d0','#009ebd','#f16821',
   '#ff6464','#ffbd4a','#ecf0f1','#bdc3c7',
-  '#e5a882','#e58a82','#e582a8','#a14a35',
+  '#e5a882','#e58a82','#ab933d','#a14a35',
 ];
 
 const ColorPicker = ({ value, onChange }) => {

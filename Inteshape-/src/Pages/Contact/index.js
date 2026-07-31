@@ -160,13 +160,17 @@ function Contact() {
             {contactImage && (
                 <div className="contact-image-panel">
                     <img src={contactImage} alt="Contact" />
+                    <div className="contact_overlay"></div>
+                    <div className="contact_infs">
+                        <div className="info-tag">{contactInfo.tag}</div>
+                    </div>
                 </div>
             )}
             <div className="contact-wrapper">
 
                 {/* Left info panel */}
                 <div className="contact-info">
-                    <div className="info-tag">{contactInfo.tag}</div>
+                    {/* <div className="info-tag">{contactInfo.tag}</div> */}
                     <h1>
                         {headingLead}
                         {headingAccent ? <span>{` ${headingAccent}`}</span> : null}

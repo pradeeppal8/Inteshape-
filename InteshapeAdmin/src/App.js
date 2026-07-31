@@ -18,6 +18,7 @@ import MyProfile from './pages/MyProfile/MyProfile';
 import Settings from './pages/Settings/Settings';
 import Messages from './pages/Messages/Messages';
 import ContactDetails from './pages/ContactDetails/ContactDetails';
+import AboutDetails from './pages/AboutDetails/AboutDetails';
 import Banners from './pages/Banners/Banners';
 import Navigation from './pages/Navigation/Navigation';
 import Experts from './pages/Experts/Experts';
@@ -29,6 +30,7 @@ import Error500 from './pages/Errors/Error500';
 import './App.css';
 
 const pageTitles = {
+  '/pages/about': 'About Us Details',
   '/pages/contact': 'Contact Details',
   '/navigation': 'Navigation Management',
   '/experts': 'Our Experts',
@@ -94,6 +96,7 @@ function App() {
                   <Route path="/profile" element={<MyProfile />} />
                   <Route path="/settings" element={<Settings />} />
                   <Route path="/messages" element={<Messages />} />
+                  <Route path="/pages/about" element={<AboutDetails />} />
                   <Route path="/pages/contact" element={<ContactDetails />} />
                   <Route path="/banners" element={<Banners />} />
                   <Route path="/navigation" element={<Navigation />} />

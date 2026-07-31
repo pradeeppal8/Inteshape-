@@ -26,12 +26,12 @@ const Navigation = () => {
   const [social, setSocial]   = useState(SOCIAL_EMPTY);
   const [activeTab, setActiveTab] = useState('header');
   const [saving, setSaving]   = useState(false);
-  const [toast, setToast]     = useState(null);
+  const [toasts, setToasts]   = useState([]);
   const [modal, setModal]     = useState(null); // { mode: 'add'|'edit', item, index }
   const [form, setForm]       = useState(EMPTY_ITEM);
   const [errors, setErrors]   = useState({});
   const dragIdx = useRef(null);
-  const toastTimer = useRef(null);
+  const toastIdRef = useRef(0);
 
   useEffect(() => {
     fetch(API)
@@ -47,9 +47,15 @@ const Navigation = () => {
   }, []);
 
   const showToast = (type, msg) => {
-    clearTimeout(toastTimer.current);
-    setToast({ type, msg });
-    toastTimer.current = setTimeout(() => setToast(null), 3000);
+    const id = ++toastIdRef.current;
+    setToasts((prev) => [...prev, { id, type, msg }]);
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, 3000);
+  };
+
+  const closeToast = (id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
   const items = nav[activeTab] || [];
@@ -103,7 +109,12 @@ const Navigation = () => {
     })
       .then(r => r.json())
       .then(d => {
-        if (d.success) showToast('success', 'Saved!');
+        if (d.success) {
+          showToast('success', 'Data saved successfully!.');
+          setTimeout(() => {
+            showToast('success', 'Data saved successfully!');
+          }, 250);
+        }
         else showToast('error', 'Failed to save');
       })
       .catch(() => showToast('error', 'Failed to save'))
@@ -128,13 +139,15 @@ const Navigation = () => {
   return (
     <div className="nv-page">
       {/* Toast */}
-      {toast && (
-        <div className={`nv-toast nv-toast--${toast.type}`}>
-          <span>{toast.type === 'success' ? '✓' : '✕'}</span>
-          <span>{toast.msg}</span>
-          <button onClick={() => setToast(null)}>×</button>
-        </div>
-      )}
+      <div className="nv-toast-container" aria-live="polite" aria-atomic="true">
+        {toasts.map((toast) => (
+          <div key={toast.id} className={`nv-toast nv-toast--${toast.type}`}>
+            <span>{toast.type === 'success' ? '✓' : '✕'}</span>
+            <span>{toast.msg}</span>
+            <button onClick={() => closeToast(toast.id)}>×</button>
+          </div>
+        ))}
+      </div>
 
       <h1 className="nv-title">Navigation Management</h1>
 
@@ -236,7 +249,7 @@ const Navigation = () => {
           });
         }}>Cancel</button>
         <button className="settings-btn-save" onClick={handleSave} disabled={saving}>
-          {saving ? 'Saving…' : 'Save'}
+          {saving ? 'Save' : 'Save'}
         </button>
       </div>
 

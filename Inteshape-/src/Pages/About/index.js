@@ -1,13 +1,189 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import CustomLoader from "../../Component/CustomeLoader";
 import ScrollButtons from "../../Component/ScrollButtons";
+import config from "../../config";
+
+const EXPRESS_STATS = [
+    { target: 24, suffix: "", label: "Our Experience" },
+    { target: 340, suffix: "", label: "Project Taken" },
+    { target: 86, suffix: "", label: "Awards Won" },
+    { target: 36, suffix: "K", label: "Twitter Followers" },
+];
 
 function About() {
     const [loading, setLoading] = useState(true);
+    const [statValues, setStatValues] = useState(() => EXPRESS_STATS.map(() => 0));
+    const [startStats, setStartStats] = useState(false);
+    const [aboutHero, setAboutHero] = useState({
+        Item: [],
+    });
+    const [whatWeSection, setWhatWeSection] = useState({
+        title: "What We Do",
+        items: [],
+    });
+    const [clientsSection, setClientsSection] = useState({
+        title: "Our Clinet",
+        showButton: true,
+        buttonText: "View More",
+        buttonLink: "",
+        items: [],
+    });
+    const [superTeamSection, setSuperTeamSection] = useState({
+        title: "Super Team",
+        Items: [],
+    });
+    // const [socialLinks, setSocialLinks] = useState({
+    //    
+    // });
+    const expressSectionRef = useRef(null);
 
     useEffect(() => {
         const timer = setTimeout(() => setLoading(false), 1500);
         return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
+
+    useEffect(() => {
+        const section = expressSectionRef.current;
+        if (!section) return undefined;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0]?.isIntersecting) {
+                    setStartStats(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.35 }
+        );
+
+        observer.observe(section);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (startStats) return undefined;
+
+        // Fallback: if intersection callback is missed, still start auto counter.
+        const fallbackTimer = setTimeout(() => {
+            setStartStats(true);
+        }, 4000);
+
+        return () => clearTimeout(fallbackTimer);
+    }, [startStats]);
+
+    useEffect(() => {
+        if (!startStats) return undefined;
+
+        const duration = 1500;
+        const startTime = performance.now();
+        let animationFrame;
+
+        const animate = (now) => {
+            const progress = Math.min((now - startTime) / duration, 1);
+            setStatValues(
+                EXPRESS_STATS.map((item) => {
+                    const target = Number(item.target) || 0;
+                    return Math.floor(target * progress);
+                })
+            );
+
+            if (progress < 1) {
+                animationFrame = requestAnimationFrame(animate);
+            }
+        };
+
+        animationFrame = requestAnimationFrame(animate);
+
+        return () => cancelAnimationFrame(animationFrame);
+    }, [startStats]);
+
+    const [socialLinks, setSocialLinks] = useState({
+        facebookLink: '', twitterLink: '', instagramLink: '', linkedinLink: ''
+    });
+
+    useEffect(() => {
+        fetch(`${config.apiUrl}/api/navigation`)
+            .then(r => r.json())
+            .then(d => {
+                if (d.success) {
+                    if (Array.isArray(d.data.footer)) {
+                        const active = d.data.footer
+                            .filter(item => item.active)
+                            .map(item => ({ path: item.path, label: item.label }));
+                        if (active.length > 0);
+                    }
+                    if (d.data.socialMediaLinks) {
+                        setSocialLinks(d.data.socialMediaLinks);
+                    }
+                }
+            })
+            .catch(() => { });
+    }, []);
+
+    useEffect(() => {
+        fetch(`${config.apiUrl}/api/settings`)
+            .then((r) => r.json())
+            .then((d) => {
+                if (!d?.success || !d.data?.aboutPage) return;
+                const a = d.data.aboutPage;
+                setAboutHero((prev) => ({
+                    ...prev,
+                    image: a.bannerImage?.trim() || prev.image,
+                    eyebrow: a.eyebrow?.trim() || prev.eyebrow,
+                    title: a.title?.trim() || prev.title,
+                    subtitle: a.description?.trim() || prev.subtitle,
+                    bannerEnabled: a.bannerEnabled ?? prev.bannerEnabled,
+                }));
+
+                setWhatWeSection({
+                    title: a.whatWeTitle?.trim() || "What We Do",
+                    items: Array.isArray(a.whatWeItems)
+                        ? a.whatWeItems
+                            .filter((item) => item && item.title)
+                            .map((item, idx) => ({
+                                title: item.title,
+                                number: item.number || String(idx + 1).padStart(2, "0"),
+                                image: item.image || "",
+                            }))
+                        : [],
+                });
+
+                setClientsSection({
+                    title: a.clientsTitle?.trim() || "Our Clinet",
+                    showButton: a.clientsShowButton ?? true,
+                    buttonText: a.clientsButtonText?.trim() || "View More",
+                    buttonLink: a.clientsButtonLink?.trim() || "",
+                    items: Array.isArray(a.clientsItems)
+                        ? a.clientsItems
+                            .filter((item) => item && item.active !== false)
+                            .map((item, idx) => ({
+                                name: item.name || `Client ${idx + 1}`,
+                                src: item.src || "",
+                            }))
+                        : [],
+                });
+
+                setSuperTeamSection((prev) => ({
+                    title: a.superTeamTitle?.trim() || prev.title,
+                    members: Array.isArray(a.superTeamMembers) && a.superTeamMembers.length
+                        ? a.superTeamMembers
+                            .filter((item) => item && item.active !== false)
+                            .map((item, idx) => ({
+                                name: item.name || `Member ${idx + 1}`,
+                                role: item.role || "",
+                                image: item.image || "",
+                            }))
+                        : prev.members,
+                }));
+            })
+            .catch(() => {
+                // Keep static fallback values when backend is unavailable.
+            });
     }, []);
 
     if (loading) return <CustomLoader loading />;
@@ -48,254 +224,180 @@ function About() {
                 "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop",
         },
     ];
-
-    const features = [
-        {
-            eyebrow: "HUBSPOT CMS",
-            title: "Build your company website using drag-and-drop.",
-            copy: "Vestibulum at diam sit amet urna vehicula elementum sed sit amet dui. Venean suscipit tortor eget felis porttitor volutpat.",
-            bullets: [
-                "Lorem ipsum dolor sit amet",
-                "Venean suscipit tortor eget felis",
-                "Mauris blandit aliquet elit",
-            ],
-            image:
-                "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop",
-            align: "left",
-        },
-        {
-            eyebrow: "HUBSPOT CMS",
-            title: "Manage your HubSpot website without a developer.",
-            copy: "Vestibulum at diam sit amet urna vehicula elementum sed sit amet dui. Venean suscipit tortor eget felis porttitor volutpat.",
-            image:
-                "https://images.unsplash.com/photo-1529336953121-4b1d67b63f58?q=80&w=1200&auto=format&fit=crop",
-            align: "right",
-        },
-        {
-            eyebrow: "HUBSPOT CMS",
-            title: "A HubSpot website theme that's easy to use.",
-            copy: "Vestibulum at diam sit amet urna vehicula elementum sed sit amet dui. Venean suscipit tortor eget felis porttitor volutpat.",
-            image:
-                "https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1200&auto=format&fit=crop",
-            align: "left",
-        },
-    ];
-    const banners = [
-        {
-            image:
-                "https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1200&auto=format&fit=crop",
-            align: "left",
-        }
-    ]
+    const teamSection = {
+        title: "A small efficient interior design team.",
+        copy: "Inteshape is a team of highly talented, experienced, and architects and designers. Our company has been the leading provider of architecture services to clients through out the USA since May 1999. We pay attention to every demand...",
+        bullets: [
+            "We provide architectural 3D modeling services.",
+            "Our specialists are ready to consult you on any topic.",
+            "We develop and implement better interior design.",
+            "We provide high-quality interior services for clients.",
+        ],
+        image: "https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1400&auto=format&fit=crop",
+        experienceLabel: "25 Years Experience",
+    };
 
     return (
         <>
             <div className="main-wrapper">
                 <div className="about_page">
                     <section id="about" className="relative">
-                        {banners.map((b, i) => (<div className="relative mx-auto max-w-7xl px-0 sm:px-6 lg:px-8">
-                            <div key={i} className="overflow-hidden bg-cover bg-center">
+                        {aboutHero.bannerEnabled && (
+                            <div className="about-hero-wrap">
                                 <img
-                                    src={b.image}
-                                    alt="feature"
-                                    className="w-full object-cover "
+                                    src={aboutHero.image}
+                                    alt="About banner"
+                                    className="about-hero-image"
                                 />
-                                <div className="background-overlay">
-                                    <div className="px-6 py-20 sm:py-28 lg:py-36 text-center text-white">
-                                        <p className="text-xs uppercase tracking-widest text-white/70">
-                                            Home Page
-                                        </p>
-                                        <h1 className="mx-auto mt-2 max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
-                                            Build and manage your HubSpot website without code.
-                                        </h1>
-                                        <div className="mt-6">
-                                            <a
-                                                href="#learn"
-                                                className="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 text-slate-900 font-medium hover:bg-slate-100"
-                                            >
-                                                Learn more
-                                            </a>
-                                        </div>
+                                <div className="about-hero-overlay">
+                                    <div className="about-hero-content">
+                                        <p className="about-hero-kicker">{aboutHero.eyebrow}</p>
+                                        <h1>{aboutHero.title}</h1>
+                                        <p className="about-hero-subtitle">{aboutHero.subtitle}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>))}
+                        )}
                     </section>
-                    <section className="py-8 sm:py-10">
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                            <div className="grid grid-cols-2 gap-8 opacity-70 sm:grid-cols-4 place-items-center">
-                                {logos.map((l) => (
+                    <section className="about-team-section">
+                        <div className="about-team-wrap">
+                            <div className="about-team-content">
+                                <h2>{teamSection.title}</h2>
+                                <p>{teamSection.copy}</p>
+                                <ul>
+                                    {teamSection.bullets.map((item, idx) => (
+                                        <li key={idx}>
+                                            <span className="about-team-arrow">&rsaquo;</span>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <button type="button" className="read-more-btn aos-init aos-animate">READ MORE</button>
+                            </div>
+
+                            <div className="about-team-media-frame">
+                                <div className="about-team-media">
+                                    {/* <img src={teamSection.image} alt="Interior design team" /> */}
                                     <img
-                                        key={l.name}
-                                        src={l.src}
-                                        alt={l.name}
-                                        className="h-6 object-contain"
+                                        src={aboutHero.image}
+                                        alt="Interior design team"
+                                        className="about-hero-image"
                                     />
-                                ))}
-                            </div>
-                        </div>
-                    </section>
-                    {features.map((f, i) => (
-                        <section key={i} className="py-12 sm:py-16">
-                            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                                <div
-                                    className={`grid items-center gap-10 lg:grid-cols-2 ${f.align === "right" ? "lg:[&>*:first-child]:order-2" : ""
-                                        }`}
-                                >
-                                    <div>
-                                        <img
-                                            src={f.image}
-                                            alt="feature"
-                                            className="w-full rounded-xl shadow-md object-cover aspect-[4/3]"
-                                        />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs font-semibold tracking-widest text-indigo-600">
-                                            {f.eyebrow}
-                                        </p>
-                                        <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">
-                                            {f.title}
-                                        </h2>
-                                        <p className="mt-3 text-slate-600 leading-relaxed">
-                                            {f.copy}
-                                        </p>
-                                        {f.bullets && (
-                                            <ul className="mt-5 space-y-2 text-slate-700">
-                                                {f.bullets.map((b, bi) => (
-                                                    <li key={bi} className="flex items-start gap-3">
-                                                        <span className="mt-2 h-2 w-2 rounded-full bg-indigo-600"></span>
-                                                        <span>{b}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                        <div className="mt-6">
-                                            <a
-                                                href="#"
-                                                className="inline-flex rounded-lg bg-indigo-600 px-4 py-2.5 text-white shadow hover:bg-indigo-500"
-                                            >
-                                                Learn more
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <button type="button" className="about-team-play" aria-label="Play video">
+                                        <span className="about-team-play-triangle" />
+                                    </button>
+                                    <div className="about-team-experience">{teamSection.experienceLabel}</div>
+                                    <span className="about-team-corner about-team-corner--tl" />
+                                    <span className="about-team-corner about-team-corner--br" />
                                 </div>
                             </div>
-                        </section>
-                    ))}
-                    <section className="py-16 sm:py-20">
-                        <div className="mx-auto max-w-4xl px-4 text-center">
-                            <h3 className="text-xl font-semibold sm:text-2xl">
-                                Every business deserves to manage their website without code.
-                            </h3>
                         </div>
                     </section>
-                    <section id="blog" className="py-12 sm:py-16">
-                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                            <div className="text-center">
-                                <p className="text-xs tracking-widest text-slate-500">
-                                    FROM THE BLOG
-                                </p>
-                                <h3 className="mt-2 text-2xl font-semibold">
-                                    Recent Blog Posts
-                                </h3>
-                                <p className="mt-1 text-slate-600">
-                                    Show your most recent blog posts on any website page
-                                </p>
-                            </div>
-                            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                                {posts.map((p, i) => (
-                                    <article
-                                        key={i}
-                                        className="rounded-xl border bg-white shadow-sm hover:shadow-md transition-shadow"
-                                    >
+
+                    <section className="about-whatdo-section">
+                        <div className="about-whatdo-title-wrap">
+                            <h3 className="about-whatdo-title">{whatWeSection.title}</h3>
+                        </div>
+                        <div className="about-whatdo-grid">
+                            {whatWeSection.items.map((item) => (
+                                <article key={item.number} className="about-whatdo-card">
+                                    <div className="about-whatdo-media">
+                                        <img src={item.image} alt={item.title} />
+                                        <span className="about-whatdo-number">{item.number}</span>
+                                    </div>
+                                    <div className="about-whatdo-caption">{item.title}</div>
+                                </article>
+                            ))}
+                        </div>
+                    </section>
+
+                    <section className="about-express-section" ref={expressSectionRef}>
+                        <div className="about-express-overlay" />
+                        <div className="about-express-wrap">
+                            {EXPRESS_STATS.map((item, idx) => (
+                                <article key={item.label} className="about-express-card">
+                                    <h4>{`${statValues[idx]}${item.suffix}`}</h4>
+                                    <p>{item.label}</p>
+                                </article>
+                            ))}
+                        </div>
+                    </section>
+
+                    <section className="about-superteam-section">
+                        <div className="about-superteam-title-wrap">
+                            <h3 className="about-superteam-title">{superTeamSection.title}</h3>
+                        </div>
+                        <div className="about-superteam-grid">
+                            {superTeamSection.members.map((member, memberIndex) => (
+                                <article key={member.name} className="about-superteam-card">
+                                    <div className="about-superteam-media">
                                         <img
-                                            src={p.image}
-                                            alt="post"
-                                            className="h-48 w-full rounded-t-xl object-cover"
+                                            src={member.image || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=900&auto=format&fit=crop"}
+                                            alt={member.name}
+                                            className="about-superteam-image"
                                         />
-                                        <div className="p-4">
-                                            <h4 className="font-medium">{p.title}</h4>
+                                        <div className="about-superteam-socials" aria-hidden="true">
+                                            {[
+                                                { key: "facebookLink", cls: "fab_facebook", title: "Facebook" },
+                                                { key: "twitterLink", cls: "fab_twitter", title: "Twitter" },
+                                                { key: "instagramLink", cls: "fab_instagram", title: "Instagram" },
+                                                { key: "linkedinLink", cls: "fab_linkedin", title: "Linkedin" },
+                                            ].map(({ key, cls, title }) =>
+                                                socialLinks[key] ? (
+                                                    <Link
+                                                        key={`${member.name}-${memberIndex}-${key}`}
+                                                        to={socialLinks[key]}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="about-superteam-social-link"
+                                                        aria-label={title}
+                                                    >
+                                                        <div className={cls}></div>
+                                                        <span className="title">{title}</span>
+                                                    </Link>
+                                                ) : null
+                                            )}
                                         </div>
-                                    </article>
-                                ))}
-                            </div>
-                            <div className="mt-8 text-center">
-                                <a
-                                    href="#"
-                                    className="inline-flex rounded-lg border px-4 py-2.5 hover:bg-slate-50"
-                                >
-                                    View Posts
-                                </a>
-                            </div>
+                                    </div>
+                                    <div className="about-superteam-body">
+                                        <h4>{member.name}</h4>
+                                        <p>{member.role}</p>
+                                    </div>
+                                </article>
+                            ))}
                         </div>
                     </section>
-                    <section className="py-12 sm:py-16 bg-slate-50">
-                        <div className="mx-auto max-w-4xl px-4">
-                            <h3 className="text-center text-xl font-semibold">
-                                Frequently Asked Questions
-                            </h3>
-                            <div className="mt-6 space-y-3">
-                                {[
-                                    "How do we accept payments on our HubSpot website?",
-                                    "How do I optimize my website for conversions?",
-                                    "What templates are included in this theme?",
-                                ].map((q, i) => (
-                                    <details
-                                        key={i}
-                                        className="group rounded-lg border bg-white p-4 open:shadow-sm"
-                                    >
-                                        <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                                            <span>{q}</span>
-                                            <span className="transition group-open:rotate-180">
-                                                ⌄
-                                            </span>
-                                        </summary>
-                                        <p className="mt-3 text-sm text-slate-600">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                            In euismod, nunc at sollicitudin volutpat, nunc nunc
-                                            facilisis nunc, quis aliquet justo magna vitae ante.
-                                        </p>
-                                    </details>
-                                ))}
-                            </div>
+
+                    <section className="about-client-section">
+                        <span className="about-client-vertical">CLIENTS</span>
+                        <div className="about-client-title-wrap">
+                            <h3 className="about-client-title">{clientsSection.title}</h3>
+                        </div>
+                        <div className="about-client-grid">
+                            {clientsSection.items.map((logo, idx) => (
+                                <article key={`${logo.name}-${idx}`} className="about-client-card">
+                                    <div className="about-client-media">
+                                        <img src={logo.src || "https://dummyimage.com/260x140/f7f7f7/5f6368&text=REAL+ESTATE+COMPANY"} alt={logo.name} />
+                                        {clientsSection.showButton && (
+                                            clientsSection.buttonLink ? (
+                                                <a
+                                                    href={clientsSection.buttonLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="about-client-view-btn"
+                                                >
+                                                    {clientsSection.buttonText}
+                                                </a>
+                                            ) : (
+                                                <button type="button" className="about-client-view-btn">{clientsSection.buttonText}</button>
+                                            )
+                                        )}
+                                    </div>
+                                </article>
+                            ))}
                         </div>
                     </section>
-                    <section className="py-16 sm:py-20">
-                        <div className="mx-auto max-w-4xl px-4 text-center">
-                            <blockquote className="text-2xl font-medium sm:text-3xl">
-                                “This theme lets our marketers maintain our website without a
-                                developer.”
-                            </blockquote>
-                            <div className="mt-6">
-                                <img
-                                    src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=300&auto=format&fit=crop"
-                                    alt="avatar"
-                                    className="mx-auto h-12 w-12 rounded-full object-cover"
-                                />
-                                <p className="mt-2 text-sm text-slate-600">
-                                    Marie Bowen — Marketing Manager, AgilTron Inc.
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-                    <section className="bg-indigo-600 py-16 text-white">
-                        <div className="mx-auto max-w-5xl px-4 text-center">
-                            <h3 className="text-2xl font-semibold sm:text-3xl">
-                                Get in touch!
-                            </h3>
-                            <p className="mt-2 text-white/90">
-                                Interested in working together? We’d love to hear from you!
-                            </p>
-                            <div className="mt-6">
-                                <a
-                                    href="#"
-                                    className="inline-flex rounded-lg bg-white px-5 py-3 font-medium text-slate-900 hover:bg-slate-100"
-                                >
-                                    Contact Us
-                                </a>
-                            </div>
-                        </div>
-                    </section>
+
                 </div>
             </div>
             <ScrollButtons />

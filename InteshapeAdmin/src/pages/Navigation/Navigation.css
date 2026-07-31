@@ -8,21 +8,27 @@
 }
 
 /* Toast */
-.nv-toast {
+.nv-toast-container {
   position: fixed;
-  top: 18px;
+  bottom: 18px;
   right: 18px;
   z-index: 99999;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nv-toast {
+  display: flex;
   align-items: center;
   gap: 10px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 12px 16px;
+  background: #22c55e;
+  border-radius: 0.5rem;
+  padding: 8px 16px;
   min-width: 220px;
   font-size: 14px;
-  font-weight: 500;
-  color: #374151;
+  font-weight: 600;
+  color: #fff;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
   animation: nvIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   button {
@@ -30,7 +36,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #9ca3af;
+    color: #fff;
     font-size: 16px;
   }
 }
