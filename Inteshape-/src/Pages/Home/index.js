@@ -9,6 +9,9 @@ import bg5 from "../../ulits/assets/bg5.jpg";
 import pic1 from "../../ulits/assets/pic1.jpg";
 import pic2 from "../../ulits/assets/pic2.jpg";
 import pic3 from "../../ulits/assets/pic3.jpg";
+import abi from "../../ulits/assets/abi.jpg";
+import pradeep from "../../ulits/assets/pradeep.jpg";
+import rocky from "../../ulits/assets/rocky_bhai.jpg";
 import slide1 from "../../ulits/assets/slide1.jpg";
 import slide2 from "../../ulits/assets/slide2.jpg";
 import slide3 from "../../ulits/assets/slide3.jpg";
@@ -102,6 +105,8 @@ const swiperSlide = [
 function Home() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const testimPrevRef = useRef(null);
+  const testimNextRef = useRef(null);
   const [loaded, setLoaded] = useState(false);
   const contentRef = useRef(null);
   const [loading, setLoading] = useState(true);
@@ -640,6 +645,51 @@ function Home() {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+  const testimonials = [
+    {
+      id: 1,
+      image: pic1,
+      role: "Interior designer",
+      name: "Barney Smith",
+      review: "Great theme, just what we were looking for. Easy to install, easy to navigate. Well documented. Really enjoyed the support.",
+    },
+    {
+      id: 2,
+      image: rocky,
+      role: "Architect",
+      name: "Rosalina D. William",
+      review: "Amazing fast and reliable customer support! The team of willing to go mile for customer service! Thanks!",
+    },
+    {
+      id: 3,
+      image: abi,
+      role: "Interior Stylist",
+      name: "Abi Johnson",
+      review: "Incredible design quality and attention to detail. The team was very professional and delivered beyond our expectations.",
+    },
+    {
+      id: 4,
+      image: pradeep,
+      role: "Project Manager",
+      name: "Pradeep Kumar",
+      review: "Outstanding work on our office renovation. The design blended functionality and aesthetics beautifully. Highly recommended!",
+    },
+    {
+      id: 5,
+      image: pic2,
+      role: "Home Owner",
+      name: "Maria Collins",
+      review: "We are so pleased with the result. The team listened to our vision and turned it into a stunning living space.",
+    },
+    {
+      id: 6,
+      image: pic3,
+      role: "Real Estate Developer",
+      name: "James Hartley",
+      review: "Exceptional professionalism and creativity. They transformed a plain space into something extraordinary. 10 out of 10!",
+    },
+  ];
+
   return (
     <>
       {loading ? (
@@ -887,6 +937,70 @@ function Home() {
                 </div>
               </div>
 
+              {/* ===== All Services Section ===== */}
+              <div className="section-full-services">
+                <div className="services-vertical-text">SERVICES</div>
+                <div className="services-inner">
+                  <div className="section-head">
+                    <h2 className="services-title">All Services <span>–</span></h2>
+                  </div>
+                  <div className="section-content">
+                    <div className="row">
+                      {[
+                        {
+                          id: "01",
+                          icon: "fas fa-drafting-compass",
+                          title: "Plans and Projects",
+                          desc: "We provide a range of architectural 3D modeling services to our customers to aid the design, planning and...",
+                        },
+                        {
+                          id: "02",
+                          icon: "fas fa-couch",
+                          title: "Interior",
+                          desc: "Analysis and planning services that help both the client and architects to work out the forthcoming project...",
+                        },
+                        {
+                          id: "03",
+                          icon: "fas fa-building",
+                          title: "Exterior",
+                          desc: "We offer comprehensive Architectural Engineering Services including interior design, Master planning, 3D modeling...",
+                        },
+                        {
+                          id: "04",
+                          icon: "fas fa-city",
+                          title: "Architecture",
+                          desc: "Project management is the process by which our team plans and executes your project. We will develop it...",
+                        },
+                        {
+                          id: "05",
+                          icon: "fas fa-chair",
+                          title: "Furniture",
+                          desc: "Our team also provides consultations on all architectural issues, even if you need specific info about working...",
+                        },
+                        {
+                          id: "06",
+                          icon: "fas fa-paint-brush",
+                          title: "Decoration",
+                          desc: "We combine interior and Exterior Design services and often provide them as a single solution. It helps us...",
+                        },
+                      ].map((service) => (
+                        <div key={service.id} className="col-lg-4 col-md-6 col-sm-12 mb-4">
+                          <div className="service-card">
+                            <div className="service-number">– {service.id}</div>
+                            <div className="service-icon">
+                              <i className={service.icon}></i>
+                            </div>
+                            <h4 className="service-card-title">{service.title}</h4>
+                            <p className="service-card-desc">{service.desc}</p>
+                            <a href="#." className="service-read-more">READ MORE</a>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="section-full-about mobile-page-padding our-experts">
                 <div className="section-content">
                   <div class="section-head">
@@ -955,6 +1069,55 @@ function Home() {
                   </div>
                 </div>
               </div>
+              {/* ===== Testimonial Section ===== */}
+              <div className="section-full-testimonial">
+                <div className="section-head">
+                  <div className="sx-separator-outer separator-center">
+                    <div className="sx-separator bg-white bg-moving bg-repeat-x">
+                      <h3 className="sep-line-one">Testimonial</h3>
+                    </div>
+                  </div>
+                </div>
+                <div className="testimonial-slider-wrap">
+                  <button ref={testimPrevRef} className="testim-nav testim-prev">
+                    <i className="fas fa-chevron-left"></i>
+                  </button>
+                  <Swiper
+                    modules={[Navigation, Autoplay]}
+                    slidesPerView={2}
+                    spaceBetween={24}
+                    loop={true}
+                    autoplay={{ delay: 4000, disableOnInteraction: false }}
+                    onInit={(swiper) => {
+                      swiper.params.navigation.prevEl = testimPrevRef.current;
+                      swiper.params.navigation.nextEl = testimNextRef.current;
+                      swiper.navigation.init();
+                      swiper.navigation.update();
+                    }}
+                    breakpoints={{
+                      0:   { slidesPerView: 1 },
+                      768: { slidesPerView: 2 },
+                    }}
+                    className="testim-swiper"
+                  >
+                    {testimonials.map((t) => (
+                      <SwiperSlide key={t.id}>
+                        <div className="testim-card">
+                          <div className="testim-quote">&#10077;</div>
+                          <img src={t.image} alt={t.name} className="testim-avatar" />
+                          <p className="testim-role">{t.role}</p>
+                          <h5 className="testim-name">{t.name}</h5>
+                          <p className="testim-review">{t.review}</p>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <button ref={testimNextRef} className="testim-nav testim-next">
+                    <i className="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
